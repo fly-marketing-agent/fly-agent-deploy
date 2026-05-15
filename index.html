@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fly营销智能体 - 1个AI顶6个人</title>
+    <title>Fly营销智能体 - 2.09亿小老板的9人营销团队</title>
     <style>
         * {
             margin: 0;
@@ -38,26 +38,6 @@
             font-size: 1.5rem;
             opacity: 0.95;
             margin-bottom: 30px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .hero .pain-point {
-            background: rgba(255,255,255,0.15);
-            padding: 20px 30px;
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
-        .hero .benefit {
-            background: rgba(255,215,0,0.2);
-            padding: 20px 30px;
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-top: 20px;
         }
         .hero .stats {
             display: flex;
@@ -128,9 +108,10 @@
             color: white;
             margin-bottom: 40px;
         }
-        .pricing-single {
-            max-width: 400px;
-            margin: 0 auto;
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
         }
         .price-card {
             background: white;
@@ -139,7 +120,10 @@
             text-align: center;
             position: relative;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .price-card.popular {
             border: 3px solid #ffd700;
+            transform: scale(1.05);
         }
         .popular-badge {
             position: absolute;
@@ -201,87 +185,12 @@
             transform: scale(1.02);
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
         }
-        /* Payment */
-        .payment {
-            padding: 60px 0;
+        .buy-btn-secondary {
+            background: #f5f5f5;
+            color: #333;
         }
-        .payment h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: white;
-            margin-bottom: 20px;
-        }
-        .payment-tip {
-            text-align: center;
-            color: rgba(255,255,255,0.9);
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-            background: rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 16px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .payment-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .payment-card {
-            background: white;
-            border-radius: 24px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-        .payment-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            color: #1a1a2e;
-        }
-        .payment-card img {
-            width: 100%;
-            max-width: 250px;
-            border-radius: 12px;
-            border: 2px solid #eee;
-        }
-        /* Contact */
-        .contact {
-            background: white;
-            padding: 60px 30px;
-            border-radius: 24px;
-            margin: 40px 0;
-            text-align: center;
-        }
-        .contact h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #1a1a2e;
-        }
-        .contact p {
-            color: #666;
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-        }
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-        .contact-item {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 16px;
-            font-size: 1.1rem;
-        }
-        .contact-item a {
-            color: white;
-            text-decoration: none;
+        .buy-btn-secondary:hover {
+            background: #eee;
         }
         /* How it works */
         .how-it-works {
@@ -416,25 +325,11 @@
             .hero h1 {
                 font-size: 2rem;
             }
-            .hero .subtitle, .hero .pain-point, .hero .benefit {
-                font-size: 1rem;
-                padding: 15px 20px;
+            .hero .subtitle {
+                font-size: 1.2rem;
             }
-            .hero .stats {
-                gap: 20px;
-            }
-            .stat-item {
-                padding: 15px 20px;
-            }
-            .stat-number {
-                font-size: 2rem;
-            }
-            .payment-grid {
-                grid-template-columns: 1fr;
-            }
-            .contact-info {
-                flex-direction: column;
-                gap: 20px;
+            .price-card.popular {
+                transform: scale(1);
             }
         }
     </style>
@@ -444,15 +339,8 @@
         <!-- Hero -->
         <section class="hero">
             <h1>🚀 Fly营销智能体</h1>
-            <p class="subtitle">你还在用6个人发抖音、小红书、朋友圈？<br>1个AI就能顶6人</p>
-            
-            <div class="pain-point">
-                💸 月省3万工资 | ⏰ 节省180小时人工 | ⚡ 每天自动跑营销
-            </div>
-            
-            <div class="benefit">
-                🎯 订单自然来，你亏不起！
-            </div>
+            <p class="subtitle">2.09亿小老板的9人营销团队</p>
+            <p>一键多平台发布 · 爆款追摹复制 · AI智能客服</p>
             
             <div class="stats">
                 <div class="stat-item">
@@ -531,54 +419,24 @@
             </div>
         </section>
 
-        <!-- Pricing - Simplified -->
+        <!-- Pricing -->
         <section class="pricing">
-            <h2>💰 定价套餐</h2>
-            <div class="pricing-single">
-                <div class="price-card">
-                    <div class="popular-badge">🔥 唯一选择</div>
-                    <h3>⚡ 标准版</h3>
+            <h2>立即开通</h2>
+            <div class="pricing-grid" style="max-width:400px;margin:0 auto;">
+                <div class="price-card popular">
+                    <div class="popular-badge">推荐</div>
+                    <h3>Fly营销智能体</h3>
                     <div class="price">¥49.9<span>/月</span></div>
                     <ul class="price-features">
-                        <li>500次API调用</li>
                         <li>全功能营销策划</li>
-                        <li>多平台内容适配</li>
+                        <li>多平台内容适配（抖音/小红书/朋友圈）</li>
                         <li>爆款追摹分析</li>
+                        <li>AI智能客服</li>
                         <li>专属客服支持</li>
                     </ul>
-                    <button class="buy-btn buy-btn-primary" onclick="document.getElementById('payment').scrollIntoView({behavior: 'smooth'})">立即购买</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Payment -->
-        <section class="payment" id="payment">
-            <h2>💳 扫码付款</h2>
-            <p class="payment-tip">
-                📱 微信/支付宝扫码付款，截图发给客服即可获取API Key
-            </p>
-            <div class="payment-grid">
-                <div class="payment-card">
-                    <h3>💚 微信支付</h3>
-                    <img src="wechat-pay.jpg" alt="微信收款码" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22300%22><rect fill=%22%23f5f5f5%22 width=%22250%22 height=%22300%22/><text x=%22125%22 y=%22150%22 text-anchor=%22middle%22 fill=%22%23999%22 font-size=%2214%22>请上传微信收款码</text></svg>'">
-                </div>
-                <div class="payment-card">
-                    <h3>💙 支付宝支付</h3>
-                    <img src="alipay-pay.jpg" alt="支付宝收款码">
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact -->
-        <section class="contact">
-            <h2>📞 联系客服</h2>
-            <p>付款后截图发给客服，秒回API Key</p>
-            <div class="contact-info">
-                <div class="contact-item">
-                    📚 <strong>文档</strong>: <a href="#">查看接入指南</a>
-                </div>
-                <div class="contact-item">
-                    💬 <strong>客服</strong>: 扫码联系获取支持
+                    <a href="https://afdian.com/a/fly-ai-agent" target="_blank" style="text-decoration:none;display:block;width:100%;">
+                        <button class="buy-btn buy-btn-primary">立即购买</button>
+                    </a>
                 </div>
             </div>
         </section>
@@ -609,7 +467,7 @@ response = requests.post(<span class="string">"https://api.coze.cn/v3/chat"</spa
             <h2>🎯 立即开始你的智能营销之旅</h2>
             <p>每天不到2块钱，拥有专业营销团队</p>
             <div class="cta-buttons">
-                <a href="#payment" class="cta-btn cta-btn-primary" onclick="document.getElementById('payment').scrollIntoView({behavior: 'smooth'}); return false;">💰 立即购买</a>
+                <a href="https://afdian.com/a/fly-ai-agent" target="_blank" class="cta-btn cta-btn-primary">立即购买</a>
                 <a href="#" class="cta-btn cta-btn-secondary">📖 查看文档</a>
             </div>
         </section>
@@ -618,9 +476,9 @@ response = requests.post(<span class="string">"https://api.coze.cn/v3/chat"</spa
         <footer>
             <p>© 2025 Fly营销智能体 · 让每个小老板都能做好营销</p>
             <p style="margin-top: 10px;">
-                <a href="#">爱发电</a> · 
-                <a href="#">关于我们</a> · 
-                <a href="#">使用条款</a>
+                <a href="https://afdian.com/a/fly-ai-agent" target="_blank">爱发电</a> · 
+                <a href="#">使用文档</a> · 
+                <a href="#">联系客服</a>
             </p>
         </footer>
     </div>

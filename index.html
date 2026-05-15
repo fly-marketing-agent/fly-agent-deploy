@@ -60,6 +60,91 @@
             font-size: 0.9rem;
             opacity: 0.9;
         }
+        /* Free Trial Badge */
+        .free-trial-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #00d4aa, #00b894);
+            color: white;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,212,170,0.4);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        /* Comparison Section */
+        .comparison {
+            background: white;
+            border-radius: 24px;
+            padding: 40px 30px;
+            margin: 40px 0;
+        }
+        .comparison h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #1a1a2e;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .comparison-card {
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+        }
+        .comparison-card.traditional {
+            background: #fff5f5;
+            border: 2px solid #ffebee;
+        }
+        .comparison-card.ai-powered {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px solid #00c853;
+        }
+        .comparison-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .comparison-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            font-size: 0.95rem;
+        }
+        .comparison-item:last-child {
+            border-bottom: none;
+        }
+        .comparison-item .label {
+            color: #666;
+        }
+        .comparison-item .value {
+            font-weight: 600;
+        }
+        .comparison-item .value.bad {
+            color: #e53935;
+        }
+        .comparison-item .value.good {
+            color: #00c853;
+        }
+        .cost-highlight {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 20px 0;
+        }
+        .comparison-card.traditional .cost-highlight {
+            color: #e53935;
+        }
         /* Features */
         .features {
             display: grid;
@@ -106,12 +191,20 @@
             text-align: center;
             font-size: 2.5rem;
             color: white;
+            margin-bottom: 15px;
+        }
+        .pricing-subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
             margin-bottom: 40px;
         }
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
         }
         .price-card {
             background: white;
@@ -122,16 +215,20 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
         .price-card.popular {
-            border: 3px solid #ffd700;
-            transform: scale(1.05);
+            border: 3px solid #00c853;
+            transform: scale(1.02);
+        }
+        .afdian-badge {
+            background: #607d8b;
+            color: white;
         }
         .popular-badge {
             position: absolute;
             top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, #ffd700, #ffaa00);
-            color: #333;
+            background: linear-gradient(135deg, #00c853, #00e676);
+            color: white;
             padding: 6px 20px;
             border-radius: 20px;
             font-size: 0.85rem;
@@ -140,6 +237,15 @@
         .price-card h3 {
             font-size: 1.5rem;
             margin-bottom: 10px;
+        }
+        .price-tag {
+            display: inline-block;
+            background: #fff3e0;
+            color: #e65100;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
         }
         .price {
             font-size: 3rem;
@@ -150,6 +256,16 @@
         .price span {
             font-size: 1rem;
             color: #999;
+        }
+        .free-trial-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #00d4aa, #00b894);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
         }
         .price-features {
             list-style: none;
@@ -163,7 +279,7 @@
         }
         .price-features li::before {
             content: "✓ ";
-            color: #667eea;
+            color: #00c853;
             font-weight: bold;
             margin-right: 8px;
         }
@@ -176,20 +292,22 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            text-decoration: none;
+            display: block;
         }
-        .buy-btn-primary {
+        .buy-btn-coze {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
         }
-        .buy-btn-primary:hover {
+        .buy-btn-coze:hover {
             transform: scale(1.02);
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
         }
-        .buy-btn-secondary {
+        .buy-btn-afdian {
             background: #f5f5f5;
             color: #333;
         }
-        .buy-btn-secondary:hover {
+        .buy-btn-afdian:hover {
             background: #eee;
         }
         /* How it works */
@@ -331,6 +449,9 @@
             .price-card.popular {
                 transform: scale(1);
             }
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -340,6 +461,7 @@
         <section class="hero">
             <h1>🚀 Fly营销智能体</h1>
             <p class="subtitle">2.09亿小老板的9人营销团队</p>
+            <div class="free-trial-badge">🎁 首次使用免费体验1次</div>
             <p>一键多平台发布 · 爆款追摹复制 · AI智能客服</p>
             
             <div class="stats">
@@ -354,6 +476,61 @@
                 <div class="stat-item">
                     <div class="stat-number">4</div>
                     <div class="stat-label">道质量关卡</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison -->
+        <section class="comparison">
+            <h2>📊 智能营销 vs 传统团队</h2>
+            <div class="comparison-grid">
+                <div class="comparison-card traditional">
+                    <div class="comparison-title">🛠️ 传统营销团队</div>
+                    <div class="cost-highlight">¥15,000+/月</div>
+                    <div class="comparison-item">
+                        <span class="label">团队规模</span>
+                        <span class="value bad">6人以上</span>
+                    </div>
+                    <div class="comparison-item">
+                        <span class="label">运营时间</span>
+                        <span class="value bad">8小时/天</span>
+                    </div>
+                    <div class="comparison-item">
+                        <span class="label">平台覆盖</span>
+                        <span class="value bad">1-2个</span>
+                    </div>
+                    <div class="comparison-item">
+                        <span class="label">响应速度</span>
+                        <span class="value bad">数小时</span>
+                    </div>
+                    <div class="comparison-item">
+                        <span class="label">人力成本</span>
+                        <span class="value bad">高</span>
+                    </div>
+                </div>
+                <div class="comparison-card ai-powered">
+                    <div class="comparison-title">🤖 Fly营销智能体</div>
+                    <div class="cost-highlight">¥49.9/月</div>
+                    <div class="comparison-item">
+                        <span class="label">团队规模</span>
+                        <span class="value good">AI全搞定</span>
+                    </div>
+                    <div class="comparison-item">
+                        <span class="label">运营时间</span>
+                        <span class="value good">24小时/天</span>
+                    </div>
+                    <div class="comparison-item">
+                        <span class="label">平台覆盖</span>
+                        <span class="value good">3个+</span>
+                    </div>
+                    <div class="comparison-item">
+                        <span class="label">响应速度</span>
+                        <span class="value good">秒级</span>
+                    </div>
+                    <div class="comparison-item">
+                        <span class="label">人力成本</span>
+                        <span class="value good">近乎为零</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -422,10 +599,32 @@
         <!-- Pricing -->
         <section class="pricing">
             <h2>立即开通</h2>
-            <div class="pricing-grid" style="max-width:400px;margin:0 auto;">
+            <p class="pricing-subtitle">两种购买渠道，随心选择</p>
+            <div class="pricing-grid">
+                <!-- 扣子技能商店 -->
                 <div class="price-card popular">
-                    <div class="popular-badge">推荐</div>
-                    <h3>Fly营销智能体</h3>
+                    <div class="popular-badge">⭐ 推荐</div>
+                    <h3>扣子技能商店</h3>
+                    <div class="free-trial-tag">🎁 首次使用免费体验1次</div>
+                    <div class="price">¥49.9<span>/月</span></div>
+                    <div class="price-tag">买断制 · 高性价比</div>
+                    <ul class="price-features">
+                        <li>免费体验1次</li>
+                        <li>全功能营销策划</li>
+                        <li>多平台内容适配（抖音/小红书/朋友圈）</li>
+                        <li>爆款追摹分析</li>
+                        <li>AI智能客服</li>
+                        <li>专属客服支持</li>
+                    </ul>
+                    <a href="https://www.coze.cn/skills" target="_blank" style="text-decoration:none;display:block;">
+                        <button class="buy-btn buy-btn-coze">立即购买</button>
+                    </a>
+                </div>
+                <!-- 爱发电 -->
+                <div class="price-card">
+                    <div class="popular-badge afdian-badge">备选渠道</div>
+                    <h3>爱发电赞助</h3>
+                    <div class="price-tag">按月订阅</div>
                     <div class="price">¥49.9<span>/月</span></div>
                     <ul class="price-features">
                         <li>全功能营销策划</li>
@@ -434,8 +633,8 @@
                         <li>AI智能客服</li>
                         <li>专属客服支持</li>
                     </ul>
-                    <a href="https://afdian.com/a/fly-ai-agent" target="_blank" style="text-decoration:none;display:block;width:100%;">
-                        <button class="buy-btn buy-btn-primary">立即购买</button>
+                    <a href="https://afdian.com/a/fly-ai-agent" target="_blank" style="text-decoration:none;display:block;">
+                        <button class="buy-btn buy-btn-afdian">立即购买</button>
                     </a>
                 </div>
             </div>
@@ -465,10 +664,10 @@ response = requests.post(<span class="string">"https://api.coze.cn/v3/chat"</spa
         <!-- CTA -->
         <section class="cta">
             <h2>🎯 立即开始你的智能营销之旅</h2>
-            <p>每天不到2块钱，拥有专业营销团队</p>
+            <p>每天不到2块钱，拥有专业营销团队 · 首次使用免费体验</p>
             <div class="cta-buttons">
-                <a href="https://afdian.com/a/fly-ai-agent" target="_blank" class="cta-btn cta-btn-primary">立即购买</a>
-                <a href="#" class="cta-btn cta-btn-secondary">📖 查看文档</a>
+                <a href="https://www.coze.cn/skills" target="_blank" class="cta-btn cta-btn-primary">立即体验</a>
+                <a href="https://afdian.com/a/fly-ai-agent" target="_blank" class="cta-btn cta-btn-secondary">爱发电支持</a>
             </div>
         </section>
 
@@ -476,6 +675,7 @@ response = requests.post(<span class="string">"https://api.coze.cn/v3/chat"</spa
         <footer>
             <p>© 2025 Fly营销智能体 · 让每个小老板都能做好营销</p>
             <p style="margin-top: 10px;">
+                <a href="https://www.coze.cn/skills" target="_blank">扣子技能商店</a> · 
                 <a href="https://afdian.com/a/fly-ai-agent" target="_blank">爱发电</a> · 
                 <a href="#">使用文档</a> · 
                 <a href="#">联系客服</a>

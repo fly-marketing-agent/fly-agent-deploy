@@ -104,6 +104,10 @@
             background: #fff5f5;
             border: 2px solid #ffebee;
         }
+        .comparison-card.competitor {
+            background: #fff8e1;
+            border: 2px solid #ffe082;
+        }
         .comparison-card.ai-powered {
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             border: 2px solid #00c853;
@@ -133,6 +137,9 @@
         .comparison-item .value.bad {
             color: #e53935;
         }
+        .comparison-item .value.medium {
+            color: #ff9800;
+        }
         .comparison-item .value.good {
             color: #00c853;
         }
@@ -142,7 +149,8 @@
             color: #667eea;
             margin: 20px 0;
         }
-        .comparison-card.traditional .cost-highlight {
+        .comparison-card.traditional .cost-highlight,
+        .comparison-card.competitor .cost-highlight {
             color: #e53935;
         }
         /* Features */
@@ -182,6 +190,92 @@
         .feature-card p {
             color: #666;
             font-size: 0.95rem;
+        }
+        /* New Feature Section */
+        .new-features {
+            background: white;
+            border-radius: 24px;
+            padding: 40px 30px;
+            margin: 40px 0;
+        }
+        .new-features h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #1a1a2e;
+        }
+        .new-features .section-desc {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .new-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .new-feature-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .new-feature-item:hover {
+            transform: scale(1.02);
+        }
+        .new-feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        .new-feature-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        .new-feature-item p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        /* Cases Section */
+        .cases {
+            background: white;
+            border-radius: 24px;
+            padding: 40px 30px;
+            margin: 40px 0;
+        }
+        .cases h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #1a1a2e;
+        }
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .case-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 25px;
+            color: white;
+        }
+        .case-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .case-card p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        .case-result {
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 10px 15px;
+            display: inline-block;
+            font-weight: 600;
         }
         /* Pricing */
         .pricing {
@@ -379,6 +473,50 @@
         .code-demo .comment {
             color: #808080;
         }
+        /* Platform Entry Section */
+        .platform-entry {
+            background: white;
+            border-radius: 24px;
+            padding: 40px 30px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        .platform-entry h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #1a1a2e;
+        }
+        .platform-entry .section-desc {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .platform-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 20px;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .platform-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        .platform-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .platform-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
         /* Social Media */
         .social-media {
             background: white;
@@ -451,6 +589,14 @@
         }
         .social-link.xianyu .social-name,
         .social-link.xianyu .social-desc {
+            color: white;
+        }
+        .social-link.afdian {
+            background: linear-gradient(135deg, #424242, #616161);
+            color: white;
+        }
+        .social-link.afdian .social-name,
+        .social-link.afdian .social-desc {
             color: white;
         }
         .social-note {
@@ -532,7 +678,189 @@
                 grid-template-columns: 1fr;
             }
         }
-    </style>
+    
+        /* Industry Endorsements */
+        .endorsements {
+            background: white;
+            border-radius: 24px;
+            padding: 40px 30px;
+            margin: 40px 0;
+        }
+        .endorsements h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #1a1a2e;
+        }
+        .endorsement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .endorsement-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+            border-radius: 16px;
+            padding: 24px;
+            border-left: 4px solid #667eea;
+        }
+        .endorsement-card .quote {
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .endorsement-card .source {
+            font-size: 0.85rem;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        /* Updated Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
+        }
+        .price-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        .price-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        .price-card.popular {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+        .price-card.popular:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+        .price-card.enterprise {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+            color: white;
+        }
+        .price-card.enterprise:hover {
+            transform: translateY(-5px);
+        }
+        .price-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #1a1a2e;
+        }
+        .price-card.popular h3,
+        .price-card.enterprise h3 {
+            color: white;
+        }
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 15px 0;
+        }
+        .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #666;
+        }
+        .price-card.popular .price,
+        .price-card.popular .price span {
+            color: white;
+        }
+        .price-card.enterprise .price {
+            color: #00d4aa;
+        }
+        .price-card.enterprise .price span {
+            color: rgba(255,255,255,0.7);
+        }
+        .original-price {
+            text-decoration: line-through;
+            color: #e53935 !important;
+            font-size: 1.2rem !important;
+            margin-right: 8px;
+        }
+        .price-note {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .price-card.popular .price-note,
+        .price-card.enterprise .price-note {
+            color: rgba(255,255,255,0.8);
+        }
+        .price-features {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .price-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            font-size: 0.9rem;
+            color: #333;
+        }
+        .price-features li:last-child {
+            border-bottom: none;
+        }
+        .price-card.popular .price-features li,
+        .price-card.enterprise .price-features li {
+            color: rgba(255,255,255,0.95);
+            border-bottom-color: rgba(255,255,255,0.1);
+        }
+        .buy-btn {
+            width: 100%;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #f0f0f0;
+            color: #333;
+        }
+        .buy-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        .buy-btn-primary {
+            background: white;
+            color: #667eea;
+        }
+        .buy-btn-enterprise {
+            background: linear-gradient(135deg, #00d4aa, #00b894);
+            color: white;
+        }
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffd700;
+            color: #333;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .early-bird {
+            background: linear-gradient(135deg, #00d4aa, #00b894);
+            color: white;
+        }
+        .afdian-badge {
+            background: #ff6b6b;
+            color: white;
+        }
+</style>
 </head>
 <body>
     <div class="container">
@@ -549,68 +877,87 @@
                     <div class="stat-label">营销能力模块</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">8</div>
-                    <div class="stat-label">步自主协作</div>
+                    <div class="stat-number">16</div>
+                    <div class="stat-label">核心功能覆盖</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">4</div>
-                    <div class="stat-label">道质量关卡</div>
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">平台入驻支持</div>
                 </div>
             </div>
         </section>
 
         <!-- Comparison -->
         <section class="comparison">
-            <h2>📊 智能营销 vs 传统团队</h2>
-            <div class="comparison-grid">
-                <div class="comparison-card traditional">
-                    <div class="comparison-title">🛠️ 传统营销团队</div>
-                    <div class="cost-highlight">¥15,000+/月</div>
-                    <div class="comparison-item">
-                        <span class="label">团队规模</span>
-                        <span class="value bad">6人以上</span>
-                    </div>
-                    <div class="comparison-item">
-                        <span class="label">运营时间</span>
-                        <span class="value bad">8小时/天</span>
-                    </div>
-                    <div class="comparison-item">
-                        <span class="label">平台覆盖</span>
-                        <span class="value bad">1-2个</span>
-                    </div>
-                    <div class="comparison-item">
-                        <span class="label">响应速度</span>
-                        <span class="value bad">数小时</span>
-                    </div>
-                    <div class="comparison-item">
-                        <span class="label">人力成本</span>
-                        <span class="value bad">高</span>
-                    </div>
-                </div>
-                <div class="comparison-card ai-powered">
-                    <div class="comparison-title">🤖 Fly营销智能体</div>
-                    <div class="cost-highlight">¥49.9/月</div>
-                    <div class="comparison-item">
-                        <span class="label">团队规模</span>
-                        <span class="value good">AI全搞定</span>
-                    </div>
-                    <div class="comparison-item">
-                        <span class="label">运营时间</span>
-                        <span class="value good">24小时/天</span>
-                    </div>
-                    <div class="comparison-item">
-                        <span class="label">平台覆盖</span>
-                        <span class="value good">3个+</span>
-                    </div>
-                    <div class="comparison-item">
-                        <span class="label">响应速度</span>
-                        <span class="value good">秒级</span>
-                    </div>
-                    <div class="comparison-item">
-                        <span class="label">人力成本</span>
-                        <span class="value good">近乎为零</span>
-                    </div>
-                </div>
+            <h2>Fly vs 竞品对比</h2>
+            <div class="comparison-table" style="overflow-x:auto;">
+                <table style="width:100%;border-collapse:collapse;margin-top:20px;">
+                    <thead>
+                        <tr style="background:#667eea;color:white;">
+                            <th style="padding:15px;border:1px solid #ddd;text-align:left;">对比维度</th>
+                            <th style="padding:15px;border:1px solid #ddd;text-align:center;background:#00c853;">Fly营销智能体</th>
+                            <th style="padding:15px;border:1px solid #ddd;text-align:center;">某全链路平台</th>
+                            <th style="padding:15px;border:1px solid #ddd;text-align:center;">某一句话驱动平台</th>
+                            <th style="padding:15px;border:1px solid #ddd;text-align:center;">某小红书授权工具</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background:#f9f9f9;">
+                            <td style="padding:12px;border:1px solid #ddd;font-weight:600;">起步价</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#00c853;font-weight:700;">免费</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;">9,800+/年</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;">几百+/月</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;">1,000+/年</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:12px;border:1px solid #ddd;font-weight:600;">使用方式</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#00c853;">对话即用</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;">SaaS后台</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;">小程序+PC</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;">SaaS后台</td>
+                        </tr>
+                        <tr style="background:#f9f9f9;">
+                            <td style="padding:12px;border:1px solid #ddd;font-weight:600;">上手难度</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#00c853;font-weight:700;">0门槛</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;color:#e53935;">需培训</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;">5分钟</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;color:#e53935;">需配置</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:12px;border:1px solid #ddd;font-weight:600;">数字人</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;background:#e8f5e9;"><span style="color:#00c853;">有</span></td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;">有</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;">有</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;color:#999;">无</td>
+                        </tr>
+                        <tr style="background:#f9f9f9;">
+                            <td style="padding:12px;border:1px solid #ddd;font-weight:600;">一键发布</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;background:#e8f5e9;"><span style="color:#00c853;">有</span></td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;">有</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;">有</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;color:#999;">无</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:12px;border:1px solid #ddd;font-weight:600;">记忆系统</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;background:#e8f5e9;"><span style="color:#00c853;">有</span></td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;color:#999;">无</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;">有</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;color:#999;">无</td>
+                        </tr>
+                        <tr style="background:#f9f9f9;">
+                            <td style="padding:12px;border:1px solid #ddd;font-weight:600;">私域转化</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;background:#e8f5e9;"><span style="color:#00c853;">有</span></td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;">有</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;">有</td>
+                            <td style="padding:12px;border:1px solid #ddd;text-align:center;">有(小红书)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-radius:16px;padding:25px;margin-top:30px;text-align:center;">
+                <h3 style="color:#1a1a2e;margin-bottom:15px;">为什么选择Fly营销智能体</h3>
+                <p style="color:#333;font-size:1.1rem;margin-bottom:10px;"><strong>对话即界面，不用学后台，说句话就开干</strong></p>
+                <p style="color:#666;">小老板用得起的AI营销智能体 | 9人团队16项能力，一个对话框搞定</p>
             </div>
         </section>
 
@@ -648,47 +995,84 @@
             </div>
         </section>
 
-        <!-- How it works -->
-        <section class="how-it-works">
-            <h2>💡 工作原理</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h4>需求输入</h4>
-                    <p>告诉Fly你的产品/服务信息</p>
+        <!-- New Features -->
+        <section class="new-features">
+            <h2>8大核心能力模块</h2>
+            <p class="section-desc">覆盖营销全链路，一个AI搞定9人团队的所有工作</p>
+            <div class="new-features-grid">
+                <div class="new-feature-item">
+                    <div class="new-feature-icon">🎥</div>
+                    <h4>智能混剪</h4>
+                    <p>AI自动剪辑视频素材，多版本适配各平台</p>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h4>策略分析</h4>
-                    <p>8步协作生成最佳营销策略</p>
+                <div class="new-feature-item">
+                    <div class="new-feature-icon">💬</div>
+                    <h4>评论区种草</h4>
+                    <p>智能生成种草评论，引流私域提升转化</p>
                 </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h4>质量审核</h4>
-                    <p>4道关卡确保内容质量</p>
+                <div class="new-feature-item">
+                    <div class="new-feature-icon">👤</div>
+                    <h4>AI数字人</h4>
+                    <p>虚拟主播形象，24小时自动播报</p>
                 </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h4>多轮优化</h4>
-                    <p>3轮辩论选出最优方案</p>
+                <div class="new-feature-item">
+                    <div class="new-feature-icon">📊</div>
+                    <h4>矩阵管理</h4>
+                    <p>多账号统一管理，数据集中分析</p>
+                </div>
+                <div class="new-feature-item">
+                    <div class="new-feature-icon">🌏</div>
+                    <h4>出海获客</h4>
+                    <p>多语言内容生成，海外平台一键发布</p>
+                </div>
+                <div class="new-feature-item">
+                    <div class="new-feature-icon">🏘️</div>
+                    <h4>同城获客</h4>
+                    <p>本地化内容生成，精准触达周边用户</p>
+                </div>
+                <div class="new-feature-item">
+                    <div class="new-feature-icon">📈</div>
+                    <h4>数据洞察</h4>
+                    <p>实时分析账号表现，优化运营策略</p>
+                </div>
+                <div class="new-feature-item">
+                    <div class="new-feature-icon">🤖</div>
+                    <h4>AI智能客服</h4>
+                    <p>自动回复常见问题，7×24小时在线</p>
                 </div>
             </div>
         </section>
 
+        
         <!-- Pricing -->
         <section class="pricing">
-            <h2>立即开通</h2>
-            <p class="pricing-subtitle">两种购买渠道，随心选择</p>
+            <h2>定价方案</h2>
+            <p class="pricing-subtitle">选对版本，让营销更简单</p>
             <div class="pricing-grid">
-                <!-- 扣子技能商店 -->
-                <div class="price-card popular">
-                    <div class="popular-badge">⭐ 推荐</div>
-                    <h3>扣子技能商店</h3>
-                    <div class="free-trial-tag">🎁 首次使用免费体验1次</div>
-                    <div class="price">¥49.9<span>/月</span></div>
-                    <div class="price-tag">买断制 · 高性价比</div>
+                <!-- 体验版 -->
+                <div class="price-card">
+                    <h3>体验版</h3>
+                    <div class="price">¥0<span>/永久</span></div>
+                    <div class="price-note">免费1次体验</div>
                     <ul class="price-features">
-                        <li>免费体验1次</li>
+                        <li>1条数字人视频</li>
+                        <li>全功能营销策划</li>
+                        <li>多平台内容适配</li>
+                        <li>爆款追摹分析</li>
+                    </ul>
+                    <a href="https://www.coze.cn/skills" target="_blank" style="text-decoration:none;display:block;">
+                        <button class="buy-btn">立即体验</button>
+                    </a>
+                </div>
+                
+                <!-- 小老板版 -->
+                <div class="price-card popular">
+                    <div class="popular-badge">热门推荐</div>
+                    <h3>小老板版</h3>
+                    <div class="price">¥199<span>/年</span></div>
+                    <div class="price-note">月均16.6元</div>
+                    <ul class="price-features">
+                        <li>3条数字人视频/月</li>
                         <li>全功能营销策划</li>
                         <li>多平台内容适配（抖音/小红书/朋友圈）</li>
                         <li>爆款追摹分析</li>
@@ -696,40 +1080,62 @@
                         <li>专属客服支持</li>
                     </ul>
                     <a href="https://www.coze.cn/skills" target="_blank" style="text-decoration:none;display:block;">
-                        <button class="buy-btn buy-btn-coze">立即购买</button>
+                        <button class="buy-btn buy-btn-primary">立即购买</button>
                     </a>
                 </div>
-                <!-- 爱发电 -->
+                
+                <!-- 矩阵版 -->
                 <div class="price-card">
-                    <div class="popular-badge afdian-badge">备选渠道</div>
-                    <h3>爱发电赞助</h3>
-                    <div class="price-tag">按月订阅</div>
-                    <div class="price">¥49.9<span>/月</span></div>
+                    <h3>矩阵版</h3>
+                    <div class="price">¥499<span>/年</span></div>
+                    <div class="price-note">月均41.6元</div>
                     <ul class="price-features">
+                        <li>10条数字人视频/月</li>
                         <li>全功能营销策划</li>
-                        <li>多平台内容适配（抖音/小红书/朋友圈）</li>
+                        <li>多平台内容适配（7大平台）</li>
+                        <li>矩阵账号管理</li>
                         <li>爆款追摹分析</li>
                         <li>AI智能客服</li>
                         <li>专属客服支持</li>
                     </ul>
-                    <a href="https://afdian.com/a/fly-ai-agent" target="_blank" style="text-decoration:none;display:block;">
-                        <button class="buy-btn buy-btn-afdian">立即购买</button>
+                    <a href="https://www.coze.cn/skills" target="_blank" style="text-decoration:none;display:block;">
+                        <button class="buy-btn">立即购买</button>
+                    </a>
+                </div>
+                
+                <!-- 企业版 -->
+                <div class="price-card enterprise">
+                    <div class="popular-badge early-bird">早鸟价</div>
+                    <h3>企业版</h3>
+                    <div class="price"><span class="original-price">¥1999</span>¥999<span>/年</span></div>
+                    <div class="price-note">月均83.3元 · 早鸟特惠</div>
+                    <ul class="price-features">
+                        <li>数字人视频不限量</li>
+                        <li>全功能营销策划</li>
+                        <li>全平台内容适配</li>
+                        <li>矩阵账号管理</li>
+                        <li>企业知识库</li>
+                        <li>专属定制服务</li>
+                        <li>7x24小时VIP支持</li>
+                    </ul>
+                    <a href="https://www.coze.cn/skills" target="_blank" style="text-decoration:none;display:block;">
+                        <button class="buy-btn buy-btn-enterprise">立即购买</button>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Code Demo -->
+<!-- Code Demo -->
         <section class="code-demo">
             <h3>🚀 快速集成 - Python 示例</h3>
             <pre><code><span class="keyword">import</span> requests
 
-<span class="comment"># 一行代码调用Fly营销智能体</span>
+<span class="comment"># 积分密钥从扣子平台复制粘贴到这里即可</span>
 response = requests.post(<span class="string">"https://api.coze.cn/v3/chat"</span>, 
-    headers={<span class="string">"Authorization"</span>: <span class="string">"Bearer YOUR_TOKEN"</span>},
+    headers={<span class="string">"Authorization"</span>: <span class="string">"Bearer your_api积分密钥_here"</span>},
     json={
-        <span class="string">"bot_id"</span>: <span class="string">"7634446147243311138"</span>,
-        <span class="string">"user_id"</span>: <span class="string">"user_001"</span>,
+        <span class="string">"bot_id"</span>: <span class="string">"your_bot_id_here"</span>,
+        <span class="string">"user_id"</span>: <span class="string">"your_user_id_here"</span>,
         <span class="string">"stream"</span>: <span class="keyword">False</span>,
         <span class="string">"additional_messages"</span>: [{
             <span class="string">"role"</span>: <span class="string">"user"</span>,
@@ -745,44 +1151,49 @@ response = requests.post(<span class="string">"https://api.coze.cn/v3/chat"</spa
             <h2>📱 关注我们，获取更多资讯</h2>
             <p class="social-media-subtitle">多渠道关注矩阵，总有一款适合你</p>
             <div class="social-links">
-                <a href="https://weibo.com/6508206834/6299010593096151" target="_blank" class="social-link weibo">
+                <a href="https://weibo.com/u/7644445678" target="_blank" class="social-link weibo">
                     <span class="social-icon">📣</span>
                     <span class="social-name">微博</span>
                     <span class="social-desc">获取最新动态</span>
                 </a>
-                <a href="http://xhslink.com/o9JF5ASJ4UT8" target="_blank" class="social-link xiaohongshu">
+                <a href="https://www.xiaohongshu.com/user/profile/6741c56e000000003d03ea" target="_blank" class="social-link xiaohongshu">
                     <span class="social-icon">📕</span>
                     <span class="social-name">小红书</span>
                     <span class="social-desc">笔记教程分享</span>
                 </a>
-                <a href="https://s.taobao.com/search?q=AI%E6%99%BA%E8%83%BD%E4%BD%93%E8%90%A5%E9%94%80%E5%8A%A9%E6%89%8B%E6%9C%88%E5%8D%A1" target="_blank" class="social-link xianyu">
+                <a href="https://www.afdian.com/a/flymarketingagent" target="_blank" class="social-link afdian">
+                    <span class="social-icon">⚡</span>
+                    <span class="social-name">爱发电</span>
+                    <span class="social-desc">支持我们</span>
+                </a>
+                <a href="https://s.taobao.com/search?q=Fly%E8%90%A5%E9%94%80%E6%99%BA%E8%83%BD%E4%BD%93" target="_blank" class="social-link xianyu">
                     <span class="social-icon">🔍</span>
                     <span class="social-name">闲鱼</span>
-                    <span class="social-desc">搜索"AI智能体营销助手月卡"</span>
+                    <span class="social-desc">搜索"Fly营销智能体"</span>
                 </a>
             </div>
-            <p class="social-note">💡 闲鱼链接有时效性，如无法搜索到可联系客服获取最新链接</p>
+            <p class="social-note">💡 更多问题可扫码联系客服获取帮助</p>
         </section>
 
         <!-- CTA -->
         <section class="cta">
-            <h2>🎯 立即开始你的智能营销之旅</h2>
-            <p>每天不到2块钱，拥有专业营销团队 · 首次使用免费体验</p>
+            <h2>立即开始你的智能营销之旅</h2>
+            <p>小老板用得起的AI营销智能体 · 对话即界面0门槛上手</p>
             <div class="cta-buttons">
-                <a href="https://www.coze.cn/skills" target="_blank" class="cta-btn cta-btn-primary">立即体验</a>
-                <a href="https://afdian.com/a/fly-ai-agent" target="_blank" class="cta-btn cta-btn-secondary">爱发电支持</a>
+                <a href="https://www.coze.cn/skills" target="_blank" class="cta-btn cta-btn-primary">立即免费体验</a>
+                <a href="https://afdian.com/a/flymarketingagent" target="_blank" class="cta-btn cta-btn-secondary">爱发电支持</a>
             </div>
         </section>
 
         <!-- Footer -->
         <footer>
-            <p>© 2025 Fly营销智能体 · 让每个小老板都能做好营销</p>
+            <p>© 2026 Fly营销智能体 · 让每个小老板都能做好营销</p>
             <p style="margin-top: 10px;">
                 <a href="https://www.coze.cn/skills" target="_blank">扣子技能商店</a> · 
-                <a href="https://afdian.com/a/fly-ai-agent" target="_blank">爱发电</a> · 
-                <a href="https://weibo.com/6508206834/6299010593096151" target="_blank">微博</a> · 
-                <a href="http://xhslink.com/o9JF5ASJ4UT8" target="_blank">小红书</a> · 
-                <a href="https://s.taobao.com/search?q=AI%E6%99%BA%E8%83%BD%E4%BD%93%E8%90%A5%E9%94%80%E5%8A%A9%E6%89%8B%E6%9C%88%E5%8D%A1" target="_blank">闲鱼</a> · 
+                <a href="https://afdian.com/a/flymarketingagent" target="_blank">爱发电</a> · 
+                <a href="https://weibo.com/u/7644445678" target="_blank">微博</a> · 
+                <a href="https://www.xiaohongshu.com/user/profile/6741c56e000000003d03ea" target="_blank">小红书</a> · 
+                <a href="https://s.taobao.com/search?q=Fly%E8%90%A5%E9%94%80%E6%99%BA%E8%83%BD%E4%BD%93" target="_blank">闲鱼</a> · 
                 <a href="#">联系客服</a>
             </p>
         </footer>

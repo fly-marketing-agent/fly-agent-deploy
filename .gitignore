@@ -1,0 +1,22 @@
+# 环境变量
+.env
+.env.local
+.env.*.local
+
+# 本地配置文件
+config_local.py
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 日志
+*.log

@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fly - 购买服务</title>
-<script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;background:#f5f5f7;color:#222;min-height:100vh}
@@ -14,9 +13,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
 .sub{font-size:14px;color:rgba(255,255,255,.6);margin-top:4px}
 .ct{max-width:480px;margin:0 auto;padding:20px 16px}
 .cards{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
-.card{background:#fff;border-radius:14px;padding:20px;border:2px solid #eee;transition:all .2s;position:relative}
+.card{background:#fff;border-radius:14px;padding:20px;border:2px solid #eee;position:relative;cursor:pointer}
 .card.selected{border-color:#e94560;box-shadow:0 0 0 1px #e94560}
-.card .check{position:absolute;right:16px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;border:2px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .2s}
+.card .check{position:absolute;right:16px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;border:2px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:13px}
 .card.selected .check{background:#e94560;border-color:#e94560;color:#fff}
 .pri{font-size:26px;font-weight:800;color:#e94560}
 .pri span{font-size:13px;color:#999;font-weight:400}
@@ -24,15 +23,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
 .dsc{font-size:12px;color:#888;line-height:1.5}
 .buy-btn{width:100%;padding:14px;border:none;border-radius:12px;background:#e94560;color:#fff;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:16px}
 .buy-btn:disabled{background:#ccc;cursor:not-allowed}
-.buy-btn:not(:disabled):hover{background:#c73650}
+.buy-btn:not(:disabled):active{background:#c73650}
 .status{background:#fff;border-radius:12px;padding:16px;margin-bottom:16px;font-size:13px;color:#555;line-height:1.8;display:none}
 .status.show{display:block}
 .status .ok{color:#27ae60;font-weight:600}
 .status .err{color:#e94560;font-weight:600}
 .foot{text-align:center;padding:20px;color:#bbb;font-size:11px}
-.connect-hint{text-align:center;padding:40px 20px;background:#fff;border-radius:14px;margin-bottom:16px}
-.connect-hint p{font-size:14px;color:#666;margin:8px 0}
-.connect-hint b{color:#2980fe}
+.wi{background:#fff;border-radius:10px;padding:12px;margin-bottom:14px;font-size:12px;color:#888;text-align:center}
+.wi b{color:#222}
+a.tx{color:#2980fe;text-decoration:none;word-break:break-all}
 </style>
 </head>
 <body>
@@ -41,112 +40,65 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
   <div class="sub">选择服务 · 一键USDT购买</div>
 </div>
 <div class="ct">
-  <div id="connectHint" class="connect-hint">
-    <p>请在 <b>TP钱包</b> 中打开此页面</p>
-    <p>TP钱包 → 发现 → 粘贴链接打开</p>
-    <p style="font-size:12px;color:#999;margin-top:12px">或使用任何支持BNB链的钱包DApp浏览器</p>
-  </div>
-  <div id="mainUI" style="display:none">
-    <div class="cards">
-      <div class="card" data-amount="9.9" onclick="selectCard(this)">
-        <div class="check">✓</div>
-        <div class="pri">9.9 <span>USDT</span></div>
-        <div class="ttl">单平台方案</div>
-        <div class="dsc">抖音/小红书/朋友圈任选一个，深度定制文案+发布策略</div>
-      </div>
-      <div class="card" data-amount="19.9" onclick="selectCard(this)">
-        <div class="check">✓</div>
-        <div class="pri">19.9 <span>USDT</span></div>
-        <div class="ttl">3平台全套</div>
-        <div class="dsc">抖音+小红书+朋友圈，一站式营销方案</div>
-      </div>
-      <div class="card" data-amount="99" onclick="selectCard(this)">
-        <div class="check">✓</div>
-        <div class="pri">99 <span>USDT/月</span></div>
-        <div class="ttl">包月管家</div>
-        <div class="dsc">每月4套方案+文案优化+GEO本地搜索优化</div>
-      </div>
+  <div id="walletInfo" class="wi">正在连接钱包...</div>
+  <div class="cards" id="cards" style="display:none">
+    <div class="card" data-amount="9.9" onclick="selectCard(this)">
+      <div class="check">✓</div>
+      <div class="pri">9.9 <span>USDT</span></div>
+      <div class="ttl">单平台方案</div>
+      <div class="dsc">抖音/小红书/朋友圈任选一个，深度定制文案+发布策略</div>
     </div>
-    <button class="buy-btn" id="buyBtn" disabled onclick="buy()">选择服务后点击购买</button>
-    <div class="status" id="status"></div>
+    <div class="card" data-amount="19.9" onclick="selectCard(this)">
+      <div class="check">✓</div>
+      <div class="pri">19.9 <span>USDT</span></div>
+      <div class="ttl">3平台全套</div>
+      <div class="dsc">抖音+小红书+朋友圈，一站式营销方案</div>
+    </div>
+    <div class="card" data-amount="99" onclick="selectCard(this)">
+      <div class="check">✓</div>
+      <div class="pri">99 <span>USDT/月</span></div>
+      <div class="ttl">包月管家</div>
+      <div class="dsc">每月4套方案+文案优化+GEO本地搜索优化</div>
+    </div>
   </div>
+  <button class="buy-btn" id="buyBtn" disabled onclick="buy()" style="display:none">选择服务后点击购买</button>
+  <div class="status" id="status"></div>
 </div>
 <div class="foot">Fly · 1个Fly顶一家公司 · BNB Chain</div>
-
 <script>
-const USDT_ADDR = '0x55d398326f99059fF775485246999027B3197955';
-const RECEIVER = '0x5460BeEd186E1b3786713AFf6eD71962C1CBE931';
-const CHAIN_ID = 56;
-const USDT_ABI = ['function transfer(address to, uint256 amount) returns (bool)', 'function decimals() view returns (uint8)'];
-let selectedAmount = null;
-let decimals = 18;
-
-function selectCard(el) {
-  document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  selectedAmount = parseFloat(el.dataset.amount);
-  const btn = document.getElementById('buyBtn');
-  btn.disabled = false;
-  btn.textContent = '支付 ' + selectedAmount + ' USDT';
+const USDT='0x55d398326f99059fF775485246999027B3197955',TO='0x5460BeEd186E1b3786713AFf6eD71962C1CBE931';
+let sel=null,prov;
+function findProv(){return window.tokenpocket?.ethereum||window.ethereum||window.web3?.currentProvider||null}
+function selectCard(el){document.querySelectorAll('.card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');sel=parseFloat(el.dataset.amount);const b=document.getElementById('buyBtn');b.disabled=false;b.textContent='支付 '+sel+' USDT'}
+function toWei(u){const p=u.toString().split('.');return BigInt(p[0]+(p[1]||'').padEnd(18,'0').substring(0,18))}
+function pad64(h){return h.replace('0x','').padStart(64,'0')}
+async function init(){
+  const wi=document.getElementById('walletInfo'),cards=document.getElementById('cards'),btn=document.getElementById('buyBtn');
+  await new Promise(r=>setTimeout(r,1000));
+  prov=findProv();
+  if(!prov){wi.innerHTML='❌ 未检测到钱包<br><span style="font-size:11px;color:#999">请用TP钱包/Trust Wallet/MetaMask的DApp浏览器打开</span>';return}
+  try{
+    const acc=await prov.request({method:'eth_requestAccounts'});
+    if(!acc?.length)throw 0;
+    const addr=acc[0];let cid=await prov.request({method:'eth_chainId'});
+    if(cid!=='0x38'){try{await prov.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x38'}]})}catch(e){await prov.request({method:'wallet_addEthereumChain',params:[{chainId:'0x38',chainName:'BNB Smart Chain',nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},rpcUrls:['https://bsc.publicnode.com'],blockExplorerUrls:['https://bscscan.com']}]})};cid=await prov.request({method:'eth_chainId'})}
+    wi.innerHTML='✅ 已连接: <b>'+addr.slice(0,6)+'...'+addr.slice(38)+'</b>'+(cid==='0x38'?' · BNB链':' · ⚠️切BNB链');
+    cards.style.display='flex';btn.style.display='block';
+  }catch(e){wi.innerHTML='❌ 连接失败，请刷新重试'}
 }
-
-async function init() {
-  if (typeof window.ethereum === 'undefined') return;
-  try {
-    await window.ethereum.request({ method: 'eth_requestAccounts' });
-    const chainId = parseInt(await window.ethereum.request({ method: 'eth_chainId' }), 16);
-    if (chainId !== CHAIN_ID) {
-      try {
-        await window.ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x38' }]
-        });
-      } catch (e) {
-        await window.ethereum.request({
-          method: 'wallet_addEthereumChain',
-          params: [{ chainId: '0x38', chainName: 'BNB Smart Chain', nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 }, rpcUrls: ['https://bsc.publicnode.com'], blockExplorerUrls: ['https://bscscan.com'] }]
-        });
-      }
-    }
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const contract = new ethers.Contract(USDT_ADDR, USDT_ABI, provider);
-    decimals = await contract.decimals();
-    document.getElementById('connectHint').style.display = 'none';
-    document.getElementById('mainUI').style.display = 'block';
-  } catch (e) {
-    console.error(e);
-  }
+async function buy(){
+  if(!sel)return;const btn=document.getElementById('buyBtn'),st=document.getElementById('status');
+  btn.disabled=true;btn.textContent='支付中...';st.className='status show';st.innerHTML='⏳ 请在钱包中确认USDT转账...';
+  try{
+    const acc=await prov.request({method:'eth_requestAccounts'}),from=acc[0];
+    const data='0xa9059cbb'+pad64(TO)+pad64('0x'+toWei(sel).toString(16));
+    const tx=await prov.request({method:'eth_sendTransaction',params:[{from,to:USDT,data,value:'0x0'}]});
+    st.innerHTML='⏳ 等待确认...<br><a class="tx" href="https://bscscan.com/tx/'+tx+'" target="_blank">'+tx+'</a>';
+    for(let i=0;i<40;i++){await new Promise(r=>setTimeout(r,3000));const rc=await prov.request({method:'eth_getTransactionReceipt',params:[tx]});
+      if(rc){if(rc.status==='0x1'){st.innerHTML='<span class="ok">✅ 支付成功！</span><br>已付 '+sel+' USDT<br><a class="tx" href="https://bscscan.com/tx/'+tx+'" target="_blank">'+tx.slice(0,18)+'...</a><br><br>加微信 <b>One1913U</b> 开通服务';btn.textContent='✅ 支付成功'}else{st.innerHTML='<span class="err">❌ 交易失败</span>';btn.disabled=false;btn.textContent='重新支付 '+sel+' USDT'}return}}
+    btn.disabled=false;btn.textContent='重新支付 '+sel+' USDT';
+  }catch(e){let m=e.message||String(e);if(/denied|reject|cancel/i.test(m))m='您取消了交易';else if(/insufficient/i.test(m))m='余额不足';st.innerHTML='<span class="err">❌ 失败</span><br>'+m;btn.disabled=false;btn.textContent='重新支付 '+sel+' USDT'}
 }
-
-async function buy() {
-  if (!selectedAmount) return;
-  const btn = document.getElementById('buyBtn');
-  const status = document.getElementById('status');
-  btn.disabled = true;
-  btn.textContent = '支付中...';
-  status.className = 'status show';
-  status.innerHTML = '⏳ 正在发起交易，请在钱包中确认...';
-
-  try {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(USDT_ADDR, USDT_ABI, signer);
-    const amount = ethers.utils.parseUnits(selectedAmount.toString(), decimals);
-    const tx = await contract.transfer(RECEIVER, amount);
-    status.innerHTML = '⏳ 交易已提交，等待确认...<br>Hash: <a href="https://bscscan.com/tx/' + tx.hash + '" target="_blank" style="color:#2980fe;word-break:break-all">' + tx.hash + '</a>';
-    const receipt = await tx.wait();
-    status.innerHTML = '<span class="ok">✅ 支付成功！</span><br>已支付 ' + selectedAmount + ' USDT<br>交易: <a href="https://bscscan.com/tx/' + tx.hash + '" target="_blank" style="color:#2980fe;word-break:break-all">' + tx.hash.substring(0,16) + '...</a><br><br>请添加微信 <b>One1913U</b> 确认服务开通';
-    btn.textContent = '✅ 支付成功';
-  } catch (e) {
-    let msg = e.message || '未知错误';
-    if (msg.includes('User denied') || msg.includes('user rejected')) msg = '您取消了交易';
-    else if (msg.includes('insufficient')) msg = 'USDT余额不足';
-    status.innerHTML = '<span class="err">❌ 支付失败</span><br>' + msg;
-    btn.disabled = false;
-    btn.textContent = '重新支付 ' + selectedAmount + ' USDT';
-  }
-}
-
 init();
 </script>
 </body>

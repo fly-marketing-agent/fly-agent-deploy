@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>链上身份注册 | Fly-Agent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-warm: #FFF9F5;
+            --bg-card: #FFFFFF;
+            --text-primary: #2D2926;
+            --text-secondary: #6B6560;
+            --accent-warm: #E85D4C;
+            --accent-coral: #FF8A70;
+            --accent-gold: #F5C563;
+            --accent-sage: #A8C5A8;
+            --shadow-soft: 0 4px 24px rgba(45, 41, 38, 0.06);
+            --shadow-hover: 0 8px 32px rgba(45, 41, 38, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-warm);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(255, 249, 245, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(45, 41, 38, 0.05);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
+
+        .logo span {
+            color: var(--accent-warm);
+        }
+
+        .logo-sub {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        nav {
+            display: flex;
+            gap: 36px;
+            align-items: center;
+        }
+
+        nav a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+        }
+
+        .btn-nav {
+            background: var(--text-primary);
+            color: var(--bg-warm) !important;
+            padding: 10px 22px;
+            border-radius: 100px;
+            font-weight: 500;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(45, 41, 38, 0.15);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 24px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -20%;
+            width: 140%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(245, 197, 99, 0.12) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: -10%;
+            width: 50%;
+            height: 50%;
+            background: radial-gradient(circle, rgba(232, 93, 76, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-card);
+            padding: 8px 16px 8px 10px;
+            border-radius: 100px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-sage);
+            border-radius: 50%;
+        }
+
+        .hero-badge span {
+            color: var(--accent-warm);
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(40px, 8vw, 64px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 .brand {
+            display: block;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-warm) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(18px, 3.5vw, 24px);
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .hero-tagline {
+            font-size: 16px;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto 32px;
+            opacity: 0.8;
+        }
+
+        /* Floating Elements */
+        .float-element {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .float-1 {
+            top: 25%;
+            left: 10%;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, rgba(245, 197, 99, 0.3) 100%);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: float1 8s ease-in-out infinite;
+        }
+
+        .float-2 {
+            bottom: 30%;
+            right: 12%;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-coral) 0%, rgba(255, 138, 112, 0.3) 100%);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: float2 10s ease-in-out infinite;
+        }
+
+        .float-3 {
+            top: 40%;
+            right: 18%;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-sage) 0%, rgba(168, 197, 168, 0.3) 100%);
+            border-radius: 50%;
+            animation: float3 6s ease-in-out infinite;
+        }
+
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(15px, -20px) rotate(8deg); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-20px, 10px) rotate(-12deg); }
+        }
+
+        @keyframes float3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-10px, -15px) scale(1.1); }
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 0 24px 100px;
+        }
+
+        .form-card {
+            max-width: 520px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: 28px;
+            padding: 48px 40px;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-warm), var(--accent-coral));
+        }
+
+        .form-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .form-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .form-label .required {
+            color: var(--accent-warm);
+            margin-left: 2px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1.5px solid rgba(45, 41, 38, 0.1);
+            border-radius: 14px;
+            font-size: 15px;
+            font-family: inherit;
+            color: var(--text-primary);
+            background: var(--bg-warm);
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent-warm);
+            background: var(--bg-card);
+            box-shadow: 0 0 0 4px rgba(232, 93, 76, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: rgba(107, 101, 96, 0.5);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1.5px solid rgba(45, 41, 38, 0.1);
+            border-radius: 14px;
+            font-size: 15px;
+            font-family: inherit;
+            color: var(--text-primary);
+            background: var(--bg-warm);
+            cursor: pointer;
+            transition: all 0.3s;
+            outline: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%236B6560' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+        }
+
+        .form-select:focus {
+            border-color: var(--accent-warm);
+            background-color: var(--bg-card);
+            box-shadow: 0 0 0 4px rgba(232, 93, 76, 0.1);
+        }
+
+        .btn-register {
+            width: 100%;
+            background: var(--accent-warm);
+            color: white;
+            padding: 16px 36px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: inherit;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-register:hover:not(:disabled) {
+            background: #D64D3C;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(232, 93, 76, 0.3);
+        }
+
+        .btn-register:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-register .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Status Messages */
+        .status-box {
+            padding: 20px;
+            border-radius: 14px;
+            margin-bottom: 24px;
+            text-align: left;
+            display: none;
+        }
+
+        .status-box.show {
+            display: block;
+        }
+
+        .status-box.info {
+            background: rgba(168, 197, 168, 0.15);
+            border: 1px solid rgba(168, 197, 168, 0.3);
+        }
+
+        .status-box.error {
+            background: rgba(232, 93, 76, 0.08);
+            border: 1px solid rgba(232, 93, 76, 0.2);
+        }
+
+        .status-box.success {
+            background: rgba(168, 197, 168, 0.15);
+            border: 1px solid rgba(168, 197, 168, 0.3);
+        }
+
+        .status-icon {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .status-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .status-box.success .status-title {
+            color: #4A7C4A;
+        }
+
+        .status-box.error .status-title {
+            color: var(--accent-warm);
+        }
+
+        .status-box.info .status-title {
+            color: #5A8A5A;
+        }
+
+        .status-message {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .result-item {
+            display: flex;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .result-label {
+            font-weight: 500;
+            color: var(--text-primary);
+            min-width: 80px;
+        }
+
+        .result-value {
+            color: var(--text-secondary);
+            word-break: break-all;
+            font-family: 'Space Grotesk', monospace;
+        }
+
+        .result-link {
+            color: var(--accent-warm);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .result-link:hover {
+            text-decoration: underline;
+        }
+
+        /* MetaMask Warning */
+        .metamask-warning {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .metamask-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: rgba(245, 197, 99, 0.15);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .metamask-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .metamask-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .btn-install {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-gold);
+            color: var(--text-primary);
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-install:hover {
+            background: #E5B553;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 197, 99, 0.3);
+        }
+
+        /* Gas Free Badge */
+        .gas-free {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(168, 197, 168, 0.2);
+            color: #4A7C4A;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        .gas-free::before {
+            content: '⚡';
+        }
+
+        /* Info Section */
+        .info-section {
+            padding: 80px 24px;
+            background: var(--bg-card);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+        }
+
+        .info-card {
+            text-align: center;
+            padding: 36px 24px;
+        }
+
+        .info-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 20px;
+            background: var(--bg-warm);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .info-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .info-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 24px;
+            text-align: center;
+        }
+
+        .cta-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--text-primary);
+            color: var(--bg-warm);
+            border-radius: 28px;
+            padding: 56px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(ellipse at center, rgba(232, 93, 76, 0.2) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .cta-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .cta-desc {
+            font-size: 16px;
+            color: rgba(255, 249, 245, 0.7);
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            padding: 40px 24px;
+            text-align: center;
+            border-top: 1px solid rgba(45, 41, 38, 0.05);
+        }
+
+        .footer-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .footer-link {
+            color: var(--accent-warm);
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Network Badge */
+        .network-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(245, 197, 99, 0.15);
+            color: #C9A033;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 12px;
+        }
+
+        .network-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #C9A033;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                Fly<span>Agent</span>
+                <span class="logo-sub"> | 链上身份</span>
+            </div>
+            <nav>
+                <a href="index.html">返回首页</a>
+                <a href="https://bscscan.com" target="_blank" class="btn-nav">BSC 浏览器</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="float-element float-1"></div>
+        <div class="float-element float-2"></div>
+        <div class="float-element float-3"></div>
+        
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>ERC-8004</span> 链上身份协议 · BSC 主网
+            </div>
+            
+            <h1>
+                你的店<span class="brand">，链上有身份</span>
+            </h1>
+            
+            <p class="hero-subtitle">让 AI 在区块链上找到你的店铺</p>
+            <p class="hero-tagline">
+                一键注册，即可获得去中心化店铺身份，永久留存于区块链
+            </p>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section">
+        <div class="form-card fade-in">
+            <div id="metamask-warning" class="metamask-warning" style="display: none;">
+                <div class="metamask-icon">🦊</div>
+                <h3 class="metamask-title">请安装 MetaMask</h3>
+                <p class="metamask-desc">
+                    链上身份注册需要使用 Web3 钱包。<br>
+                    请先安装 MetaMask 浏览器扩展。
+                </p>
+                <a href="https://metamask.io/download/" target="_blank" class="btn-install">
+                    安装 MetaMask
+                </a>
+            </div>
+
+            <div id="form-container">
+                <h2 class="form-title">注册你的店铺身份</h2>
+                <p class="form-subtitle">填写店铺信息，即可在 BSC 链上创建永久身份</p>
+
+                <div id="status-box" class="status-box"></div>
+
+                <form id="register-form">
+                    <div class="form-group">
+                        <label class="form-label">
+                            店铺名称 <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            class="form-input" 
+                            id="shop-name" 
+                            placeholder="例如：静舍养生馆"
+                            required
+                            maxlength="64"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            店铺地址 <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            class="form-input" 
+                            id="shop-address" 
+                            placeholder="例如：北京市朝阳区三里屯路19号"
+                            required
+                            maxlength="128"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            联系电话
+                        </label>
+                        <input 
+                            type="tel" 
+                            class="form-input" 
+                            id="shop-phone" 
+                            placeholder="例如：138-0013-8000"
+                            maxlength="32"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            店铺品类 <span class="required">*</span>
+                        </label>
+                        <select class="form-select" id="shop-category" required>
+                            <option value="">请选择店铺品类</option>
+                            <option value="养生">�养生 · 中医理疗/按摩/SPA</option>
+                            <option value="美容">💅美容 · 美发/美甲/美容</option>
+                            <option value="餐饮">🍜餐饮 · 餐厅/咖啡/茶饮</option>
+                            <option value="其他">🏪其他 · 其他服务业态</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-register" id="register-btn">
+                        <span id="btn-text">注册链上身份</span>
+                    </button>
+
+                    <div style="text-align: center;">
+                        <div class="gas-free">免 Gas 费 · Paymaster 赞助</div>
+                        <div class="network-badge">BSC Mainnet</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info-section">
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-icon">🔗</div>
+                <h3 class="info-title">什么是链上身份</h3>
+                <p class="info-desc">
+                    链上身份是将你的店铺信息（名称、地址、品类）加密记录到
+                    BSC 区块链上，生成唯一的 Agent ID，不可篡改，永久可查。
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">💡</div>
+                <h3 class="info-title">为什么需要</h3>
+                <p class="info-desc">
+                    当用户在附近搜索服务时，Fly AI 会优先推荐有链上身份的店铺。
+                    链上身份 = 真实可信 + 优先推荐 + 去中心化认证。
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">🗺️</div>
+                <h3 class="info-title">与 Fly GEO 的关系</h3>
+                <p class="info-desc">
+                    Fly GEO 是地理位置服务，链上身份是身份认证服务。
+                    两者结合：GEO 确定"你在哪里"，链上身份确认"你是谁"，
+                    共同构建可信的本地服务网络。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-card">
+            <h2 class="cta-title">让 AI 记住你的店铺</h2>
+            <p class="cta-desc">
+                注册链上身份后，你的店铺将进入 Fly 知识图谱，<br>
+                被 AI 优先推荐给附近有需求的用户
+            </p>
+            <div class="gas-free" style="background: rgba(168, 197, 168, 0.25); color: #A8C5A8;">
+                ⚡ 完全免费 · Paymaster 替你付 Gas
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">
+            基于 <a href="https://bscscan.com" target="_blank" class="footer-link">BSC</a> · 
+            ERC-8004 协议 · 
+            <a href="https://bscscan.com/address/0x8004A169FB4a3325136EB29fA0ceB6D2e539a432" target="_blank" class="footer-link">合约地址</a>
+        </p>
+    </footer>
+
+    <script>
+        // Contract Configuration
+        const CONTRACT_ADDRESS = '0x8004A169FB4a3325136EB29fA0ceB6D2e539a432';
+        const RPC_URL = 'https://bsc.publicnode.com';
+        const BSCSCAN_URL = 'https://bscscan.com';
+
+        // ERC-8004 ABI - registerAgent function
+        const CONTRACT_ABI = [
+            {
+                "inputs": [
+                    {"internalType": "string", "name": "_name", "type": "string"},
+                    {"internalType": "string", "name": "_location", "type": "string"},
+                    {"internalType": "string", "name": "_category", "type": "string"},
+                    {"internalType": "string", "name": "_metadata", "type": "string"}
+                ],
+                "name": "registerAgent",
+                "outputs": [
+                    {"internalType": "uint256", "name": "", "type": "uint256"}
+                ],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            }
+        ];
+
+        // DOM Elements
+        const form = document.getElementById('register-form');
+        const registerBtn = document.getElementById('register-btn');
+        const btnText = document.getElementById('btn-text');
+        const statusBox = document.getElementById('status-box');
+        const metamaskWarning = document.getElementById('metamask-warning');
+        const formContainer = document.getElementById('form-container');
+
+        // Check MetaMask
+        function isMetaMaskInstalled() {
+            return typeof window.ethereum !== 'undefined' || 
+                   (window.web3 && window.web3.currentProvider);
+        }
+
+        // Get Web3 Provider
+        function getProvider() {
+            if (window.ethereum) {
+                return window.ethereum;
+            } else if (window.web3 && window.web3.currentProvider) {
+                return window.web3.currentProvider;
+            }
+            return null;
+        }
+
+        // Get Web3 Instance
+        function getWeb3() {
+            const provider = getProvider();
+            if (!provider) return null;
+            return new Web3(provider);
+        }
+
+        // Show Status
+        function showStatus(type, title, message, details = null) {
+            const icons = {
+                info: '💡',
+                error: '❌',
+                success: '✅'
+            };
+
+            let html = `
+                <div class="status-icon">${icons[type]}</div>
+                <div class="status-title">${title}</div>
+                <div class="status-message">${message}</div>
+            `;
+
+            if (details) {
+                html += '<div style="margin-top: 16px;">';
+                if (details.agentId) {
+                    html += `
+                        <div class="result-item">
+                            <span class="result-label">Agent ID</span>
+                            <span class="result-value">#${details.agentId}</span>
+                        </div>
+                    `;
+                }
+                if (details.txHash) {
+                    html += `
+                        <div class="result-item">
+                            <span class="result-label">交易哈希</span>
+                            <span class="result-value">${details.txHash}</span>
+                        </div>
+                    `;
+                }
+                if (details.bscscanUrl) {
+                    html += `
+                        <div class="result-item">
+                            <span class="result-label">查看详情</span>
+                            <span class="result-value">
+                                <a href="${details.bscscanUrl}" target="_blank" class="result-link">
+                                    在 BSCscan 上查看 →
+                                </a>
+                            </span>
+                        </div>
+                    `;
+                }
+                html += '</div>';
+            }
+
+            statusBox.innerHTML = html;
+            statusBox.className = `status-box show ${type}`;
+        }
+
+        // Hide Status
+        function hideStatus() {
+            statusBox.className = 'status-box';
+        }
+
+        // Set Loading State
+        function setLoading(loading, text = '注册链上身份') {
+            registerBtn.disabled = loading;
+            btnText.innerHTML = loading ? '<div class="spinner"></div>' : text;
+        }
+
+        // Check Network
+        async function checkNetwork(web3) {
+            try {
+                const networkId = await web3.eth.net.getId();
+                // BSC Mainnet = 56
+                if (networkId !== 56) {
+                    return { valid: false, networkId };
+                }
+                return { valid: true, networkId };
+            } catch (error) {
+                console.error('Network check error:', error);
+                return { valid: false, networkId: null, error };
+            }
+        }
+
+        // Initialize
+        async function init() {
+            if (!isMetaMaskInstalled()) {
+                metamaskWarning.style.display = 'block';
+                formContainer.style.display = 'none';
+                return;
+            }
+
+            metamaskWarning.style.display = 'none';
+            formContainer.style.display = 'block';
+        }
+
+        // Handle Network Switch
+        async function switchToBSC() {
+            const provider = getProvider();
+            if (!provider) return false;
+
+            try {
+                await provider.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: '0x38' }], // BSC Mainnet chainId in hex
+                });
+                return true;
+            } catch (switchError) {
+                // Chain not added, try to add it
+                if (switchError.code === 4902) {
+                    try {
+                        await provider.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [{
+                                chainId: '0x38',
+                                chainName: 'BNB Smart Chain',
+                                nativeCurrency: {
+                                    name: 'BNB',
+                                    symbol: 'BNB',
+                                    decimals: 18
+                                },
+                                rpcUrls: ['https://bsc.publicnode.com'],
+                                blockExplorerUrls: ['https://bscscan.com/']
+                            }]
+                        });
+                        return true;
+                    } catch (addError) {
+                        console.error('Add chain error:', addError);
+                        return false;
+                    }
+                }
+                return false;
+            }
+        }
+
+        // Form Submit Handler
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideStatus();
+
+            const shopName = document.getElementById('shop-name').value.trim();
+            const shopAddress = document.getElementById('shop-address').value.trim();
+            const shopPhone = document.getElementById('shop-phone').value.trim();
+            const shopCategory = document.getElementById('shop-category').value;
+
+            // Validation
+            if (!shopName || !shopAddress || !shopCategory) {
+                showStatus('error', '请填写必填项', '店铺名称、地址和品类为必填项');
+                return;
+            }
+
+            const web3 = getWeb3();
+            if (!web3) {
+                showStatus('error', '钱包未连接', '请安装并连接 MetaMask 钱包');
+                return;
+            }
+
+            // Check accounts
+            const accounts = await web3.eth.getAccounts();
+            if (!accounts || accounts.length === 0) {
+                try {
+                    await getProvider().request({ method: 'eth_requestAccounts' });
+                } catch (err) {
+                    showStatus('error', '钱包未授权', '请在 MetaMask 中授权连接');
+                    return;
+                }
+            }
+
+            const currentAccounts = await web3.eth.getAccounts();
+            const userAddress = currentAccounts[0];
+
+            // Check network
+            const networkCheck = await checkNetwork(web3);
+            if (!networkCheck.valid) {
+                if (networkCheck.networkId !== 56 && networkCheck.networkId !== null) {
+                    showStatus('info', '请切换到 BSC 网络', '正在为你切换到 BSC 主网...');
+                    const switched = await switchToBSC();
+                    if (!switched) {
+                        showStatus('error', '网络切换失败', '请手动在 MetaMask 中切换到 BSC 主网 (Chain ID: 56)');
+                        return;
+                    }
+                    // Retry after switch
+                    showStatus('info', '网络已切换', '请再次点击「注册链上身份」按钮');
+                    return;
+                }
+            }
+
+            setLoading(true);
+
+            try {
+                // Build metadata
+                const metadata = JSON.stringify({
+                    phone: shopPhone || '',
+                    registeredAt: new Date().toISOString(),
+                    via: 'FlyAgent-Web'
+                });
+
+                // Create contract instance
+                const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
+
+                // Estimate gas first (optional, for UX)
+                const gasEstimate = await contract.methods
+                    .registerAgent(shopName, shopAddress, shopCategory, metadata)
+                    .estimateGas({ from: userAddress });
+
+                showStatus('info', '交易处理中', `正在提交交易到 BSC 链...`);
+
+                // Send transaction
+                const tx = await contract.methods
+                    .registerAgent(shopName, shopAddress, shopCategory, metadata)
+                    .send({
+                        from: userAddress,
+                        gas: Math.round(gasEstimate * 1.2) // Add 20% buffer
+                    });
+
+                // Parse receipt
+                const txHash = tx.transactionHash;
+                const agentId = tx.events?.AgentRegistered?.returnValues?.agentId || 
+                               tx.events?.0?.returnValues?.agentId ||
+                               'pending';
+
+                // Show success
+                showStatus('success', '🎉 注册成功！', '你的店铺身份已永久记录在 BSC 区块链上', {
+                    agentId: agentId !== 'pending' ? agentId : '铸造中...',
+                    txHash: txHash,
+                    bscscanUrl: `${BSCSCAN_URL}/tx/${txHash}`
+                });
+
+                // Clear form
+                form.reset();
+
+            } catch (error) {
+                console.error('Registration error:', error);
+                
+                let errorMessage = '注册失败，请重试';
+                
+                if (error.code === 4001 || error.message?.includes('User rejected')) {
+                    errorMessage = '用户取消了交易';
+                } else if (error.message?.includes('nonce')) {
+                    errorMessage = '交易 nonce 错误，请刷新页面后重试';
+                } else if (error.message?.includes('insufficient funds')) {
+                    errorMessage = 'BNB 余额不足（虽然使用 Paymaster，通常不需要）';
+                } else if (error.message) {
+                    // Try to extract useful part
+                    const match = error.message.match(/reason[:\s]+([^"]+)/i) ||
+                                  error.message.match(/execution reverted[:\s]+(.+)/i);
+                    if (match) {
+                        errorMessage = match[1].substring(0, 100);
+                    }
+                }
+
+                showStatus('error', '注册失败', errorMessage);
+            } finally {
+                setLoading(false);
+            }
+        });
+
+        // Listen for account changes
+        if (window.ethereum) {
+            window.ethereum.on('accountsChanged', (accounts) => {
+                if (accounts.length === 0) {
+                    hideStatus();
+                    showStatus('info', '钱包已断开', '请重新连接 MetaMask');
+                } else {
+                    hideStatus();
+                }
+            });
+
+            window.ethereum.on('chainChanged', () => {
+                // Reload on chain change
+                window.location.reload();
+            });
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', init);
+        
+        // Also try immediately in case DOMContentLoaded already fired
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            init();
+        }
+    </script>
+
+    <!-- Web3.js -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+</body>
+</html>

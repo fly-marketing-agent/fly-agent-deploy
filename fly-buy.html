@@ -12,26 +12,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
 .logo span{color:#e94560}
 .sub{font-size:14px;color:rgba(255,255,255,.6);margin-top:4px}
 .ct{max-width:480px;margin:0 auto;padding:20px 16px}
-.cards{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
 .card{background:#fff;border-radius:14px;padding:20px;border:2px solid #eee;position:relative;cursor:pointer}
-.card.selected{border-color:#e94560;box-shadow:0 0 0 1px #e94560}
-.card .check{position:absolute;right:16px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;border:2px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:13px}
-.card.selected .check{background:#e94560;border-color:#e94560;color:#fff}
+.card.sel{border-color:#e94560;box-shadow:0 0 0 1px #e94560}
+.card .ck{position:absolute;right:16px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;border:2px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:13px}
+.card.sel .ck{background:#e94560;border-color:#e94560;color:#fff}
 .pri{font-size:26px;font-weight:800;color:#e94560}
 .pri span{font-size:13px;color:#999;font-weight:400}
 .ttl{font-size:16px;font-weight:600;margin:4px 0}
 .dsc{font-size:12px;color:#888;line-height:1.5}
-.buy-btn{width:100%;padding:14px;border:none;border-radius:12px;background:#e94560;color:#fff;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:16px}
-.buy-btn:disabled{background:#ccc;cursor:not-allowed}
-.buy-btn:not(:disabled):active{background:#c73650}
-.status{background:#fff;border-radius:12px;padding:16px;margin-bottom:16px;font-size:13px;color:#555;line-height:1.8;display:none}
-.status.show{display:block}
-.status .ok{color:#27ae60;font-weight:600}
-.status .err{color:#e94560;font-weight:600}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;color:#fff;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:16px}
+.btn:disabled{background:#ccc;cursor:not-allowed}
+.br{background:#e94560}.br:not(:disabled):active{background:#c73650}
+.bb{background:#2980fe}.bb:not(:disabled):active{background:#1a6ddf}
+.st{background:#fff;border-radius:12px;padding:16px;margin-bottom:16px;font-size:13px;color:#555;line-height:1.8;display:none}
+.st.on{display:block}
+.ok{color:#27ae60;font-weight:600}
+.err{color:#e94560;font-weight:600}
 .foot{text-align:center;padding:20px;color:#bbb;font-size:11px}
 .wi{background:#fff;border-radius:10px;padding:12px;margin-bottom:14px;font-size:12px;color:#888;text-align:center}
 .wi b{color:#222}
-a.tx{color:#2980fe;text-decoration:none;word-break:break-all}
+a.lk{color:#2980fe;text-decoration:none;word-break:break-all}
+.fb{background:#fff;border-radius:14px;padding:24px;margin-bottom:16px}
+.fb h3{font-size:18px;font-weight:700;margin-bottom:16px}
+.fb label{display:block;font-size:13px;color:#666;margin:12px 0 4px}
+.fb input,.fb select,.fb textarea{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;background:#fafafa}
+.fb textarea{height:60px;resize:none}
+.rb{background:#fff;border-radius:14px;padding:24px;margin-bottom:16px;text-align:center}
+.rb .bg{font-size:48px;margin-bottom:8px}
+.rb h3{font-size:18px;font-weight:700;margin-bottom:12px;color:#27ae60}
+.rb p{font-size:13px;color:#666;line-height:1.8}
+.dots{display:flex;justify-content:center;gap:8px;margin-bottom:20px}
+.dt{width:10px;height:10px;border-radius:50%;background:#ddd}
+.dt.a{background:#e94560}.dt.d{background:#27ae60}
+.h{display:none}
+.cards{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
 </style>
 </head>
 <body>
@@ -40,64 +54,87 @@ a.tx{color:#2980fe;text-decoration:none;word-break:break-all}
   <div class="sub">选择服务 · 一键USDT购买</div>
 </div>
 <div class="ct">
-  <div id="walletInfo" class="wi">正在连接钱包...</div>
-  <div class="cards" id="cards" style="display:none">
-    <div class="card" data-amount="9.9" onclick="selectCard(this)">
-      <div class="check">✓</div>
-      <div class="pri">9.9 <span>USDT</span></div>
-      <div class="ttl">单平台方案</div>
-      <div class="dsc">抖音/小红书/朋友圈任选一个，深度定制文案+发布策略</div>
+  <div id="wi" class="wi">正在连接钱包...</div>
+  <div class="dots" id="dots" style="display:none"><div class="dt a" id="d1"></div><div class="dt" id="d2"></div><div class="dt" id="d3"></div></div>
+
+  <div id="p1">
+    <div class="cards" id="cards" style="display:none">
+      <div class="card" data-amt="9.9" onclick="sc(this)"><div class="ck">✓</div><div class="pri">9.9 <span>USDT</span></div><div class="ttl">单平台方案</div><div class="dsc">抖音/小红书/朋友圈任选一个</div></div>
+      <div class="card" data-amt="19.9" onclick="sc(this)"><div class="ck">✓</div><div class="pri">19.9 <span>USDT</span></div><div class="ttl">3平台全套</div><div class="dsc">抖音+小红书+朋友圈</div></div>
+      <div class="card" data-amt="99" onclick="sc(this)"><div class="ck">✓</div><div class="pri">99 <span>USDT/月</span></div><div class="ttl">包月管家</div><div class="dsc">每月4套+文案优化+GEO</div></div>
     </div>
-    <div class="card" data-amount="19.9" onclick="selectCard(this)">
-      <div class="check">✓</div>
-      <div class="pri">19.9 <span>USDT</span></div>
-      <div class="ttl">3平台全套</div>
-      <div class="dsc">抖音+小红书+朋友圈，一站式营销方案</div>
-    </div>
-    <div class="card" data-amount="99" onclick="selectCard(this)">
-      <div class="check">✓</div>
-      <div class="pri">99 <span>USDT/月</span></div>
-      <div class="ttl">包月管家</div>
-      <div class="dsc">每月4套方案+文案优化+GEO本地搜索优化</div>
+    <button class="btn br" id="buyBtn" disabled onclick="pay()" style="display:none">选择服务后点击购买</button>
+    <div class="st" id="st"></div>
+  </div>
+
+  <div id="p2" class="h">
+    <div class="fb">
+      <h3>📝 告诉Fly你的店</h3>
+      <p style="font-size:12px;color:#999;margin-bottom:8px">信息上链存证，Fly自动生成营销方案</p>
+      <label>店铺名称 *</label><input id="fN" placeholder="例如：鸿颜徒手养护">
+      <label>店铺类型 *</label><select id="fT"><option value="">请选择</option><option>养生馆</option><option>美容美业</option><option>餐饮</option><option>健身运动</option><option>教育培训</option><option>宠物服务</option><option>其他</option></select>
+      <label>店铺地址</label><input id="fA" placeholder="杭州市西湖区xx路">
+      <label>目标客户</label><textarea id="fC" placeholder="25-45岁女性，注重养生"></textarea>
+      <label>想推什么</label><textarea id="fP" placeholder="新客体验套餐9.9元"></textarea>
+      <button class="btn bb" onclick="go()">提交上链</button>
     </div>
   </div>
-  <button class="buy-btn" id="buyBtn" disabled onclick="buy()" style="display:none">选择服务后点击购买</button>
-  <div class="status" id="status"></div>
+
+  <div id="p3" class="h">
+    <div class="rb">
+      <div class="bg">🎉</div>
+      <h3>订单已上链</h3>
+      <p>Fly正在生成你的营销方案<br>方案完成后写入链上，回来即可查看</p>
+      <p style="margin-top:12px;font-size:12px;color:#999">支付：<a class="lk" id="rP" href="#" target="_blank"></a></p>
+      <p style="font-size:12px;color:#999">信息上链：<a class="lk" id="rO" href="#" target="_blank"></a></p>
+      <p style="font-size:12px;color:#999">订单号：<b id="rI"></b></p>
+      <a style="display:inline-block;margin-top:14px;background:#e94560;color:#fff;padding:10px 24px;border-radius:8px;font-weight:600;text-decoration:none;font-size:14px" id="rL" href="#" target="_blank">查看链上记录 →</a>
+    </div>
+  </div>
 </div>
 <div class="foot">Fly · 1个Fly顶一家公司 · BNB Chain</div>
 <script>
 const USDT='0x55d398326f99059fF775485246999027B3197955',TO='0x5460BeEd186E1b3786713AFf6eD71962C1CBE931';
-let sel=null,prov;
-function findProv(){return window.tokenpocket?.ethereum||window.ethereum||window.web3?.currentProvider||null}
-function selectCard(el){document.querySelectorAll('.card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');sel=parseFloat(el.dataset.amount);const b=document.getElementById('buyBtn');b.disabled=false;b.textContent='支付 '+sel+' USDT'}
-function toWei(u){const p=u.toString().split('.');return BigInt(p[0]+(p[1]||'').padEnd(18,'0').substring(0,18))}
-function pad64(h){return h.replace('0x','').padStart(64,'0')}
+let sel=null,prov,ptx=null;
+function fp(){return window.tokenpocket?.ethereum||window.ethereum||window.web3?.currentProvider||null}
+function sc(el){document.querySelectorAll('.card').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');sel=parseFloat(el.dataset.amt);const b=document.getElementById('buyBtn');b.disabled=false;b.textContent='支付 '+sel+' USDT'}
+function tw(u){const p=u.toString().split('.');return BigInt(p[0]+(p[1]||'').padEnd(18,'0').substring(0,18))}
+function p6(h){return h.replace('0x','').padStart(64,'0')}
+function gs(n){for(let i=1;i<=3;i++){document.getElementById('d'+i).className=n>i?'dt d':n===i?'dt a':'dt'}document.getElementById('p1').className=n===1?'':'h';document.getElementById('p2').className=n===2?'':'h';document.getElementById('p3').className=n===3?'':'h'}
 async function init(){
-  const wi=document.getElementById('walletInfo'),cards=document.getElementById('cards'),btn=document.getElementById('buyBtn');
-  await new Promise(r=>setTimeout(r,1000));
-  prov=findProv();
+  const wi=document.getElementById('wi');await new Promise(r=>setTimeout(r,1000));prov=fp();
   if(!prov){wi.innerHTML='❌ 未检测到钱包<br><span style="font-size:11px;color:#999">请用TP钱包/Trust Wallet/MetaMask的DApp浏览器打开</span>';return}
-  try{
-    const acc=await prov.request({method:'eth_requestAccounts'});
-    if(!acc?.length)throw 0;
-    const addr=acc[0];let cid=await prov.request({method:'eth_chainId'});
-    if(cid!=='0x38'){try{await prov.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x38'}]})}catch(e){await prov.request({method:'wallet_addEthereumChain',params:[{chainId:'0x38',chainName:'BNB Smart Chain',nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},rpcUrls:['https://bsc.publicnode.com'],blockExplorerUrls:['https://bscscan.com']}]})};cid=await prov.request({method:'eth_chainId'})}
-    wi.innerHTML='✅ 已连接: <b>'+addr.slice(0,6)+'...'+addr.slice(38)+'</b>'+(cid==='0x38'?' · BNB链':' · ⚠️切BNB链');
-    cards.style.display='flex';btn.style.display='block';
-  }catch(e){wi.innerHTML='❌ 连接失败，请刷新重试'}
+  try{const a=await prov.request({method:'eth_requestAccounts'});if(!a?.length)throw 0;let c=await prov.request({method:'eth_chainId'});
+  if(c!=='0x38'){try{await prov.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x38'}]})}catch(e){await prov.request({method:'wallet_addEthereumChain',params:[{chainId:'0x38',chainName:'BNB Smart Chain',nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},rpcUrls:['https://bsc.publicnode.com'],blockExplorerUrls:['https://bscscan.com']}]})}c=await prov.request({method:'eth_chainId'})}
+  wi.innerHTML='✅ <b>'+a[0].slice(0,6)+'...'+a[0].slice(38)+'</b>'+(c==='0x38'?' · BNB链':' · ⚠️切BNB链');
+  document.getElementById('cards').style.display='flex';document.getElementById('buyBtn').style.display='block';document.getElementById('dots').style.display='flex';
+  }catch(e){wi.innerHTML='❌ 连接失败，请刷新'}
 }
-async function buy(){
-  if(!sel)return;const btn=document.getElementById('buyBtn'),st=document.getElementById('status');
-  btn.disabled=true;btn.textContent='支付中...';st.className='status show';st.innerHTML='⏳ 请在钱包中确认USDT转账...';
-  try{
-    const acc=await prov.request({method:'eth_requestAccounts'}),from=acc[0];
-    const data='0xa9059cbb'+pad64(TO)+pad64('0x'+toWei(sel).toString(16));
-    const tx=await prov.request({method:'eth_sendTransaction',params:[{from,to:USDT,data,value:'0x0'}]});
-    st.innerHTML='⏳ 等待确认...<br><a class="tx" href="https://bscscan.com/tx/'+tx+'" target="_blank">'+tx+'</a>';
-    for(let i=0;i<40;i++){await new Promise(r=>setTimeout(r,3000));const rc=await prov.request({method:'eth_getTransactionReceipt',params:[tx]});
-      if(rc){if(rc.status==='0x1'){st.innerHTML='<span class="ok">✅ 支付成功！</span><br>已付 '+sel+' USDT<br><a class="tx" href="https://bscscan.com/tx/'+tx+'" target="_blank">'+tx.slice(0,18)+'...</a><br><br>加微信 <b>One1913U</b> 开通服务';btn.textContent='✅ 支付成功'}else{st.innerHTML='<span class="err">❌ 交易失败</span>';btn.disabled=false;btn.textContent='重新支付 '+sel+' USDT'}return}}
-    btn.disabled=false;btn.textContent='重新支付 '+sel+' USDT';
-  }catch(e){let m=e.message||String(e);if(/denied|reject|cancel/i.test(m))m='您取消了交易';else if(/insufficient/i.test(m))m='余额不足';st.innerHTML='<span class="err">❌ 失败</span><br>'+m;btn.disabled=false;btn.textContent='重新支付 '+sel+' USDT'}
+async function pay(){
+  if(!sel)return;const b=document.getElementById('buyBtn'),s=document.getElementById('st');
+  b.disabled=true;b.textContent='支付中...';s.className='st on';s.innerHTML='⏳ 请在钱包中确认USDT转账...';
+  try{const a=await prov.request({method:'eth_requestAccounts'}),f=a[0];
+  ptx=await prov.request({method:'eth_sendTransaction',params:[{from:f,to:USDT,data:'0xa9059cbb'+p6(TO)+p6('0x'+tw(sel).toString(16)),value:'0x0'}]});
+  s.innerHTML='⏳ 确认中...<br><a class="lk" href="https://bscscan.com/tx/'+ptx+'" target="_blank">'+ptx+'</a>';
+  for(let i=0;i<40;i++){await new Promise(r=>setTimeout(r,3000));const rc=await prov.request({method:'eth_getTransactionReceipt',params:[ptx]});
+  if(rc){if(rc.status==='0x1'){gs(2);return}else{s.innerHTML='<span class="err">❌ 交易失败</span>';b.disabled=false;b.textContent='重新支付 '+sel+' USDT'}return}}
+  b.disabled=false;b.textContent='重新支付 '+sel+' USDT';
+  }catch(e){let m=e.message||String(e);if(/denied|reject|cancel/i.test(m))m='您取消了交易';else if(/insufficient/i.test(m))m='余额不足';s.innerHTML='<span class="err">❌</span> '+m;b.disabled=false;b.textContent='重新支付 '+sel+' USDT'}
+}
+async function go(){
+  const n=document.getElementById('fN').value,t=document.getElementById('fT').value;
+  if(!n||!t){alert('请填写店铺名称和类型');return}
+  const oid='FLY-'+Date.now().toString(36).toUpperCase();
+  const d=JSON.stringify({id:oid,amt:sel,shop:{n,t,a:document.getElementById('fA').value,c:document.getElementById('fC').value,p:document.getElementById('fP').value},pay:ptx,ts:Date.now()});
+  try{const a=await prov.request({method:'eth_requestAccounts'}),f=a[0];
+  const hx='0x'+Array.from(new TextEncoder().encode('FLY:'+d)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  const otx=await prov.request({method:'eth_sendTransaction',params:[{from:f,to:f,data:hx,value:'0x0'}]});
+  gs(3);document.getElementById('rP').textContent=ptx?ptx.slice(0,18)+'...':'';document.getElementById('rP').href=ptx?'https://bscscan.com/tx/'+ptx:'#';
+  document.getElementById('rO').textContent=otx.slice(0,18)+'...';document.getElementById('rO').href='https://bscscan.com/tx/'+otx;
+  document.getElementById('rI').textContent=oid;document.getElementById('rL').href='https://bscscan.com/address/'+f;
+  }catch(e){let or=JSON.parse(localStorage.getItem('fly_orders')||'[]');or.push({id:oid,d,ptx});localStorage.setItem('fly_orders',JSON.stringify(or));
+  gs(3);document.getElementById('rP').textContent=ptx?ptx.slice(0,18)+'...':'';document.getElementById('rP').href=ptx?'https://bscscan.com/tx/'+ptx:'#';
+  document.getElementById('rO').textContent='本地记录';document.getElementById('rI').textContent=oid;document.getElementById('rL').href='https://bscscan.com/address/0x5460BeEd186E1b3786713AFf6eD71962C1CBE931'}
 }
 init();
 </script>

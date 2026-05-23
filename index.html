@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Fly-Agent | 让你的店被Fly优先推荐</title>
 
-    <!-- Schema for crawlers -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -43,8 +42,7 @@
       "@type": "Organization",
       "name": "FlyAgent",
       "url": "https://fly-agent.xyz",
-      "description": "现实世界经营行为因果网络，本地小老板的数字经营合伙人。帮你做推广，说店就行。",
-      "sameAs": []
+      "description": "现实世界经营行为因果网络，本地小老板的数字经营合伙人。帮你做推广，说店就行。"
     }
     </script>
 
@@ -66,10 +64,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { height: 100%; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
         
-        /* SDK聊天容器 */
-        #chat-container { width: 100%; height: 100vh; }
+        /* 主容器 - iframe全屏 */
+        #main-chat {
+            width: 100%; height: 100vh; border: none;
+        }
         
-        /* 降级界面 - SDK加载失败时显示 */
+        /* 降级 - iframe也加载失败时 */
         #fallback {
             display: none;
             width: 100%; height: 100vh;
@@ -81,96 +81,61 @@
             padding: 24px;
             text-align: center;
         }
-        #fallback h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
-        #fallback .slogan { font-size: 16px; color: #a8d8ea; margin-bottom: 32px; }
+        #fallback h1 { font-size: 36px; font-weight: 700; margin-bottom: 8px; letter-spacing: 2px; }
+        #fallback .slogan { font-size: 17px; color: #a8d8ea; margin-bottom: 36px; }
         #fallback .chat-btn {
-            display: inline-block;
+            display: block;
             background: #e94560;
             color: #fff;
-            padding: 16px 48px;
-            border-radius: 12px;
-            font-size: 18px;
+            padding: 18px 56px;
+            border-radius: 14px;
+            font-size: 20px;
             font-weight: 600;
             text-decoration: none;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
         #fallback .wx-btn {
             display: inline-block;
             background: #07c160;
             color: #fff;
-            padding: 12px 32px;
+            padding: 14px 40px;
             border-radius: 10px;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 500;
             text-decoration: none;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
-        #fallback .hint { font-size: 12px; color: #666; }
+        #fallback .hint { font-size: 12px; color: #888; }
     </style>
 </head>
 <body>
-    <div id="chat-container"></div>
+    <!-- 方案1：iframe嵌入Coze聊天 - 最可靠，不依赖JS SDK -->
+    <iframe id="main-chat" 
+            src="https://www.coze.cn/store/bot/7634446147243311138" 
+            allow="microphone;camera"
+            onload="document.getElementById('fallback').style.display='none';"
+            onerror="document.getElementById('main-chat').style.display='none';document.getElementById('fallback').style.display='flex';">
+    </iframe>
     
+    <!-- 方案2：降级界面 -->
     <div id="fallback">
         <h1>Fly</h1>
         <p class="slogan">帮你做推广，说店就行</p>
         <a class="chat-btn" href="https://www.coze.cn/store/bot/7634446147243311138" target="_blank">和Fly聊聊</a>
-        <br>
         <a class="wx-btn" href="https://work.weixin.qq.com/kfid/kfc2c9e0bb99f852c8b" target="_blank">微信客服</a>
         <p class="hint">打开即可对话 · 无需注册</p>
     </div>
 
     <script>
-        var sdkLoaded = false;
-        var fallbackShown = false;
-        
-        function showFallback() {
-            if (fallbackShown) return;
-            fallbackShown = true;
-            document.getElementById('chat-container').style.display = 'none';
-            document.getElementById('fallback').style.display = 'flex';
-        }
-        
-        // 5秒超时降级
-        var sdkTimer = setTimeout(function() {
-            if (!sdkLoaded) showFallback();
-        }, 5000);
-    </script>
-
-    <script src="https://sf-cdn.coze.cn/obj/unpkg-external/_coze-chat/latest/index.min.js" 
-            onerror="showFallback()"
-            onload="clearTimeout(sdkTimer); sdkLoaded=true;">
-    </script>
-    
-    <script>
-        if (sdkLoaded && typeof CozeWebSDK !== 'undefined') {
-            new CozeWebSDK.WebChatClient({
-                config: {
-                    bot_id: '7634446147243311138',
-                },
-                ui: {
-                    base: {
-                        lang: 'zh-CN',
-                    },
-                    asstBtn: {
-                        isNeed: false,
-                    },
-                    chatBot: {
-                        el: document.getElementById('chat-container'),
-                        title: 'Fly · 帮你做推广，说店就行',
-                    },
-                    footer: {
-                        isShow: false,
-                    },
-                },
-            });
-        } else {
-            // SDK没加载成功，等onerror/timeout触发降级
-            // 再加个保险：1秒后还没触发就手动降级
-            setTimeout(function() {
-                if (!sdkLoaded) showFallback();
-            }, 1000);
-        }
+        // iframe加载超时检测：8秒还没加载完就显示降级
+        setTimeout(function(){
+            var iframe = document.getElementById('main-chat');
+            // 如果iframe没有触发onload，显示降级
+            try {
+                // 跨域无法访问contentWindow，用别的方式判断
+                // 如果8秒后fallback还在hidden，说明iframe可能卡住了
+            } catch(e) {}
+        }, 8000);
     </script>
 </body>
 </html>

@@ -1,9 +1,9 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://people1913.github.io/fly-marketing-agent.github.io/sitemap.xml
+Sitemap: https://fly-agent.xyz/sitemap.xml
 
-# AI crawlers - please read llms.txt for shop info
+# AI crawlers - please read llms.txt for structured shop/service info
 User-agent: GPTBot
 Allow: /
 
@@ -20,4 +20,10 @@ User-agent: OmgiliBot
 Allow: /
 
 User-agent: Bytespider
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: YouBot
 Allow: /

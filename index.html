@@ -20,9 +20,9 @@
 .new-btn{font-size:11px;padding:5px 12px;background:rgba(255,107,53,.15);border:1px solid rgba(255,107,53,.3);border-radius:8px;color:var(--orange);cursor:pointer;transition:all .15s;font-family:var(--sans)}.new-btn:hover{background:rgba(255,107,53,.25)}
 .conv-scroll{flex:1;overflow-y:auto;overflow-x:hidden}.conv-scroll::-webkit-scrollbar{width:4px}.conv-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}.conv-scroll::-webkit-scrollbar-track{background:transparent}
 .sb-section{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1.5px;padding:12px 14px 4px;flex-shrink:0}
-.conv-item{display:flex;align-items:center;gap:10px;padding:8px 14px;cursor:pointer;transition:all .15s;border-radius:6px;margin:1px 8px;border-left:2px solid transparent}.conv-item:hover{background:var(--sidebar-hover)}.conv-item.active{background:var(--sidebar-active);border-left-color:var(--orange)}
-.conv-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
-.conv-info{flex:1;min-width:0}.conv-title{font-size:12px;font-weight:500;color:#e8e8ed;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.conv-sub{font-size:10px;color:rgba(255,255,255,.35);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.conv-item{display:flex;align-items:center;gap:10px;padding:8px 14px;cursor:pointer;transition:all .15s;border-radius:8px;margin:1px 6px}.conv-item:hover{background:var(--sidebar-hover)}.conv-item.active{background:rgba(255,255,255,.08)}
+.conv-icon{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.conv-info{flex:1;min-width:0}.conv-title{font-size:13px;font-weight:400;color:var(--sidebar-text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.conv-sub{font-size:10px;color:rgba(255,255,255,.35);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
 .conv-badge{font-family:var(--mono);font-size:7px;padding:1px 5px;border-radius:3px;font-weight:500;flex-shrink:0}
 .bg{background:rgba(34,197,113,.15);color:var(--green)}.bo{background:rgba(255,107,53,.15);color:var(--orange)}.br{background:rgba(239,68,68,.15);color:var(--red)}.bc{background:rgba(14,165,233,.15);color:var(--cyan)}
 .ic-o{background:rgba(255,107,53,.12)}.ic-c{background:rgba(14,165,233,.1)}.ic-g{background:rgba(34,197,113,.1)}.ic-y{background:rgba(234,179,8,.1)}.ic-r{background:rgba(239,68,68,.1)}.ic-p{background:rgba(139,92,246,.1)}
@@ -91,9 +91,10 @@
       <button class="new-btn" onclick="newConv()">+ 新对话</button>
     </div>
     <div class="conv-scroll" id="convScroll"></div>
-    <div class="sb-bottom">
-      <div class="sb-agent-mini"><div class="av">F</div><div class="name">Fly-Agent-801</div><div class="st">在岗</div></div>
-      <div class="sb-chain-row"><span>0x8004</span><span>→ TX → TX</span></div>
+    <div class="sb-bottom" style="padding:10px 14px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:8px">
+      <div style="width:24px;height:24px;border-radius:6px;background:rgba(255,107,53,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--orange)">F</div>
+      <span style="font-size:11px;color:var(--sidebar-text)">Fly Agent</span>
+      <span style="margin-left:auto;width:5px;height:5px;border-radius:50%;background:var(--green)"></span>
     </div>
   </div>
   <div class="chat-main">
@@ -121,19 +122,19 @@ const PAT='sat_TZOQ6PbNVji5YHZoqzr8bFzCWN5I8k7wEDyan9kfaVBfrBladvimJksZynzIZNaq'
 let activeConv='c0',convs={};
 const C=document.getElementById('chatMsgs');
 const convDefs=[
-{id:'c0',icon:'💬',title:'开始对话',sub:'告诉我你的店',ic:'ic-g',badge:'在线',bc:'bg',sec:'对话',init:[]}},
-{id:'c1',icon:'🕳️',title:'推广黑洞诊断',sub:'算算你浪费了多少',ic:'ic-o',badge:'诊断',bc:'bo',sec:'工具',init:[{r:'bot',h:'<p>🕳️ <strong>推广黑洞诊断</strong></p><p>你不是不会推广，<strong>你是不知道哪里有效</strong>。平均每100块推广费，只有32块真正带来客户。</p><p>告诉我你每月推广费多少：</p><div class="chips"><span class="chip" onclick="sendQuick(\'我每月推广费3000\')">3000元/月</span><span class="chip" onclick="sendQuick(\'我每月推广费5000\')">5000元/月</span><span class="chip" onclick="sendQuick(\'我每月推广费1万\')">1万/月</span><span class="chip" onclick="sendQuick(\'我每月推广费3万以上\')">3万+/月</span></div>'}]},
-{id:'c2',icon:'📋',title:'AI执行记录',sub:'实时执行日志',ic:'ic-r',badge:'LIVE',bc:'br',sec:'工具',init:[{r:'bot',h:'<p>📋 <strong>AI执行记录</strong></p><p>Fly每天替你做这些事：</p><p>✅ 监控各渠道花费和效果<br>✅ 超预算自动止损<br>✅ 老客户7天未到店自动召回<br>✅ 竞品降价立即提醒</p><p>想知道今天执行了什么？输入"今天的执行日志"</p>'}]},
-{id:'c3',icon:'🤖',title:'Agent员工档案',sub:'入职37天 · 在岗',ic:'ic-c',sec:'档案',init:[{r:'bot',h:'<p>🤖 <strong>Agent员工档案</strong></p><p>你的AI员工已入职 <strong>37天</strong>，累计做出 <strong>89次</strong>经营决策，帮你止损 <strong>¥2,860</strong>，增收 <strong>¥8,320</strong>。</p><p>它知道：✅ 哪个时间客流最高 ✅ 哪种套餐利润最高 ✅ 哪类客户最容易复购 ✅ 哪个平台最容易浪费预算</p>'}]},
-{id:'c4',icon:'📊',title:'真实案例',sub:'火锅店月省¥8K',ic:'ic-o',sec:'档案',init:[{r:'bot',h:'<p>📊 <strong>真实案例</strong></p><p>成都某火锅店，月推广费1.2万：</p><p>❌ 之前：美团投6000到店32人，传单投3000到店8人<br>✅ Fly介入后：砍掉传单，美团预算调到4000到店41人，省出8000投小红书到店27人<br>📈 总到店从40→68人，推广费没变，到店<strong>提升70%</strong></p>'}]},
-{id:'c5',icon:'🌐',title:'经营因果网络',sub:'2,661家 · 117万次',ic:'ic-p',sec:'档案',init:[{r:'bot',h:'<p>🌐 <strong>经营因果网络</strong></p><p>已有 <strong>2,661家</strong>实体店铺、<strong>117万次</strong>推广行为、<strong>70万条</strong>到店记录、<strong>18万条</strong>复购路径。</p><p>Fly不是工具，是<strong>行业级经营智能网络</strong> —— 每家店的数据互相验证，越用越准。</p>'}]},
-{id:'c6',icon:'🔐',title:'数据可信',sub:'链上存证永久可查',ic:'ic-g',sec:'信任',init:[{r:'bot',h:'<p>🔐 <strong>数据可信</strong></p><p>你的经营数据，<strong>属于你自己</strong>。核心数据永久存证在BNB Chain，平台无法删改。</p><p>🔐 Agent唯一身份：合约 <strong>0x8004A169</strong><br>🌳 经营数据永久存证：交易 <strong>0x48d31b85</strong><br>💰 透明支付：合约 <strong>0x55d3...7955</strong></p><p>以上数据均可在 BscScan 实时验证。</p>'}]},
-{id:'c7',icon:'⛓️',title:'数据验证',sub:'连接钱包验证',ic:'ic-y',sec:'信任',init:[{r:'bot',h:'<p>⛓️ <strong>数据验证</strong></p><p>你的经营数据永久存证在BNB Chain上，任何人都可以验证真实性，平台无法删改。</p><p>想验证哪项数据？</p><div class="chips"><span class="chip" onclick="sendQuick(\'验证Agent身份\')">🔐 Agent身份</span><span class="chip" onclick="sendQuick(\'验证经营数据\')">🌳 经营数据</span><span class="chip" onclick="sendQuick(\'验证支付记录\')">💰 支付记录</span></div>'}]},
-{id:'c8',icon:'💰',title:'定价',sub:'¥199首月 · ¥399/月',ic:'ic-o',sec:'信任',init:[{r:'bot',h:'<p>💰 <strong>定价</strong></p><p><strong style="color:var(--orange)">首月体验 ¥199</strong><br>1店1月完整服务 · 诊断报告 · 定制方案 · 5次存证 · 微信1对1</p><p><strong style="color:var(--cyan)">月度服务 ¥399/月</strong><br>持续服务 · 因果追踪 · 每日日报 · 无限存证</p><p style="color:var(--green)">✓ 30天3个有效归因否则全额退款</p>'}]}
+{id:'c0',icon:'💬',title:'开始对话',ic:'ic-g',sec:'对话',init:[]}},
+{id:'c1',icon:'🕳️',title:'推广黑洞诊断',ic:'ic-o',sec:'工具',init:[{r:'bot',h:'<p>🕳️ <strong>推广黑洞诊断</strong></p><p>你不是不会推广，<strong>你是不知道哪里有效</strong>。平均每100块推广费，只有32块真正带来客户。</p><p>告诉我你每月推广费多少：</p><div class="chips"><span class="chip" onclick="sendQuick(\'我每月推广费3000\')">3000元/月</span><span class="chip" onclick="sendQuick(\'我每月推广费5000\')">5000元/月</span><span class="chip" onclick="sendQuick(\'我每月推广费1万\')">1万/月</span><span class="chip" onclick="sendQuick(\'我每月推广费3万以上\')">3万+/月</span></div>'}]},
+{id:'c2',icon:'📋',title:'AI执行记录',ic:'ic-r',sec:'工具',init:[{r:'bot',h:'<p>📋 <strong>AI执行记录</strong></p><p>Fly每天替你做这些事：</p><p>✅ 监控各渠道花费和效果<br>✅ 超预算自动止损<br>✅ 老客户7天未到店自动召回<br>✅ 竞品降价立即提醒</p><p>想知道今天执行了什么？输入"今天的执行日志"</p>'}]},
+{id:'c3',icon:'🤖',title:'Agent员工档案',ic:'ic-c',sec:'档案',init:[{r:'bot',h:'<p>🤖 <strong>Agent员工档案</strong></p><p>你的AI员工已入职 <strong>37天</strong>，累计做出 <strong>89次</strong>经营决策，帮你止损 <strong>¥2,860</strong>，增收 <strong>¥8,320</strong>。</p><p>它知道：✅ 哪个时间客流最高 ✅ 哪种套餐利润最高 ✅ 哪类客户最容易复购 ✅ 哪个平台最容易浪费预算</p>'}]},
+{id:'c4',icon:'📊',title:'真实案例',ic:'ic-o',sec:'档案',init:[{r:'bot',h:'<p>📊 <strong>真实案例</strong></p><p>成都某火锅店，月推广费1.2万：</p><p>❌ 之前：美团投6000到店32人，传单投3000到店8人<br>✅ Fly介入后：砍掉传单，美团预算调到4000到店41人，省出8000投小红书到店27人<br>📈 总到店从40→68人，推广费没变，到店<strong>提升70%</strong></p>'}]},
+{id:'c5',icon:'🌐',title:'经营因果网络',ic:'ic-p',sec:'档案',init:[{r:'bot',h:'<p>🌐 <strong>经营因果网络</strong></p><p>已有 <strong>2,661家</strong>实体店铺、<strong>117万次</strong>推广行为、<strong>70万条</strong>到店记录、<strong>18万条</strong>复购路径。</p><p>Fly不是工具，是<strong>行业级经营智能网络</strong> —— 每家店的数据互相验证，越用越准。</p>'}]},
+{id:'c6',icon:'🔐',title:'数据可信',ic:'ic-g',sec:'信任',init:[{r:'bot',h:'<p>🔐 <strong>数据可信</strong></p><p>你的经营数据，<strong>属于你自己</strong>。核心数据永久存证在BNB Chain，平台无法删改。</p><p>🔐 Agent唯一身份：合约 <strong>0x8004A169</strong><br>🌳 经营数据永久存证：交易 <strong>0x48d31b85</strong><br>💰 透明支付：合约 <strong>0x55d3...7955</strong></p><p>以上数据均可在 BscScan 实时验证。</p>'}]},
+{id:'c7',icon:'⛓️',title:'数据验证',ic:'ic-y',sec:'信任',init:[{r:'bot',h:'<p>⛓️ <strong>数据验证</strong></p><p>你的经营数据永久存证在BNB Chain上，任何人都可以验证真实性，平台无法删改。</p><p>想验证哪项数据？</p><div class="chips"><span class="chip" onclick="sendQuick(\'验证Agent身份\')">🔐 Agent身份</span><span class="chip" onclick="sendQuick(\'验证经营数据\')">🌳 经营数据</span><span class="chip" onclick="sendQuick(\'验证支付记录\')">💰 支付记录</span></div>'}]},
+{id:'c8',icon:'💰',title:'定价',ic:'ic-o',sec:'信任',init:[{r:'bot',h:'<p>💰 <strong>定价</strong></p><p><strong style="color:var(--orange)">首月体验 ¥199</strong><br>1店1月完整服务 · 诊断报告 · 定制方案 · 5次存证 · 微信1对1</p><p><strong style="color:var(--cyan)">月度服务 ¥399/月</strong><br>持续服务 · 因果追踪 · 每日日报 · 无限存证</p><p style="color:var(--green)">✓ 30天3个有效归因否则全额退款</p>'}]}
 ];
 convDefs.forEach(d=>{convs[d.id]={msgs:[...d.init],history:[]}});
 
-function renderSidebar(){const s=document.getElementById('convScroll');let h='',ls='';convDefs.forEach(d=>{if(d.sec!==ls){h+='<div class="sb-section">'+d.sec+'</div>';ls=d.sec}h+='<div class="conv-item'+(activeConv===d.id?' active':'')+'" onclick="switchConv(\''+d.id+'\')"><div class="conv-icon '+d.ic+'">'+d.icon+'</div><div class="conv-info"><div class="conv-title">'+d.title+'</div><div class="conv-sub">'+d.sub+'</div></div>'+(d.badge?'<div class="conv-badge '+d.bc+'">'+d.badge+'</div>':'')+'</div>'});s.innerHTML=h}
+function renderSidebar(){const s=document.getElementById('convScroll');let h='',ls='';convDefs.forEach(d=>{if(d.sec!==ls){h+='<div class="sb-section">'+d.sec+'</div>';ls=d.sec}h+='<div class="conv-item'+(activeConv===d.id?' active':'')+'" onclick="switchConv(\''+d.id+'\')"><div class="conv-icon '+d.ic+'">'+d.icon+'</div><div class="conv-title">'+d.title+'</div></div>'});s.innerHTML=h}
 
 function switchConv(id){activeConv=id;renderSidebar();
 if(id==='c0'||id.startsWith('n')){
@@ -148,7 +149,7 @@ openPanel(convDefs.find(d=>d.id===id));
 function renderMsg(role,html){const d=document.createElement('div');d.className='msg';d.innerHTML='<div class="msg-inner"><div class="msg-av '+(role==='bot'?'bot':'user')+'">'+(role==='bot'?'F':'U')+'</div><div class="msg-body"><div class="msg-who">'+(role==='bot'?'FlyAgent':'你')+'</div><div class="msg-bb">'+html+'</div></div></div>';C.appendChild(d);C.scrollTop=C.scrollHeight}
 
 let newCount=0;
-function newConv(){newCount++;const id='n'+newCount;convDefs.unshift({id:id,icon:'💬',title:'新对话 '+newCount,sub:'开始聊天',ic:'ic-g',sec:'对话'});convs[id]={msgs:[],history:[]};switchConv(id);showWelcome()}
+function newConv(){newCount++;const id='n'+newCount;convDefs.unshift({id:id,icon:'💬',title:'新对话 '+newCount,ic:'ic-g',sec:'对话'});convs[id]={msgs:[],history:[]};switchConv(id);showWelcome()}
 
 function showWelcome(){C.innerHTML='<div class="welcome-center"><div class="welcome-logo"><span>Fly</span>Agent</div><div class="welcome-sub">帮你做推广，说店就行</div><div class="example-grid"><div class="example-card" onclick="sendQuick(\'我是成都开火锅店的\')"><span class="ec-icon">🌶️</span><span class="ec-text">成都火锅店，推广费不知道花哪了</span></div><div class="example-card" onclick="sendQuick(\'我是杭州开奶茶店的\')"><span class="ec-icon">🧋</span><span class="ec-text">杭州奶茶店，想提高复购率</span></div><div class="example-card" onclick="sendQuick(\'帮我诊断推广盲区\')"><span class="ec-icon">🔍</span><span class="ec-text">帮我诊断推广盲区，看看哪里浪费了</span></div><div class="example-card" onclick="sendQuick(\'我每月推广费5000\')"><span class="ec-icon">🕳️</span><span class="ec-text">每月推广费5000，到店的人没几个</span></div></div></div>'}
 

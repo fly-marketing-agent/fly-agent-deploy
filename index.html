@@ -11,7 +11,7 @@
 :root{--bg:#0d0d14;--bg2:#13131f;--bg3:#1a1a2e;--orange:#FF6B35;--cyan:#00ffcc;--gold:#f0b90b;--green:#2ecc71;--red:#ff6b6b;--text:#e8e8ed;--text2:#9898a6;--text3:#5a5a6e;--mono:'JetBrains Mono',monospace;--sans:'Noto Sans SC',sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;overflow:hidden}body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6}a{color:var(--cyan);text-decoration:none}
 .app{display:flex;height:100vh;width:100vw}
-.sidebar{width:260px;min-width:260px;background:var(--bg2);border-right:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;transition:margin .3s}.sidebar.collapsed{margin-left:-260px}
+.sidebar{width:260px;min-width:260px;background:var(--bg2);border-right:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;transition:all .3s ease;overflow:hidden}.sidebar.collapsed{width:0;min-width:0;margin-left:0;padding:0;border:none}
 .sb-head{padding:12px 14px 8px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .sb-logo{font-family:var(--mono);font-size:17px;font-weight:700;letter-spacing:-1px;display:flex;align-items:center;gap:8px}.sb-logo span{color:var(--orange)}
 .sb-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}

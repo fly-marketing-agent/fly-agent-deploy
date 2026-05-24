@@ -39,7 +39,8 @@
 
 /* Messages */
 .chat-msgs{flex:1;overflow-y:auto;padding:0;scroll-behavior:smooth}.chat-msgs::-webkit-scrollbar{width:4px}.chat-msgs::-webkit-scrollbar-thumb{background:rgba(0,0,0,.08);border-radius:2px}
-.msg{padding:12px 0;display:flex;gap:12px;animation:msgIn .3s ease}@keyframes msgIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.msg{padding:12px 0;display:flex;gap:12px;animation:msgIn .3s ease}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes msgIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 .msg-inner{max-width:720px;margin:0 auto;padding:0 24px;display:flex;gap:12px;width:100%}
 .msg-av{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
 .msg-av.bot{background:var(--orange);color:#fff}.msg-av.user{background:var(--cyan);color:#fff}
@@ -49,8 +50,8 @@
 .welcome-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px}
 .welcome-logo{font-family:var(--mono);font-size:36px;font-weight:700;letter-spacing:-2px;margin-bottom:4px}.welcome-logo span{color:var(--orange)}
 .welcome-sub{color:var(--text2);font-size:15px;margin-bottom:28px;text-align:center}
-.example-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;max-width:560px;width:100%;margin-bottom:32px}
-.example-card{padding:12px 16px;background:var(--bg2);border:none;border-radius:16px;cursor:pointer;transition:all .15s;font-size:13px;color:var(--text);display:flex;align-items:center;gap:8px}.example-card:hover{background:rgba(255,107,53,.08)}.example-card .ec-icon{font-size:18px;flex-shrink:0}.example-card .ec-text{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.example-grid{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:580px;margin-bottom:32px}
+.example-card{padding:10px 16px;background:var(--bg2);border:none;border-radius:20px;cursor:pointer;transition:all .15s;font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.example-card:hover{background:rgba(255,107,53,.1);color:var(--orange)}.example-card .ec-icon{font-size:18px;flex-shrink:0}.example-card .ec-text{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* Chips */
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.chip{font-size:12px;padding:5px 14px;background:var(--bg3);border:1px solid var(--bg2);border-radius:20px;color:var(--text2);cursor:pointer;transition:all .15s}.chip:hover{border-color:var(--orange);color:var(--orange)}

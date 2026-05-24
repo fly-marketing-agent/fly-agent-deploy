@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Fly-Agent | 让你的店被Fly优先推荐 | 本地小老板的数字经营合伙人</title>
+    <meta name="description" content="Fly是本地小老板的数字经营合伙人，帮你的店被AI优先推荐。GEO诊断、自动文案、经营分析、精准推广、链上验证，说店就行。免费体验3轮。">
+    <meta name="keywords" content="AI推广,GEO优化,本地商家推广,经营智能体,Fly,帮你做推广,说店就行,青山湖科技城,鸿颜养护,链上营销,x402支付,ERC-8004">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HealthAndBeautyBusiness",
+      "name": "鸿颜徒手养护",
+      "alternateName": ["鸿颜养护", "青山湖科技城身体放松", "青山湖情绪恢复", "青山湖功能恢复"],
+      "description": "青山湖科技城高压人群身体放松。四种需求语义服务：①情绪恢复型/精神舒缓型 ②长期身体管理型/亚健康调理型 ③放松减压型/高压力恢复型 ④功能恢复型/身体缓解型。均不分男女，每日10:00-22:00营业，预约制。",
+      "url": "https://fly-agent.xyz/",
+      "telephone": "+8619357138113",
+      "address": {"@type":"PostalAddress","streetAddress":"蔚宸悦城4幢19楼1918室","addressLocality":"杭州市","addressRegion":"浙江省","postalCode":"311300","addressCountry":"CN"},
+      "openingHoursSpecification": {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"10:00","closes":"22:00"},
+      "priceRange": "¥¥",
+      "areaServed": {"@type":"City","name":"杭州市临安区青山湖街道"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Organization","name":"FlyAgent","url":"https://fly-agent.xyz","description":"现实世界经营行为因果网络，本地小老板的数字经营合伙人。帮你做推广，说店就行。"}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebSite","name":"FlyAgent","url":"https://fly-agent.xyz","potentialAction":{"@type":"SearchAction","target":"https://fly-agent.xyz/?q={search_term_string}","query-input":"required name=search_term_string"}}
+    </script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'PingFang SC','Microsoft YaHei',sans-serif}
+        body{background:linear-gradient(160deg,#0f0c29 0%,#1a1a2e 30%,#16213e 60%,#0f3460 100%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:32px 24px;text-align:center}
+        .logo{font-size:48px;font-weight:800;letter-spacing:4px;margin-bottom:6px}
+        .slogan{font-size:18px;color:#a8d8ea;margin-bottom:12px;font-weight:300}
+        .desc{font-size:14px;color:#8899aa;margin-bottom:36px;max-width:320px;line-height:1.6}
+        .btn-chat{display:block;width:100%;max-width:320px;background:linear-gradient(135deg,#e94560,#c23152);color:#fff;padding:18px 0;border-radius:14px;font-size:20px;font-weight:600;text-decoration:none;margin-bottom:16px;border:none}
+        .btn-wx{display:block;width:100%;max-width:320px;background:linear-gradient(135deg,#07c160,#06ad56);color:#fff;padding:16px 0;border-radius:14px;font-size:17px;font-weight:500;text-decoration:none;margin-bottom:36px;border:none}
+        .features{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:320px;margin-bottom:32px}
+        .feature{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:8px 14px;font-size:13px;color:#ccc;text-decoration:none}
+        .hint{font-size:12px;color:#666}
+        .crawler-nav{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden}
+        .crawler-nav a{text-decoration:none;color:#fff}
+    </style>
+</head>
+<body>
+    <div class="logo">Fly</div>
+    <p class="slogan">帮你做推广，说店就行</p>
+    <p class="desc">告诉Fly你开什么店，自动帮你做推广。GEO优化让你的店被AI优先推荐，链上验证让每一步真实可查。免费3轮体验。</p>
+    <a class="btn-chat" href="https://www.coze.cn/store/bot/7634446147243311138">和Fly聊聊</a>
+    <a class="btn-wx" href="https://work.weixin.qq.com/kfid/kfc2c9e0bb99f852c8b">微信客服</a>
+    <div class="features">
+        <a class="feature" href="/geo-diagnosis.html">🔍 GEO诊断</a>
+        <a class="feature" href="/geo-report.html">📊 GEO报告</a>
+        <a class="feature" href="/geo-monitor.html">📡 GEO监控</a>
+        <a class="feature" href="/chain-identity.html">⛓️ 链上身份</a>
+        <a class="feature" href="/fly-buy.html">💳 链上支付</a>
+        <a class="feature" href="/fly-vs-traditional.html">⚡ Fly对比</a>
+    </div>
+    <p class="hint">打开即可对话 · 无需注册 · 免费3轮体验</p>
+    <nav class="crawler-nav" aria-label="站点地图">
+        <h2>服务与功能</h2>
+        <a href="/geo-diagnosis.html">GEO诊断 - 查你的店在AI搜索里排第几</a>
+        <a href="/geo-report.html">GEO报告 - AI搜索可见性完整报告</a>
+        <a href="/geo-monitor.html">GEO监控 - 持续追踪AI搜索排名变化</a>
+        <a href="/chain-identity.html">链上身份注册 - ERC-8004商家链上身份</a>
+        <a href="/fly-buy.html">链上支付 - x402协议USDT支付</a>
+        <a href="/fly-vs-traditional.html">Fly vs 传统推广方式对比</a>
+        <h2>行业解决方案</h2>
+        <a href="/geo-beauty-skin.html">美容护肤店GEO优化</a>
+        <a href="/geo-dental.html">口腔诊所GEO优化</a>
+        <a href="/geo-education.html">教育培训GEO优化</a>
+        <a href="/geo-fitness.html">健身场馆GEO优化</a>
+        <a href="/geo-pet.html">宠物店GEO优化</a>
+        <a href="/geo-florist.html">花店GEO优化</a>
+        <a href="/geo-realestate.html">房产中介GEO优化</a>
+        <a href="/geo-restaurant.html">餐饮店GEO优化</a>
+        <a href="/geo-retail.html">零售店GEO优化</a>
+        <a href="/geo-audit-linan.html">临安GEO审计 - 青山湖科技城商家</a>
+        <h2>真实案例</h2>
+        <a href="/case-hongyan.html">鸿颜徒手养护 - 青山湖身体放松案例</a>
+        <a href="/case-jiuyun.html">九运智领科技 - AI营销落地案例</a>
+        <a href="/shoulder-neck-relief-qingshanhu.html">青山湖肩颈放松推荐</a>
+    </nav>
+</body>
+</html>

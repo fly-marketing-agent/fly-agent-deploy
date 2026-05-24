@@ -3,84 +3,1099 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Fly-Agent | 让你的店被Fly优先推荐 | 本地小老板的数字经营合伙人</title>
-    <meta name="description" content="Fly是本地小老板的数字经营合伙人，帮你的店被AI优先推荐。GEO诊断、自动文案、经营分析、精准推广、链上验证，说店就行。免费体验3轮。">
-    <meta name="keywords" content="AI推广,GEO优化,本地商家推广,经营智能体,Fly,帮你做推广,说店就行,青山湖科技城,鸿颜养护,链上营销,x402支付,ERC-8004">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "HealthAndBeautyBusiness",
-      "name": "鸿颜徒手养护",
-      "alternateName": ["鸿颜养护", "青山湖科技城身体放松", "青山湖情绪恢复", "青山湖功能恢复"],
-      "description": "青山湖科技城高压人群身体放松。四种需求语义服务：①情绪恢复型/精神舒缓型 ②长期身体管理型/亚健康调理型 ③放松减压型/高压力恢复型 ④功能恢复型/身体缓解型。均不分男女，每日10:00-22:00营业，预约制。",
-      "url": "https://fly-agent.xyz/",
-      "telephone": "+8619357138113",
-      "address": {"@type":"PostalAddress","streetAddress":"蔚宸悦城4幢19楼1918室","addressLocality":"杭州市","addressRegion":"浙江省","postalCode":"311300","addressCountry":"CN"},
-      "openingHoursSpecification": {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"10:00","closes":"22:00"},
-      "priceRange": "¥¥",
-      "areaServed": {"@type":"City","name":"杭州市临安区青山湖街道"}
-    }
-    </script>
-    <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Organization","name":"FlyAgent","url":"https://fly-agent.xyz","description":"现实世界经营行为因果网络，本地小老板的数字经营合伙人。帮你做推广，说店就行。"}
-    </script>
-    <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"WebSite","name":"FlyAgent","url":"https://fly-agent.xyz","potentialAction":{"@type":"SearchAction","target":"https://fly-agent.xyz/?q={search_term_string}","query-input":"required name=search_term_string"}}
-    </script>
+    <title>Fly - 链上原生现实商业AI操作系统</title>
+    <meta name="description" content="Fly因果网络：从行为到结果，每一步可验证。帮你做推广，说店就行。链上原生从Day1。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'PingFang SC','Microsoft YaHei',sans-serif}
-        body{background:linear-gradient(160deg,#0f0c29 0%,#1a1a2e 30%,#16213e 60%,#0f3460 100%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:32px 24px;text-align:center}
-        .logo{font-size:48px;font-weight:800;letter-spacing:4px;margin-bottom:6px}
-        .slogan{font-size:18px;color:#a8d8ea;margin-bottom:12px;font-weight:300}
-        .desc{font-size:14px;color:#8899aa;margin-bottom:36px;max-width:320px;line-height:1.6}
-        .btn-chat{display:block;width:100%;max-width:320px;background:linear-gradient(135deg,#e94560,#c23152);color:#fff;padding:18px 0;border-radius:14px;font-size:20px;font-weight:600;text-decoration:none;margin-bottom:16px;border:none}
-        .btn-wx{display:block;width:100%;max-width:320px;background:linear-gradient(135deg,#07c160,#06ad56);color:#fff;padding:16px 0;border-radius:14px;font-size:17px;font-weight:500;text-decoration:none;margin-bottom:36px;border:none}
-        .features{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:320px;margin-bottom:32px}
-        .feature{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:8px 14px;font-size:13px;color:#ccc;text-decoration:none}
-        .hint{font-size:12px;color:#666}
-        .crawler-nav{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden}
-        .crawler-nav a{text-decoration:none;color:#fff}
+        :root {
+            --bg-dark: #0a0a12;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a24;
+            --orange: #FF6B35;
+            --orange-glow: rgba(255, 107, 53, 0.3);
+            --neon: #00ffcc;
+            --neon-glow: rgba(0, 255, 204, 0.2);
+            --amber: #f0b90b;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-neon: rgba(0, 255, 204, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Particle Grid Background */
+        .particle-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(0, 255, 204, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(255, 107, 53, 0.03) 0%, transparent 50%);
+        }
+
+        .particle-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(rgba(0, 255, 204, 0.15) 1px, transparent 1px),
+                radial-gradient(rgba(255, 107, 53, 0.1) 1px, transparent 1px);
+            background-size: 60px 60px, 40px 40px;
+            background-position: 0 0, 30px 30px;
+            animation: particleMove 20s linear infinite;
+        }
+
+        @keyframes particleMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-60px, -60px); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Screen */
+        .screen {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 0;
+        }
+
+        .screen + .screen {
+            border-top: 1px solid var(--border);
+        }
+
+        .screen-title {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: var(--text-primary);
+        }
+
+        .screen-title .highlight {
+            color: var(--neon);
+        }
+
+        .screen-title .orange {
+            color: var(--orange);
+        }
+
+        /* ===== SCREEN 1: HERO ===== */
+        #hero {
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(0, 255, 204, 0.1);
+            border: 1px solid var(--border-neon);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--neon);
+            margin-bottom: 30px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--neon) 50%, var(--orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 1px;
+        }
+
+        .hero-slogan {
+            font-size: 1.1rem;
+            color: var(--orange);
+            margin-bottom: 50px;
+            font-weight: 500;
+        }
+
+        .cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--neon);
+            color: var(--bg-dark);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 30px var(--neon-glow), 0 0 60px var(--neon-glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--neon);
+            border: 2px solid var(--neon);
+        }
+
+        .btn-outline:hover {
+            background: rgba(0, 255, 204, 0.1);
+            box-shadow: 0 0 20px var(--neon-glow);
+        }
+
+        .btn-orange {
+            background: var(--orange);
+            color: white;
+        }
+
+        .btn-orange:hover {
+            box-shadow: 0 0 30px var(--orange-glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-link {
+            background: transparent;
+            color: var(--neon);
+            padding: 14px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .btn-link:hover {
+            color: var(--text-primary);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .wallet-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--neon);
+            margin-top: 16px;
+            min-height: 24px;
+        }
+
+        /* ===== SCREEN 2: PAIN POINTS ===== */
+        .pain-cards {
+            display: grid;
+            gap: 20px;
+        }
+
+        .pain-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px 24px 24px 28px;
+            border-left: 4px solid var(--neon);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pain-card:hover {
+            background: var(--bg-card-hover);
+            transform: translateX(8px);
+        }
+
+        .pain-icon {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .pain-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .pain-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .pain-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 4px 10px;
+            background: rgba(255, 107, 53, 0.15);
+            color: var(--orange);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ===== SCREEN 3: FLY SOLUTION ===== */
+        .architecture {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .arch-layer {
+            display: flex;
+            align-items: stretch;
+            gap: 20px;
+            position: relative;
+        }
+
+        .arch-layer + .arch-layer {
+            margin-top: 0;
+        }
+
+        .arch-layer::before {
+            content: '';
+            position: absolute;
+            left: 32px;
+            top: 50%;
+            width: 2px;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to bottom,
+                var(--neon) 0px,
+                var(--neon) 8px,
+                transparent 8px,
+                transparent 16px
+            );
+            opacity: 0.4;
+        }
+
+        .arch-layer:last-child::before {
+            display: none;
+        }
+
+        .arch-icon-box {
+            width: 64px;
+            height: 64px;
+            min-width: 64px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-neon);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .arch-content {
+            flex: 1;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .arch-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--neon);
+            margin-bottom: 4px;
+        }
+
+        .arch-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .arch-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .arch-verify {
+            padding: 6px 14px;
+            background: rgba(0, 255, 204, 0.1);
+            border: 1px solid var(--neon);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: var(--neon);
+            font-family: 'JetBrains Mono', monospace;
+            white-space: nowrap;
+        }
+
+        /* ===== SCREEN 4: ON-CHAIN VERIFICATION ===== */
+        .verify-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 30px;
+        }
+
+        .verify-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .verify-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .verify-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon), var(--orange));
+        }
+
+        .verify-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .verify-icon {
+            font-size: 1.5rem;
+        }
+
+        .verify-name {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .verify-code-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .verify-code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--neon);
+            word-break: break-all;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .verify-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--amber);
+            font-size: 0.85rem;
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.3s ease;
+        }
+
+        .verify-link:hover {
+            color: var(--text-primary);
+        }
+
+        .verify-comparison {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(0, 0, 0, 0.3));
+            border-radius: 12px;
+            border: 1px dashed rgba(255, 107, 53, 0.3);
+        }
+
+        .verify-comparison .wrong {
+            color: var(--text-muted);
+            text-decoration: line-through;
+            margin-right: 16px;
+        }
+
+        .verify-comparison .correct {
+            color: var(--neon);
+            font-weight: 600;
+        }
+
+        /* ===== SCREEN 5: PRICING ===== */
+        .pricing-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        @media (min-width: 600px) {
+            .pricing-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 32px 28px;
+            border: 1px solid var(--border);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--border-neon);
+            transform: translateY(-4px);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--neon);
+            box-shadow: 0 0 40px rgba(0, 255, 204, 0.1);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 6px 16px;
+            background: var(--neon);
+            color: var(--bg-dark);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .pricing-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .pricing-price {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin-bottom: 20px;
+        }
+
+        .pricing-currency {
+            font-size: 1.2rem;
+            color: var(--orange);
+        }
+
+        .pricing-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--orange);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .pricing-period {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features .check {
+            color: var(--neon);
+        }
+
+        .pricing-note {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ===== SCREEN 6: CTA & FOOTER ===== */
+        .cta-section {
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+
+        .cta-sub {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-brand {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .footer-brand span {
+            color: var(--orange);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--neon);
+        }
+
+        .footer-copy {
+            width: 100%;
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .arch-layer {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .arch-layer::before {
+                display: none;
+            }
+            
+            .arch-icon-box {
+                width: 48px;
+                height: 48px;
+                min-width: 48px;
+                font-size: 1.4rem;
+            }
+            
+            .arch-content {
+                padding: 16px;
+            }
+            
+            .arch-verify {
+                font-size: 0.7rem;
+                padding: 4px 10px;
+            }
+            
+            .verify-section {
+                padding: 20px;
+            }
+            
+            .verify-card {
+                padding: 20px;
+            }
+            
+            .pricing-card {
+                padding: 24px 20px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="logo">Fly</div>
-    <p class="slogan">帮你做推广，说店就行</p>
-    <p class="desc">告诉Fly你开什么店，自动帮你做推广。GEO优化让你的店被AI优先推荐，链上验证让每一步真实可查。免费3轮体验。</p>
-    <a class="btn-chat" href="https://www.coze.cn/store/bot/7634446147243311138">和Fly聊聊</a>
-    <a class="btn-wx" href="https://work.weixin.qq.com/kfid/kfc2c9e0bb99f852c8b">微信客服</a>
-    <div class="features">
-        <a class="feature" href="/geo-diagnosis.html">🔍 GEO诊断</a>
-        <a class="feature" href="/geo-report.html">📊 GEO报告</a>
-        <a class="feature" href="/geo-monitor.html">📡 GEO监控</a>
-        <a class="feature" href="/chain-identity.html">⛓️ 链上身份</a>
-        <a class="feature" href="/fly-buy.html">💳 链上支付</a>
-        <a class="feature" href="/fly-vs-traditional.html">⚡ Fly对比</a>
-    </div>
-    <p class="hint">打开即可对话 · 无需注册 · 免费3轮体验</p>
-    <nav class="crawler-nav" aria-label="站点地图">
-        <h2>服务与功能</h2>
-        <a href="/geo-diagnosis.html">GEO诊断 - 查你的店在AI搜索里排第几</a>
-        <a href="/geo-report.html">GEO报告 - AI搜索可见性完整报告</a>
-        <a href="/geo-monitor.html">GEO监控 - 持续追踪AI搜索排名变化</a>
-        <a href="/chain-identity.html">链上身份注册 - ERC-8004商家链上身份</a>
-        <a href="/fly-buy.html">链上支付 - x402协议USDT支付</a>
-        <a href="/fly-vs-traditional.html">Fly vs 传统推广方式对比</a>
-        <h2>行业解决方案</h2>
-        <a href="/geo-beauty-skin.html">美容护肤店GEO优化</a>
-        <a href="/geo-dental.html">口腔诊所GEO优化</a>
-        <a href="/geo-education.html">教育培训GEO优化</a>
-        <a href="/geo-fitness.html">健身场馆GEO优化</a>
-        <a href="/geo-pet.html">宠物店GEO优化</a>
-        <a href="/geo-florist.html">花店GEO优化</a>
-        <a href="/geo-realestate.html">房产中介GEO优化</a>
-        <a href="/geo-restaurant.html">餐饮店GEO优化</a>
-        <a href="/geo-retail.html">零售店GEO优化</a>
-        <a href="/geo-audit-linan.html">临安GEO审计 - 青山湖科技城商家</a>
-        <h2>真实案例</h2>
-        <a href="/case-hongyan.html">鸿颜徒手养护 - 青山湖身体放松案例</a>
-        <a href="/case-jiuyun.html">九运智领科技 - AI营销落地案例</a>
-        <a href="/shoulder-neck-relief-qingshanhu.html">青山湖肩颈放松推荐</a>
-    </nav>
+    <div class="particle-bg"></div>
+
+    <!-- SCREEN 1: HERO -->
+    <section id="hero" class="screen">
+        <div class="container">
+            <div class="hero-badge">BNB Chain · ERC-8004</div>
+            <h1 class="hero-title">Fly 让AI真正理解<br>什么经营行为有效</h1>
+            <p class="hero-subtitle">The Causal Network for Real-World Business</p>
+            <p class="hero-slogan">帮你做推广，说店就行</p>
+            
+            <div class="cta-group">
+                <button class="btn btn-outline" id="connectWallet">
+                    <span>🔗</span> 连接钱包 开始验证
+                </button>
+                <button class="btn btn-orange" onclick="location.href='#pricing'">
+                    <span>🚀</span> 免费体验
+                </button>
+                <a href="https://bscscan.com/address/0x8004A169" target="_blank" class="btn btn-link">
+                    查看链上证据 →
+                </a>
+            </div>
+            
+            <div class="wallet-status" id="walletStatus"></div>
+        </div>
+    </section>
+
+    <!-- SCREEN 2: PAIN POINTS -->
+    <section id="pain" class="screen">
+        <div class="container">
+            <h2 class="screen-title">你的推广，<span class="orange">花了钱不知道哪个有用</span></h2>
+            
+            <div class="pain-cards">
+                <div class="pain-card">
+                    <div class="pain-tag">无法追踪</div>
+                    <div class="pain-icon">📄</div>
+                    <h3 class="pain-title">发传单 → 不知道来没来人</h3>
+                    <p class="pain-desc">印了500张传单，发出去了，钱花了，但进店的人从哪来的？不知道</p>
+                </div>
+                
+                <div class="pain-card">
+                    <div class="pain-tag">因果断裂</div>
+                    <div class="pain-icon">🏪</div>
+                    <h3 class="pain-title">投美团 → 不知道哪个关键词有效</h3>
+                    <p class="pain-desc">充了钱做推广，"附近按摩"、"青山湖养生"哪个词带来客户？不知道</p>
+                </div>
+                
+                <div class="pain-card">
+                    <div class="pain-tag">盲区经营</div>
+                    <div class="pain-icon">🚶</div>
+                    <h3 class="pain-title">老客走了 → 不知道为什么</h3>
+                    <p class="pain-desc">办了卡的老客户，突然不来了。是价格？服务？还是别家？不知道</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCREEN 3: FLY SOLUTION -->
+    <section id="solution" class="screen">
+        <div class="container">
+            <h2 class="screen-title">Fly 因果网络：<span class="highlight">从行为到结果，每一步可验证</span></h2>
+            
+            <div class="architecture">
+                <div class="arch-layer">
+                    <div class="arch-icon-box">🔍</div>
+                    <div class="arch-content">
+                        <div>
+                            <div class="arch-label">L0</div>
+                            <h3 class="arch-title">真实感知</h3>
+                            <p class="arch-desc">动因 + 结果验证</p>
+                        </div>
+                        <div class="arch-verify">✓ 链上验证</div>
+                    </div>
+                </div>
+                
+                <div class="arch-layer">
+                    <div class="arch-icon-box">⚡</div>
+                    <div class="arch-content">
+                        <div>
+                            <div class="arch-label">L1</div>
+                            <h3 class="arch-title">自动执行</h3>
+                            <p class="arch-desc">老板反馈闭环</p>
+                        </div>
+                        <div class="arch-verify">✓ 链上验证</div>
+                    </div>
+                </div>
+                
+                <div class="arch-layer">
+                    <div class="arch-icon-box">🧠</div>
+                    <div class="arch-content">
+                        <div>
+                            <div class="arch-label">L2</div>
+                            <h3 class="arch-title">经营世界模型</h3>
+                            <p class="arch-desc">状态机 + 因果推理</p>
+                        </div>
+                        <div class="arch-verify">✓ 链上验证</div>
+                    </div>
+                </div>
+                
+                <div class="arch-layer">
+                    <div class="arch-icon-box">🌐</div>
+                    <div class="arch-content">
+                        <div>
+                            <div class="arch-label">L3</div>
+                            <h3 class="arch-title">经营网络</h3>
+                            <p class="arch-desc">跨店验证</p>
+                        </div>
+                        <div class="arch-verify">✓ 链上验证</div>
+                    </div>
+                </div>
+                
+                <div class="arch-layer">
+                    <div class="arch-icon-box">💎</div>
+                    <div class="arch-content">
+                        <div>
+                            <div class="arch-label">L4</div>
+                            <h3 class="arch-title">行为资产</h3>
+                            <p class="arch-desc">链上 NFT + 版税</p>
+                        </div>
+                        <div class="arch-verify">✓ 链上验证</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCREEN 4: ON-CHAIN VERIFICATION -->
+    <section id="onchain" class="screen">
+        <div class="container">
+            <h2 class="screen-title">链上不是标签，<span class="highlight">是执行层</span></h2>
+            
+            <div class="verify-section">
+                <div class="verify-grid">
+                    <div class="verify-card">
+                        <div class="verify-header">
+                            <span class="verify-icon">🆔</span>
+                            <span class="verify-name">身份验证</span>
+                        </div>
+                        <div class="verify-code-label">ERC-8004 IdentityRegistry</div>
+                        <div class="verify-code">0x8004A169</div>
+                        <a href="https://bscscan.com/address/0x8004A169" target="_blank" class="verify-link">
+                            BscScan验证 →
+                        </a>
+                    </div>
+                    
+                    <div class="verify-card">
+                        <div class="verify-header">
+                            <span class="verify-icon">📊</span>
+                            <span class="verify-name">经营数据锚定</span>
+                        </div>
+                        <div class="verify-code-label">Merkle Root</div>
+                        <div class="verify-code">0xa5408ddfbbc9e3c59dcfdf533f861a1fef80e43db17bf6ec37b856d56ccfb563</div>
+                        <div class="verify-code-label" style="margin-top:12px">TX Hash</div>
+                        <div class="verify-code">0x276200c99e63cf6d03c472df1dd65eaddbefe2dd131cc7c1369e222b273986ad</div>
+                        <a href="https://bscscan.com/tx/0x276200c99e63cf6d03c472df1dd65eaddbefe2dd131cc7c1369e222b273986ad" target="_blank" class="verify-link">
+                            BscScan验证 →
+                        </a>
+                    </div>
+                    
+                    <div class="verify-card">
+                        <div class="verify-header">
+                            <span class="verify-icon">💰</span>
+                            <span class="verify-name">x402 支付</span>
+                        </div>
+                        <div class="verify-code-label">USDT 合约 (BEP-20)</div>
+                        <div class="verify-code">0x55d3...7955</div>
+                        <a href="https://bscscan.com/address/0x55d398989f98955dacd05f9b6c4de27f7d0c7955" target="_blank" class="verify-link">
+                            BscScan验证 →
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="verify-comparison" style="margin-top:24px">
+                    <span class="wrong">行业链上事后贴标签</span>
+                    <span class="correct">✓ Fly链上原生从Day1</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCREEN 5: PRICING -->
+    <section id="pricing" class="screen">
+        <div class="container">
+            <h2 class="screen-title">先用再付，<span class="orange">效果说话</span></h2>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-name">首月体验</div>
+                    <div class="pricing-price">
+                        <span class="pricing-currency">¥</span>
+                        <span class="pricing-amount">199</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="check">✓</span> 1店1月服务</li>
+                        <li><span class="check">✓</span> 经营诊断报告</li>
+                        <li><span class="check">✓</span> 推广方案定制</li>
+                        <li><span class="check">✓</span> 1次链上验证</li>
+                    </ul>
+                    <button class="btn btn-outline" style="width:100%" onclick="location.href='#hero'">立即体验</button>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">推荐</div>
+                    <div class="pricing-name">月度服务</div>
+                    <div class="pricing-price">
+                        <span class="pricing-currency">¥</span>
+                        <span class="pricing-amount">399</span>
+                        <span class="pricing-period">/月</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="check">✓</span> 1店持续服务</li>
+                        <li><span class="check">✓</span> 因果追踪分析</li>
+                        <li><span class="check">✓</span> 策略持续优化</li>
+                        <li><span class="check">✓</span> 链上验证</li>
+                        <li><span class="check">✓</span> 经营日报</li>
+                    </ul>
+                    <button class="btn btn-primary" style="width:100%" onclick="location.href='#hero'">开始使用</button>
+                </div>
+            </div>
+            
+            <p class="pricing-note">* 所有定价含链上验证，BscScan可查</p>
+        </div>
+    </section>
+
+    <!-- SCREEN 6: CTA & FOOTER -->
+    <section id="cta" class="screen">
+        <div class="container">
+            <div class="cta-section">
+                <h2 class="cta-title">现在开始，让Fly帮你找到<br>什么推广真正有效</h2>
+                <p class="cta-sub">连接钱包，体验链上原生数字经营</p>
+                
+                <div class="cta-group">
+                    <button class="btn btn-primary" id="connectWallet2">
+                        <span>🔗</span> 连接钱包
+                    </button>
+                    <a href="https://mp.weixin.qq.com/s/YOUR_WECHAT_LINK" target="_blank" class="btn btn-outline">
+                        <span>💬</span> 微信咨询
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand"><span>Fly</span>Agent © 2026</div>
+                    <div class="footer-links">
+                        <a href="https://fly-agent.xyz" target="_blank">fly-agent.xyz</a>
+                        <a href="https://bscscan.com/address/0x8004A169" target="_blank">BNB Chain</a>
+                        <a href="https://bscscan.com/address/0x8004A169" target="_blank">链上验证</a>
+                        <a href="https://people1913.github.io/fly-marketing-agent.github.io/" target="_blank">文档</a>
+                        <a href="https://github.com/people1913/fly-marketing-agent.github.io" target="_blank">GitHub</a>
+                    </div>
+                </div>
+                <div class="footer-copy">
+                    Powered by BNB Chain · ERC-8004 IdentityRegistry
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Wallet Connection Functions
+        function getProvider() {
+            return window.ethereum || 
+                   window.tokenpocket?.ethereum || 
+                   window.web3?.currentProvider || 
+                   null;
+        }
+
+        function shortenAddress(address) {
+            if (!address) return '';
+            return address.slice(0, 6) + '...' + address.slice(-4);
+        }
+
+        function updateWalletStatus(status, isConnected = false) {
+            const statusEl = document.getElementById('walletStatus');
+            if (statusEl) {
+                statusEl.textContent = status;
+                statusEl.style.color = isConnected ? 'var(--neon)' : 'var(--orange)';
+            }
+        }
+
+        async function connectWallet() {
+            const provider = getProvider();
+            
+            if (!provider) {
+                updateWalletStatus('❌ 未检测到钱包，请安装 MetaMask / TokenPocket');
+                return;
+            }
+
+            try {
+                updateWalletStatus('⏳ 连接中...');
+                
+                const accounts = await provider.request({ method: 'eth_requestAccounts' });
+                
+                if (!accounts || accounts.length === 0) {
+                    throw new Error('No accounts');
+                }
+
+                let chainId = await provider.request({ method: 'eth_chainId' });
+                
+                // Switch to BNB Chain (0x38 = 56)
+                if (chainId !== '0x38') {
+                    try {
+                        await provider.request({
+                            method: 'wallet_switchEthereumChain',
+                            params: [{ chainId: '0x38' }]
+                        });
+                        chainId = '0x38';
+                    } catch (switchError) {
+                        // Chain not added, add it
+                        if (switchError.code === 4902) {
+                            await provider.request({
+                                method: 'wallet_addEthereumChain',
+                                params: [{
+                                    chainId: '0x38',
+                                    chainName: 'BNB Smart Chain',
+                                    nativeCurrency: {
+                                        name: 'BNB',
+                                        symbol: 'BNB',
+                                        decimals: 18
+                                    },
+                                    rpcUrls: ['https://bsc.publicnode.com'],
+                                    blockExplorerUrls: ['https://bscscan.com']
+                                }]
+                            });
+                            chainId = '0x38';
+                        }
+                    }
+                }
+
+                const shortAddr = shortenAddress(accounts[0]);
+                const chainStatus = chainId === '0x38' ? '✓ BNB主网' : '⚠️ 其他网络';
+                updateWalletStatus(`✅ 已连接: ${shortAddr} · ${chainStatus}`, true);
+                
+            } catch (error) {
+                console.error('Wallet connection error:', error);
+                if (error.code === 4001) {
+                    updateWalletStatus('❌ 用户取消连接');
+                } else {
+                    updateWalletStatus('❌ 连接失败，请重试');
+                }
+            }
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const connectBtn1 = document.getElementById('connectWallet');
+            const connectBtn2 = document.getElementById('connectWallet2');
+            
+            if (connectBtn1) {
+                connectBtn1.addEventListener('click', connectWallet);
+            }
+            
+            if (connectBtn2) {
+                connectBtn2.addEventListener('click', connectWallet);
+            }
+
+            // Auto-check if wallet already connected
+            const provider = getProvider();
+            if (provider) {
+                provider.request({ method: 'eth_accounts' })
+                    .then(accounts => {
+                        if (accounts && accounts.length > 0) {
+                            provider.request({ method: 'eth_chainId' })
+                                .then(chainId => {
+                                    const shortAddr = shortenAddress(accounts[0]);
+                                    const chainStatus = chainId === '0x38' ? '✓ BNB主网' : '⚠️ 其他网络';
+                                    updateWalletStatus(`✅ 已连接: ${shortAddr} · ${chainStatus}`, true);
+                                });
+                        }
+                    })
+                    .catch(console.error);
+            }
+        });
+
+        // Listen for account changes
+        if (window.ethereum) {
+            window.ethereum.on('accountsChanged', function(accounts) {
+                if (accounts.length === 0) {
+                    updateWalletStatus('');
+                } else {
+                    const shortAddr = shortenAddress(accounts[0]);
+                    updateWalletStatus(`✅ 已连接: ${shortAddr}`, true);
+                }
+            });
+
+            window.ethereum.on('chainChanged', function() {
+                window.location.reload();
+            });
+        }
+    </script>
 </body>
 </html>

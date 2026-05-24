@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f7f7f8;--bg2:#ededf0;--bg3:#ffffff;--sidebar:#1a1a2e;--sidebar-text:#c4c4d4;--sidebar-hover:rgba(255,255,255,.06);--sidebar-active:rgba(255,107,53,.12);--orange:#FF6B35;--cyan:#0ea5e9;--green:#22c55e;--red:#ef4444;--text:#1a1a2e;--text2:#6b7280;--text3:#9ca3af;--sans:'Noto Sans SC','Inter',sans-serif;--mono:'Inter',monospace}
+:root{--bg:#f7f7f8;--bg2:#ededf0;--bg3:#ffffff;--sidebar:#303030;--sidebar-text:#b4b4b4;--sidebar-hover:rgba(255,255,255,.06);--sidebar-active:rgba(255,107,53,.12);--orange:#FF6B35;--cyan:#0ea5e9;--green:#22c55e;--red:#ef4444;--text:#1a1a2e;--text2:#6b7280;--text3:#9ca3af;--sans:'Noto Sans SC','Inter',sans-serif;--mono:'Inter',monospace}
 *{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;overflow:hidden}body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6}
 .app{display:flex;height:100vh;width:100vw}
 
@@ -49,8 +49,8 @@
 .welcome-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px}
 .welcome-logo{font-family:var(--mono);font-size:36px;font-weight:700;letter-spacing:-2px;margin-bottom:4px}.welcome-logo span{color:var(--orange)}
 .welcome-sub{color:var(--text2);font-size:15px;margin-bottom:28px;text-align:center}
-.example-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:560px;width:100%;margin-bottom:32px}
-.example-card{padding:12px 16px;background:var(--bg3);border:1px solid var(--bg2);border-radius:12px;cursor:pointer;transition:all .15s;font-size:13px;color:var(--text);display:flex;align-items:center;gap:8px}.example-card:hover{border-color:var(--orange);background:rgba(255,107,53,.03)}.example-card .ec-icon{font-size:18px;flex-shrink:0}.example-card .ec-text{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.example-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;max-width:560px;width:100%;margin-bottom:32px}
+.example-card{padding:12px 16px;background:var(--bg2);border:none;border-radius:16px;cursor:pointer;transition:all .15s;font-size:13px;color:var(--text);display:flex;align-items:center;gap:8px}.example-card:hover{background:rgba(255,107,53,.08)}.example-card .ec-icon{font-size:18px;flex-shrink:0}.example-card .ec-text{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* Chips */
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.chip{font-size:12px;padding:5px 14px;background:var(--bg3);border:1px solid var(--bg2);border-radius:20px;color:var(--text2);cursor:pointer;transition:all .15s}.chip:hover{border-color:var(--orange);color:var(--orange)}
@@ -74,7 +74,12 @@
 .wToast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);padding:8px 16px;background:var(--bg3);border:1px solid var(--bg2);border-radius:8px;font-size:12px;display:none;z-index:60}
 
 /* Mobile */
-@media(max-width:768px){.sidebar{position:fixed;left:-260px;z-index:20;height:100vh;transition:left .3s}.sidebar.open{left:0}.chat-main{width:100%}.example-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.sidebar{position:fixed;left:-260px;z-index:20;height:100vh;transition:left .3s}.sidebar.open{left:0}.chat-main{width:100%}.example-grid{grid-template-columns:1fr!important}}
+
+.panel{width:0;overflow:hidden;transition:width .3s ease;background:var(--bg3);border-left:1px solid var(--bg2);display:flex;flex-direction:column}.panel.open{width:360px;min-width:360px}
+.panel-head{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid var(--bg2);flex-shrink:0;font-size:13px;font-weight:500;color:var(--text)}
+.panel-close{width:28px;height:28px;border-radius:6px;background:transparent;border:none;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .15s}.panel-close:hover{background:var(--bg2);color:var(--text)}
+.panel-body{flex:1;overflow-y:auto;padding:16px}.panel-body::-webkit-scrollbar{width:4px}.panel-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.08);border-radius:2px}
 </style>
 </head>
 <body>
@@ -106,6 +111,7 @@
   </div>
 </div>
 
+<div class="panel" id="panel"><div class="panel-head"><span id="panelTitle">详情</span><button class="panel-close" onclick="closePanel()">✕</button></div><div class="panel-body" id="panelBody"></div></div>
 <div class="overlay" id="wOv" onclick="if(event.target===this)this.classList.remove('show')"><div class="ov-card" style="position:relative"><button class="ov-close" onclick="document.getElementById('wOv').classList.remove('show')">✕</button><div class="ov-title">⛓️ 连接钱包验证</div><button class="wallet-btn" onclick="connW('binance')"><span>🟡</span>Binance Wallet</button><button class="wallet-btn" onclick="connW('okx')"><span>⭕</span>OKX Wallet</button><button class="wallet-btn" onclick="connW('bitget')"><span>🟢</span>Bitget Wallet</button><button class="wallet-btn" onclick="connW('metamask')"><span>🦊</span>MetaMask</button></div></div>
 <div class="wToast" id="wToast"></div>
 
@@ -128,7 +134,15 @@ convDefs.forEach(d=>{convs[d.id]={msgs:[...d.init],history:[]}});
 
 function renderSidebar(){const s=document.getElementById('convScroll');let h='',ls='';convDefs.forEach(d=>{if(d.sec!==ls){h+='<div class="sb-section">'+d.sec+'</div>';ls=d.sec}h+='<div class="conv-item'+(activeConv===d.id?' active':'')+'" onclick="switchConv(\''+d.id+'\')"><div class="conv-icon '+d.ic+'">'+d.icon+'</div><div class="conv-info"><div class="conv-title">'+d.title+'</div><div class="conv-sub">'+d.sub+'</div></div>'+(d.badge?'<div class="conv-badge '+d.bc+'">'+d.badge+'</div>':'')+'</div>'});s.innerHTML=h}
 
-function switchConv(id){activeConv=id;renderSidebar();C.innerHTML='';convs[id].msgs.forEach(m=>renderMsg(m.r,m.h));document.getElementById('chatTitle').textContent=convDefs.find(d=>d.id===id).title}
+function switchConv(id){activeConv=id;renderSidebar();
+if(id==='c0'||id.startsWith('n')){
+C.innerHTML='';convs[id].msgs.forEach(m=>renderMsg(m.r,m.h));
+if(id.startsWith('n')&&convs[id].msgs.length===0)showWelcome();
+document.getElementById('chatTitle').textContent=convDefs.find(d=>d.id===id).title;
+closePanel();
+}else{
+openPanel(convDefs.find(d=>d.id===id));
+}}
 
 function renderMsg(role,html){const d=document.createElement('div');d.className='msg';d.innerHTML='<div class="msg-inner"><div class="msg-av '+(role==='bot'?'bot':'user')+'">'+(role==='bot'?'F':'U')+'</div><div class="msg-body"><div class="msg-who">'+(role==='bot'?'FlyAgent':'你')+'</div><div class="msg-bb">'+html+'</div></div></div>';C.appendChild(d);C.scrollTop=C.scrollHeight}
 
@@ -162,6 +176,15 @@ function escH(s){const d=document.createElement('div');d.textContent=s;return d.
 const WP={binance:{g:()=>window.BinanceChain,n:'Binance Wallet'},okx:{g:()=>window.okxwallet,n:'OKX Wallet'},bitget:{g:()=>window.bitkeep?.ethereum,n:'Bitget Wallet'},metamask:{g:()=>window.ethereum,n:'MetaMask'}};
 async function connW(k){const p=WP[k]?.g();if(!p){sendQuick('验证链上数据');document.getElementById('wOv').classList.remove('show');return}document.getElementById('wOv').classList.remove('show');const t=document.getElementById('wToast');try{const a=await p.request({method:'eth_requestAccounts'});if(!a?.length)throw new Error('No accounts');let c=await p.request({method:'eth_chainId'});if(c!=='0x38'){try{await p.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x38'}]})}catch(e){await p.request({method:'wallet_addEthereumChain',params:[{chainId:'0x38',chainName:'BNB Smart Chain',nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},rpcUrls:['https://bsc.publicnode.com'],blockExplorerUrls:['https://bscscan.com']}]})}}t.textContent='✅ '+WP[k].n+': '+a[0].slice(0,10)+'...'+a[0].slice(-6);t.style.display='block';t.style.borderColor='rgba(34,197,113,.3)';t.style.color='var(--green)';setTimeout(()=>{t.style.display='none'},5000)}catch(e){t.textContent='❌ '+(e.message||'用户取消');t.style.display='block';t.style.borderColor='rgba(239,68,68,.3)';t.style.color='var(--red)';setTimeout(()=>{t.style.display='none'},3000)}}
 
+
+function openPanel(def){
+const p=document.getElementById('panel'),pb=document.getElementById('panelBody'),pt=document.getElementById('panelTitle');
+pt.textContent=def.icon+' '+def.title;
+let h='';
+convs[def.id].msgs.forEach(m=>{h+='<div style="padding:8px 0"><div style="display:flex;gap:8px"><div class="msg-av '+(m.r==='bot'?'bot':'user')+'" style="width:26px;height:26px;font-size:10px">'+(m.r==='bot'?'F':'U')+'</div><div style="flex:1;min-width:0"><div class="msg-bb" style="font-size:13px;line-height:1.6">'+m.h+'</div></div></div></div>'});
+pb.innerHTML=h;p.classList.add('open');
+}
+function closePanel(){document.getElementById('panel').classList.remove('open')}
 function toggleSB(){const sb=document.getElementById('sidebar');if(window.innerWidth<=768){sb.classList.toggle('open')}else{sb.classList.toggle('collapsed')}}
 
 const ta=document.getElementById('chatInput');ta.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px'});

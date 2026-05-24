@@ -211,12 +211,34 @@ footer .links a:hover{color:var(--cyan)}
 <div class="container">
   <h2>你不是不会推广<br>你是<em>不知道哪里有效</em></h2>
   <div class="emotion-you"><span>发传单</span><span>投美团</span><span>做团购</span><span>发抖音</span></div>
-  <p class="emotion-but">但你不知道：</p>
-  <div class="emotion-blind">
-    <div>哪个渠道赚钱</div><div>哪个渠道亏钱</div>
-    <div>哪个客户会复购</div><div>哪个活动是浪费钱</div>
+  <div style="max-width:560px;margin:32px auto;background:var(--bg2);border-radius:16px;padding:32px;border:1px solid rgba(255,60,60,.15)">
+    <h3 style="font-size:16px;margin-bottom:16px;color:var(--text)">🕳️ 推广黑洞计算器</h3>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">输入你门店月度推广总费用，看看有多少钱被黑洞吞噬</p>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:20px">
+      <span style="font-size:14px;color:var(--text2)">月推广费</span>
+      <span style="color:var(--orange);font-weight:700">¥</span>
+      <input type="number" id="bhInput" value="5000" min="500" max="100000" step="500" style="flex:1;background:var(--bg);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 14px;color:var(--text);font-family:var(--mono);font-size:16px;outline:none" oninput="calcBlackHole()">
+      <span style="font-size:13px;color:var(--text3)">/月</span>
+    </div>
+    <div id="bhResult">
+      <div style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:13px;color:var(--text3)">平台抽成</span><span id="bh1" style="font-family:var(--mono);font-size:13px;color:var(--red)">-</span></div>
+        <div style="height:6px;background:var(--bg);border-radius:3px;overflow:hidden"><div id="bhBar1" style="height:100%;background:var(--red);border-radius:3px;transition:width .8s;width:0"></div></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;margin-top:10px"><span style="font-size:13px;color:var(--text3)">无效曝光/虚假流量</span><span id="bh2" style="font-family:var(--mono);font-size:13px;color:var(--red)">-</span></div>
+        <div style="height:6px;background:var(--bg);border-radius:3px;overflow:hidden"><div id="bhBar2" style="height:100%;background:var(--orange);border-radius:3px;transition:width .8s;width:0"></div></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;margin-top:10px"><span style="font-size:13px;color:var(--text3)">无法归因的浪费</span><span id="bh3" style="font-family:var(--mono);font-size:13px;color:var(--red)">-</span></div>
+        <div style="height:6px;background:var(--bg);border-radius:3px;overflow:hidden"><div id="bhBar3" style="height:100%;background:var(--gold);border-radius:3px;transition:width .8s;width:0"></div></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;margin-top:10px"><span style="font-size:13px;color:var(--green)">✅ 真正有效的投放</span><span id="bh4" style="font-family:var(--mono);font-size:13px;color:var(--green)">-</span></div>
+        <div style="height:6px;background:var(--bg);border-radius:3px;overflow:hidden"><div id="bhBar4" style="height:100%;background:var(--green);border-radius:3px;transition:width .8s;width:0"></div></div>
+      </div>
+      <div style="text-align:center;padding:16px;background:rgba(255,60,60,.08);border-radius:10px;border:1px solid rgba(255,60,60,.2)">
+        <div style="font-size:13px;color:var(--text3)">你的门店每月推广黑洞浪费</div>
+        <div id="bhWaste" style="font-family:var(--mono);font-size:clamp(24px,4vw,36px);font-weight:700;color:var(--red)">¥0</div>
+        <div style="font-size:12px;color:var(--text3);margin-top:4px">Fly Agent 可以帮你自动识别并止损</div>
+      </div>
+    </div>
   </div>
-  <div class="emotion-fly">
+  <div class="emotion-fly" style="max-width:560px">
     <h3>FlyAgent 出现</h3>
     <ul class="emotion-fly-list">
       <li>自动追踪每个渠道的真实效果</li>
@@ -267,15 +289,27 @@ footer .links a:hover{color:var(--cyan)}
   <p class="section-label">经营数字生命</p>
   <h2 class="section-title">Fly 已经学习你的店铺 <span style="color:var(--orange)">37</span> 天</h2>
   <p class="section-desc" style="margin:12px auto 0">AI正在理解你的生意，比新员工更懂你的店</p>
-  <div class="life-grid">
-    <div class="life-card"><p><span class="check">✅</span>哪个时间客流最高</p></div>
-    <div class="life-card"><p><span class="check">✅</span>哪种套餐利润最高</p></div>
-    <div class="life-card"><p><span class="check">✅</span>哪类客户最容易复购</p></div>
-    <div class="life-card"><p><span class="check">✅</span>哪个平台最容易浪费预算</p></div>
-    <div class="life-card"><p><span class="check">✅</span>哪种文案最容易成交</p></div>
-    <div class="life-card"><p><span class="check">✅</span>什么天气影响客流最大</p></div>
+  <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:32px">
+    <div style="background:var(--bg2);border-radius:16px;padding:28px;border:1px solid rgba(255,107,53,.2);min-width:240px;text-align:left">
+      <div style="font-family:var(--mono);font-size:12px;color:var(--text3);margin-bottom:12px">AGENT 员工档案</div>
+      <div style="font-size:18px;font-weight:600;margin-bottom:16px">Fly-Agent-001</div>
+      <div style="font-size:13px;color:var(--text2);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)">入职天数 <span style="color:var(--orange);float:right;font-family:var(--mono)">37天</span></div>
+      <div style="font-size:13px;color:var(--text2);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)">累计决策 <span style="color:var(--cyan);float:right;font-family:var(--mono)">89次</span></div>
+      <div style="font-size:13px;color:var(--text2);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)">为本店止损 <span style="color:var(--green);float:right;font-family:var(--mono)">¥2,860</span></div>
+      <div style="font-size:13px;color:var(--text2);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)">为本店增收 <span style="color:var(--gold);float:right;font-family:var(--mono)">¥8,320</span></div>
+      <div style="font-size:13px;color:var(--text2);padding:6px 0">状态 <span style="color:var(--green);float:right">🟢 在岗运行中</span></div>
+    </div>
+    <div style="max-width:320px;text-align:left">
+      <div style="font-size:14px;color:var(--text2);margin-bottom:16px">Fly 已经理解你的店：</div>
+      <div style="padding:8px 0;font-size:14px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.04)"><span style="color:var(--green)">✅</span> 哪个时间客流最高</div>
+      <div style="padding:8px 0;font-size:14px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.04)"><span style="color:var(--green)">✅</span> 哪种套餐利润最高</div>
+      <div style="padding:8px 0;font-size:14px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.04)"><span style="color:var(--green)">✅</span> 哪类客户最容易复购</div>
+      <div style="padding:8px 0;font-size:14px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.04)"><span style="color:var(--green)">✅</span> 哪个平台最容易浪费预算</div>
+      <div style="padding:8px 0;font-size:14px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.04)"><span style="color:var(--green)">✅</span> 哪种文案最容易成交</div>
+      <div style="padding:8px 0;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✅</span> 什么天气影响客流最大</div>
+    </div>
   </div>
-  <p class="life-cta"><strong>Fly比新员工更懂你的店</strong></p>
+  <p class="life-cta" style="margin-top:28px"><strong>Fly比新员工更懂你的店</strong></p>
 </div>
 </section>
 
@@ -298,9 +332,9 @@ footer .links a:hover{color:var(--cyan)}
   <h2 class="section-title">你的经营数据，属于你自己</h2>
   <p class="section-desc">核心数据永久存证，平台无法删改，任何人都无法篡改</p>
   <div class="trust-grid">
-    <div class="trust-card"><h3>🔐 Agent唯一身份</h3><p class="desc">每个Fly Agent都有唯一身份标识，不可伪造，行为轨迹永久可查</p><div class="trust-addr">0x8004A169...</div><a class="trust-link" href="https://bscscan.com/address/0x8004A169" target="_blank">验证 →</a></div>
-    <div class="trust-card"><h3>🌳 经营数据永久存证</h3><p class="desc">每日推广数据自动聚合存证，根哈希上链，无法篡改，永久可查</p><div class="trust-addr">0x48d31b85...83cf8</div><a class="trust-link" href="https://bscscan.com/tx/0x48d31b8575cd69225e5b4a9a0ee80eba8d842159fb892b7b799629f705a83cf8" target="_blank">验证 →</a></div>
-    <div class="trust-card"><h3>💰 透明支付</h3><p class="desc">服务费自动结算，每笔可追溯，经营模式资产化，自动版税分成</p><div class="trust-addr">0x55d3...7955</div><a class="trust-link" href="https://bscscan.com/token/0x55d3" target="_blank">验证 →</a></div>
+    <div class="trust-card" style="cursor:pointer" onclick="showVerify('identity')"><h3>🔐 Agent唯一身份 <span style="font-size:11px;color:var(--cyan);float:right">点击验证 ↓</span></h3><p class="desc">每个Fly Agent都有唯一身份标识，不可伪造，行为轨迹永久可查</p><div class="trust-addr">0x8004A169...</div><a class="trust-link">验证 →</a></div>
+    <div class="trust-card" style="cursor:pointer" onclick="showVerify('data')"><h3>🌳 经营数据永久存证 <span style="font-size:11px;color:var(--cyan);float:right">点击验证 ↓</span></h3><p class="desc">每日推广数据自动聚合存证，根哈希上链，无法篡改，永久可查</p><div class="trust-addr">0x48d31b85...83cf8</div><a class="trust-link">验证 →</a></div>
+    <div class="trust-card" style="cursor:pointer" onclick="showVerify('payment')"><h3>💰 透明支付 <span style="font-size:11px;color:var(--cyan);float:right">点击验证 ↓</span></h3><p class="desc">服务费自动结算，每笔可追溯，经营模式资产化，自动版税分成</p><div class="trust-addr">0x55d3...7955</div><a class="trust-link">验证 →</a></div>
   </div>
   <div class="trust-compare">
     <div class="no">❌ 传统SaaS：数据存在厂商服务器，随时可改</div>
@@ -371,6 +405,15 @@ footer .links a:hover{color:var(--cyan)}
 </div>
 </footer>
 
+
+<!-- Verify Popup Modal -->
+<div class="wallet-overlay" id="verifyOverlay" onclick="if(event.target===this)closeVerify()">
+  <div class="wallet-modal" style="max-width:420px">
+    <h3 id="verifyTitle" style="margin-bottom:8px">验证</h3>
+    <div id="verifyContent" style="font-size:13px;color:var(--text2);line-height:1.8"></div>
+    <span class="wallet-close" onclick="closeVerify()">关闭</span>
+  </div>
+</div>
 <div class="wallet-status" id="walletStatus"></div>
 <div class="wallet-overlay" id="walletOverlay" onclick="if(event.target===this)closeWalletModal()">
   <div class="wallet-modal">
@@ -398,6 +441,12 @@ const WALLET_PROVIDERS={binance:{get:()=>window.BinanceChain,name:'Binance Walle
 function connectWallet(){for(const[key,prov]of Object.entries(WALLET_PROVIDERS)){const el=document.getElementById('w-'+key);const p=prov.get();if(el)el.classList.toggle('disabled',!p)}document.getElementById('walletOverlay').classList.add('show')}
 function closeWalletModal(){document.getElementById('walletOverlay').classList.remove('show')}
 async function connectWith(walletKey){const prov=WALLET_PROVIDERS[walletKey];const p=prov?.get();if(!p)return;closeWalletModal();const s=document.getElementById('walletStatus');const b=document.getElementById('walletBtn');b.textContent='⏳ 连接中...';try{const accounts=await p.request({method:'eth_requestAccounts'});if(!accounts||!accounts.length)throw new Error('No accounts');let chainId=await p.request({method:'eth_chainId'});if(chainId!=='0x38'){try{await p.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x38'}]})}catch(e){await p.request({method:'wallet_addEthereumChain',params:[{chainId:'0x38',chainName:'BNB Smart Chain',nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},rpcUrls:['https://bsc.publicnode.com'],blockExplorerUrls:['https://bscscan.com']}]})}}const addr=accounts[0];b.textContent='✅ '+addr.slice(0,6)+'...'+addr.slice(38);let balance='...';try{const balHex=await p.request({method:'eth_getBalance',params:[addr,'latest']});balance=parseFloat(parseInt(balHex,16)/1e18).toFixed(4)+' BNB'}catch(e){balance='BNB'}s.innerHTML='✅ '+prov.name+': '+addr.slice(0,10)+'...'+addr.slice(-6)+' · '+balance+' · <a href="https://bscscan.com/address/'+addr+'" target="_blank" style="color:var(--cyan)">查看 →</a>';s.className='wallet-status';s.style.display='block'}catch(e){b.textContent='数据验证';s.textContent='❌ 连接失败: '+(e.message||'用户取消');s.className='wallet-status error';s.style.display='block'}}
+
+function calcBlackHole(){const v=parseInt(document.getElementById('bhInput').value)||0;if(v<500)return;const platform=Math.round(v*0.22);const fake=Math.round(v*0.18);const waste=Math.round(v*0.28);const effective=v-platform-fake-waste;document.getElementById('bh1').textContent='¥'+platform;document.getElementById('bh2').textContent='¥'+fake;document.getElementById('bh3').textContent='¥'+waste;document.getElementById('bh4').textContent='¥'+effective;const t=v||1;setTimeout(()=>{document.getElementById('bhBar1').style.width=(platform/t*100)+'%';document.getElementById('bhBar2').style.width=(fake/t*100)+'%';document.getElementById('bhBar3').style.width=(waste/t*100)+'%';document.getElementById('bhBar4').style.width=(effective/t*100)+'%'},50);document.getElementById('bhWaste').textContent='¥'+(platform+fake+waste)+'/月'}
+const verifyData={identity:{title:'🔐 Agent唯一身份验证',content:'<div style="margin:12px 0"><div style="color:var(--text3);font-size:12px;margin-bottom:4px">合约地址</div><div style="font-family:var(--mono);color:var(--cyan);padding:8px 12px;background:rgba(0,255,204,.05);border-radius:6px;word-break:break-all">0x8004A169</div></div><div style="margin:12px 0"><div style="color:var(--text3);font-size:12px;margin-bottom:4px">存证时间</div><div style="font-family:var(--mono);color:var(--text)">2026-05-24 06:47 UTC</div></div><div style="margin:12px 0"><div style="color:var(--text3);font-size:12px;margin-bottom:4px">验证说明</div><div style="color:var(--text2)">每个Fly Agent在部署时自动注册唯一链上身份，不可伪造，行为轨迹永久可查</div></div><a href="https://bscscan.com/address/0x8004A169" target="_blank" style="display:inline-block;margin-top:12px;padding:8px 16px;background:rgba(240,185,11,.1);border:1px solid rgba(240,185,11,.3);border-radius:6px;color:var(--gold);font-family:var(--mono);font-size:12px">BscScan 验证 →</a>'},data:{title:'🌳 经营数据存证验证',content:'<div style="margin:12px 0"><div style="color:var(--text3);font-size:12px;margin-bottom:4px">交易哈希</div><div style="font-family:var(--mono);color:var(--cyan);padding:8px 12px;background:rgba(0,255,204,.05);border-radius:6px;word-break:break-all">0x48d31b8575cd69225e5b4a9a0ee80eba8d842159fb892b7b799629f705a83cf8</div></div><div style="margin:12px 0"><div style="color:var(--text3);font-size:12px;margin-bottom:4px">区块高度</div><div style="font-family:var(--mono);color:var(--text)">#100109363</div></div><div style="margin:12px 0"><div style="color:var(--text3);font-size:12px;margin-bottom:4px">Merkle Root</div><div style="font-family:var(--mono);color:var(--orange);padding:8px 12px;background:rgba(255,107,53,.05);border-radius:6px;word-break:break-all">0xa5408ddf...fb563</div></div><div style="margin:12px 0"><div style="color:var(--text3);font-size:12px;margin-bottom:4px">存证数据</div><div style="color:var(--text2)">29条经营事件 · L0事件8条 · L1事实16条 · L2模式4条</div></div><a href="https://bscscan.com/tx/0x48d31b8575cd69225e5b4a9a0ee80eba8d842159fb892b7b799629f705a83cf8" target="_blank" style="display:inline-block;margin-top:12px;padding:8px 16px;background:rgba(240,185,11,.1);border:1px solid rgba(240,185,11,.3);border-radius:6px;color:var(--gold);font-family:var(--mono);font-size:12px">BscScan 验证 →</a>'},payment:{title:'💰 透明支付验证',content:'<div style="margin:12px 0"><div style="color:var(--text3);font-size:12px;margin-bottom:4px">支付合约</div><div style="font-family:var(--mono);color:var(--cyan);padding:8px 12px;background:rgba(0,255,204,.05);border-radius:6px;word-break:break-all">0x55d3...7955</div></div><div style="margin:12px 0"><div style="color:var(--text3);font-size:12px;margin-bottom:4px">支付方式</div><div style="color:var(--text2)">BSC链上USDT（BEP-20），每笔交易永久可追溯</div></div><div style="margin:12px 0"><div style="color:var(--text3);font-size:12px;margin-bottom:4px">版税分配</div><div style="color:var(--text2)">50%原创 / 30%验证 / 20%协议 · 自动执行</div></div><a href="https://bscscan.com/token/0x55d3" target="_blank" style="display:inline-block;margin-top:12px;padding:8px 16px;background:rgba(240,185,11,.1);border:1px solid rgba(240,185,11,.3);border-radius:6px;color:var(--gold);font-family:var(--mono);font-size:12px">BscScan 验证 →</a>'}};
+function showVerify(key){const d=verifyData[key];document.getElementById('verifyTitle').textContent=d.title;document.getElementById('verifyContent').innerHTML=d.content;document.getElementById('verifyOverlay').classList.add('show')}
+function closeVerify(){document.getElementById('verifyOverlay').classList.remove('show')}
+calcBlackHole();
 </script>
 </body>
 </html>

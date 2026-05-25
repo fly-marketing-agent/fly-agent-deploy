@@ -62,23 +62,35 @@ a.lk{color:#2980fe;text-decoration:none;word-break:break-all}
 .faq-q{font-size:14px;font-weight:600;color:#222;margin-bottom:4px}
 .faq-a{font-size:13px;color:#666;line-height:1.6}
 .foot{text-align:center;padding:20px;color:#bbb;font-size:11px;border-top:1px solid #eee;margin-top:20px}
+/* ERC-8183 托管步骤进度条 */
+.steps{display:flex;gap:4px;margin:12px 0 16px;align-items:center}
+.step{flex:1;text-align:center;padding:8px 4px;border-radius:8px;font-size:11px;color:#999;background:#f5f5f7;transition:all .3s}
+.step.done{background:#e8f5e9;color:#27ae60}
+.step.active{background:#fff0f0;color:#e94560;font-weight:600}
+.step-num{display:block;font-size:16px;font-weight:800;margin-bottom:2px}
+.escrow-badge{display:inline-block;background:linear-gradient(135deg,#1a1a2e,#0f3460);color:#fff;font-size:11px;padding:4px 10px;border-radius:20px;margin-bottom:12px}
+.escrow-badge span{color:#4fc3f7}
 </style>
 <link rel="canonical" href="https://fly-agent.xyz/fly-buy.html">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Fly GEO服务","description":"让本地商家被AI推荐从AI搜不到到被AI推荐GEO优化加Schema.org加FAQ语义覆盖加经营可信认证","provider":{"@type":"Organization","name":"FlyAgent","url":"https://fly-agent.xyz"},"serviceType":"Fly GEO服务"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Fly GEO服务包含什么？","acceptedAnswer":{"@type":"Answer","text":"包含4个核心模块1Schema.org结构化数据优化2FAQ语义覆盖30到130条3经营可信认证4多平台实体统一每个模块都让AI更理解你更信任你"}},{"@type":"Question","name":"Fly GEO服务多少钱？","acceptedAnswer":{"@type":"Answer","text":"首月199元后续399元每月包含GEO诊断加优化加监测加持续优化没有隐藏费用效果可量化AI搜到你就是证明"}},{"@type":"Question","name":"Fly GEO多久能看到效果？","acceptedAnswer":{"@type":"Answer","text":"1到3周AI爬虫重新索引后开始生效部分关键词可能更快首月内可以看到AI搜索中的变化持续优化效果越来越好"}},{"@type":"Question","name":"Fly和其他营销公司有什么区别？","acceptedAnswer":{"@type":"Answer","text":"传统营销公司帮你发内容Fly帮你被AI推荐发内容是方法被AI推荐才是结果Fly做GEO的也做可信验证的行业唯一四层护城河AI推荐加GEO曝光加本地商业加Agent可信化"}},{"@type":"Question","name":"Fly GEO适合什么商家？","acceptedAnswer":{"@type":"Answer","text":"适合所有依赖本地流量的商家美业餐饮牙科教育健身宠物花店房产零售任何需要被AI推荐的本地商家都可以用Fly做GEO"}}]}</script>
+<!-- ethers.js v5 for ABI encoding + contract interaction -->
+<script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
 </head>
 <body>
 <div class="header">
   <div class="logo"><span>九运</span>智领</div>
-  <div class="sub">让AI搜到你的店 · GEO优化 · 安全支付 · SDK验证级</div>
+  <div class="sub">让AI搜到你的店 · GEO优化 · 合约托管 · SDK验证级</div>
 </div>
 <div class="ct">
+
   <div class="box">
     <h2>🔍 什么是GEO？</h2>
     <p>你的店在抖音、小红书、百度上能搜到吗？</p>
     <p>现在越来越多人用<span class="hl">AI搜索</span>（豆包、DeepSeek、Kimi）找店。如果你的店不在AI的推荐里，客户根本找不到你。</p>
     <p><b>GEO = 生成式引擎优化</b>，让AI搜索推荐你的店，让客户主动找上门。</p>
   </div>
+
   <div class="box">
     <h2>📊 效果对比</h2>
     <div class="cmp-row">
@@ -95,6 +107,7 @@ a.lk{color:#2980fe;text-decoration:none;word-break:break-all}
     </div>
     <p style="font-size:12px;color:#888;text-align:center">案例：青山湖科技城鸿颜徒手养护，搜"青山湖养生"从0结果到AI推荐</p>
   </div>
+
   <div class="box">
     <h2>🏗️ 九运智领怎么做GEO？</h2>
     <p><b>第1步：诊断</b> — 检查你的店在AI搜索里能不能被看到</p>
@@ -103,9 +116,22 @@ a.lk{color:#2980fe;text-decoration:none;word-break:break-all}
     <p><b>第4步：地图认领</b> — 百度地图/高德地图标注，让搜附近的客户找到你</p>
     <p><b>第5步：持续优化</b> — 监控效果、调整关键词、月度报告</p>
   </div>
+
+  <!-- 合约托管保障说明 -->
+  <div class="box" style="background:linear-gradient(135deg,#f0f7ff,#e8f5e9);border:1px solid #c8e6c9">
+    <div class="escrow-badge">🔒 <span>合约托管</span> · 服务交付才付款</div>
+    <h2 style="font-size:16px;margin-bottom:8px">你的钱不进商家口袋，锁在智能合约里</h2>
+    <p style="font-size:13px;color:#555;margin-bottom:4px">✅ 下单时资金锁定 → 服务完成后自动释放</p>
+    <p style="font-size:13px;color:#555;margin-bottom:4px">✅ 不满意可申请退款 → 争议期内随时申请</p>
+    <p style="font-size:13px;color:#555">✅ 全程可追踪 → 每笔操作有据可查</p>
+  </div>
+
   <h2 style="font-size:18px;font-weight:700;margin:20px 0 12px;text-align:center">选择服务套餐</h2>
-  <div id="wi" class="wi">正在连接支付...</div>
+
+  <div id="wi" class="wi">正在连接...</div>
+
   <div class="dots" id="dots" style="display:none"><div class="dt a" id="d1"></div><div class="dt" id="d2"></div><div class="dt" id="d3"></div></div>
+
   <div id="p1">
     <div id="cards" style="display:none">
       <div class="card" data-amt="9.9" onclick="sc(this)">
@@ -134,20 +160,32 @@ a.lk{color:#2980fe;text-decoration:none;word-break:break-all}
         <div class="pri">999 <span>USDT/月</span></div>
         <div class="ttl">全托管代运营</div>
         <div class="dsc">一站式全包 · 专人对接 · 效果对赌</div>
-        <div class="inc"><b>包含：</b><br>✅ 全平台内容+7平台分发<br>✅ 专属运营1对1对接<br>✅ 每日监控+每周优化<br>✅ 效果不达标退款承诺<br>✅ 数字人短视频生成<br>✅ 私域引流方案<br>🎁 安全支付 + 可信认证</div>
+        <div class="inc"><b>包含：</b><br>✅ 全平台内容+7平台分发<br>✅ 专属运营1对1对接<br>✅ 每日监控+每周优化<br>✅ 效果不达标退款承诺<br>✅ 数字人短视频生成<br>✅ 私域引流方案<br>🎁 合约托管 + 可信认证</div>
       </div>
     </div>
-    <button class="btn br" id="buyBtn" disabled onclick="pay()" style="display:none">选择服务后点击购买</button>
+
+    <!-- ERC-8183 5步托管进度 -->
+    <div id="stepProgress" class="steps" style="display:none">
+      <div class="step" id="s1"><span class="step-num">1</span>创建订单</div>
+      <div class="step" id="s2"><span class="step-num">2</span>注册保障</div>
+      <div class="step" id="s3"><span class="step-num">3</span>设定托管</div>
+      <div class="step" id="s4"><span class="step-num">4</span>授权托管</div>
+      <div class="step" id="s5"><span class="step-num">5</span>资金锁定</div>
+    </div>
+
+    <button class="btn br" id="buyBtn" disabled onclick="erc8183_pay()" style="display:none">选择服务后点击购买</button>
     <div class="st" id="st"></div>
   </div>
+
   <div class="box">
     <h2>❓ 常见问题</h2>
     <div class="faq-item"><div class="faq-q">GEO和SEO有什么区别？</div><div class="faq-a">SEO优化百度搜索排名，GEO优化AI搜索推荐。现在越来越多人用AI搜索，GEO让你的店出现在AI回答里。</div></div>
     <div class="faq-item"><div class="faq-q">多久能看到效果？</div><div class="faq-a">基础GEO优化7-14天开始生效，深度代运营30天可见明显效果。9.9诊断套餐不含优化，只出报告。</div></div>
-    <div class="faq-item"><div class="faq-q">为什么用数字货币支付？</div><div class="faq-a">支付即存证。你的订单、服务记录、效果数据全部安全保存，不可篡改，可作为信用资产积累。</div></div>
-    <div class="faq-item"><div class="faq-q">效果不好怎么办？</div><div class="faq-a">999全托管套餐支持效果对赌——30天AI搜索推荐率未达30%，全额退款。其他套餐按月付费，随时停。</div></div>
+    <div class="faq-item"><div class="faq-q">为什么用数字货币支付？</div><div class="faq-a">你的钱不直接到商家账户，而是锁在智能合约里。服务完成后自动释放给商家，不满意可在争议期内申请退款。资金全程安全透明，每笔操作可追踪验证。</div></div>
+    <div class="faq-item"><div class="faq-q">效果不好怎么办？</div><div class="faq-a">999全托管套餐支持效果对赌——30天AI搜索推荐率未达30%，全额退款。其他套餐按月付费，随时停。合约托管保障你的资金安全。</div></div>
     <div class="faq-item"><div class="faq-q">我需要做什么？</div><div class="faq-a">9.9诊断：你什么都不用做，等报告。59/299套餐：配合提供店铺信息和素材。999全托管：几乎不用管，九运智领全包。</div></div>
   </div>
+
   <div id="p2" class="h">
     <div class="fb">
       <h3>📝 告诉我们你的店</h3>
@@ -159,15 +197,16 @@ a.lk{color:#2980fe;text-decoration:none;word-break:break-all}
       <button class="btn bb" onclick="go()">提交确认</button>
     </div>
   </div>
+
   <div id="p3" class="h">
     <div class="rb">
       <div class="bg">🎉</div>
       <h3>订单已确认</h3>
-      <p>正在生成你的营销方案<br>方案完成后安全保存，回来即可查看</p>
-      <p style="margin-top:12px;font-size:12px;color:#999">支付：<a class="lk" id="rP" href="#" target="_blank"></a></p>
-      <p style="font-size:12px;color:#999">信息已保存：<a class="lk" id="rO" href="#" target="_blank"></a></p>
+      <p>资金已托管，正在生成你的营销方案<br>方案完成后安全保存，回来即可查看</p>
+      <p style="margin-top:12px;font-size:12px;color:#999">托管交易：<a class="lk" id="rP" href="#" target="_blank"></a></p>
       <p style="font-size:12px;color:#999">订单号：<b id="rI"></b></p>
-      <a style="display:inline-block;margin-top:14px;background:#e94560;color:#fff;padding:10px 24px;border-radius:8px;font-weight:600;text-decoration:none;font-size:14px" id="rL" href="#" target="_blank">查看交易记录 →</a>
+      <p style="font-size:12px;color:#999">Job ID：<b id="rJ"></b></p>
+      <a style="display:inline-block;margin-top:14px;background:#e94560;color:#fff;padding:10px 24px;border-radius:8px;font-weight:600;text-decoration:none;font-size:14px" id="rL" href="#" target="_blank">查看托管详情 →</a>
     </div>
   </div>
 </div>
@@ -179,48 +218,292 @@ a.lk{color:#2980fe;text-decoration:none;word-break:break-all}
   <br><span style="color:#bbb">📞 19357138113 · 💬 微信 One1913U</span>
 </div>
 <script>
-const USDT='0x55d398326f99059fF775485246999027B3197955',TO='0x5460BeEd186E1b3786713AFf6eD71962C1CBE931';
-let sel=null,prov,ptx=null;
+// ===== ERC-8183 合约地址 (BSC Mainnet) =====
+const COMMERCE='0xea4daa3100a767e86fded867729ae7446476eba6';
+const ROUTER='0x51895229e12f9876011789b04f8698af06ccd6da';
+const POLICY='0x9c01845705b3078aa2e8cff7520a6376fd766de5';
+const USDT='0x55d398326f99059fF775485246999027B3197955';
+const PROVIDER='0x5460BeEd186E1b3786713AFf6eD71962C1CBE931';
+
+let sel=null,prov,jobId=null;
+
+// ===== ERC-8183 ABI — 来自BNBAgent SDK官方 + AgentEscrow参考 =====
+// 参照 bnbagent-sdk/abis/AgenticCommerce.json 提取
+const COMMERCE_ABI=[
+  // createJob: SDK happy.py 第1步 — 创建托管订单
+  'function createJob(address provider, address evaluator, uint256 expiredAt, string description, address hook) returns (uint256 jobId)',
+  // setBudget: SDK happy.py 第3步 — 设定托管金额
+  'function setBudget(uint256 jobId, uint256 amount, bytes optParams)',
+  // fund: SDK happy.py 第5步 — 资金锁定进合约托管
+  'function fund(uint256 jobId, uint256 expectedBudget, bytes optParams)',
+  // paymentToken: 查询合约接受的支付代币
+  'function paymentToken() view returns (address)',
+  // getJob: 查询订单状态
+  'function getJob(uint256 jobId) view returns (tuple(uint256 id, address client, address provider, address evaluator, string description, uint256 budget, uint256 expiredAt, uint8 status, address hook, uint256 submittedAt, bytes32 deliverable))'
+];
+const ROUTER_ABI=[
+  // registerJob: SDK happy.py 第2步 — 绑定保障策略
+  'function registerJob(uint256 jobId, address policy)'
+];
+const ERC20_ABI=[
+  // approve: SDK happy.py 第4步 — 授权合约划转USDT
+  'function approve(address spender, uint256 value) returns (bool)',
+  // allowance: 检查已有授权额度，避免重复授权
+  'function allowance(address owner, address spender) view returns (uint256)',
+  'function balanceOf(address account) view returns (uint256)'
+];
+
+// ===== ethers.js 接口初始化 =====
+let commerceIface, routerIface, erc20Iface;
+try {
+  commerceIface = new ethers.utils.Interface(COMMERCE_ABI);
+  routerIface = new ethers.utils.Interface(ROUTER_ABI);
+  erc20Iface = new ethers.utils.Interface(ERC20_ABI);
+} catch(e) { console.error('ethers.js init failed:', e); }
+
+// ===== 工具函数 =====
 function fp(){return window.tokenpocket?.ethereum||window.ethereum||window.web3?.currentProvider||null}
-function sc(el){document.querySelectorAll('.card').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');sel=parseFloat(el.dataset.amt);const b=document.getElementById('buyBtn');b.disabled=false;b.textContent='支付 '+sel+' USDT'}
-function tw(u){const p=u.toString().split('.');return BigInt(p[0]+(p[1]||'').padEnd(18,'0').substring(0,18))}
-function p6(h){return h.replace('0x','').padStart(64,'0')}
-function gs(n){for(let i=1;i<=3;i++){document.getElementById('d'+i).className=n>i?'dt d':n===i?'dt a':'dt'}document.getElementById('p1').className=n===1?'':'h';document.getElementById('p2').className=n===2?'':'h';document.getElementById('p3').className=n===3?'':'h'}
+
+// USDT是18位小数（BSC上的USDT）
+function tw(u){const p=u.toString().split('.');return ethers.BigNumber.from(p[0]+(p[1]||'').padEnd(18,'0').substring(0,18))}
+
+function sc(el){
+  document.querySelectorAll('.card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');sel=parseFloat(el.dataset.amt);
+  const b=document.getElementById('buyBtn');b.disabled=false;
+  b.textContent='合约托管支付 '+sel+' USDT';
+}
+
+function gs(n){
+  for(let i=1;i<=3;i++){
+    document.getElementById('d'+i).className=n>i?'dt d':n===i?'dt a':'dt';
+  }
+  document.getElementById('p1').className=n===1?'':'h';
+  document.getElementById('p2').className=n===2?'':'h';
+  document.getElementById('p3').className=n===3?'':'h';
+}
+
+// 更新5步进度条
+function updateStep(done, active){
+  for(let i=1;i<=5;i++){
+    const el=document.getElementById('s'+i);
+    el.className = i<=done ? 'step done' : i===active ? 'step active' : 'step';
+  }
+}
+
+function setStatus(html){const s=document.getElementById('st');s.className='st on';s.innerHTML=html;}
+function setError(msg){setStatus('<span class="err">❌</span> '+msg);}
+
+// ===== 发送交易并等待链上确认 =====
+async function sendTx(txData, stepLabel){
+  const accounts = await prov.request({method:'eth_requestAccounts'});
+  const from = accounts[0];
+  const txHash = await prov.request({
+    method:'eth_sendTransaction',
+    params:[{from, to:txData.to, data:txData.data, value:'0x0'}]
+  });
+  setStatus('⏳ '+stepLabel+' 确认中...<br><a class="lk" href="https://bscscan.com/tx/'+txHash+'" target="_blank">'+txHash.slice(0,18)+'...</a>');
+  // 轮询等待交易确认（最多3分钟）
+  for(let i=0;i<60;i++){
+    await new Promise(r=>setTimeout(r,3000));
+    const rc=await prov.request({method:'eth_getTransactionReceipt',params:[txHash]});
+    if(rc){
+      if(rc.status==='0x1') return {txHash, receipt:rc};
+      throw new Error(stepLabel+' 交易失败');
+    }
+  }
+  throw new Error(stepLabel+' 确认超时');
+}
+
+// ===== 从createJob回执中解析JobCreated事件获取jobId =====
+// 事件签名: JobCreated(uint256,address,address,address,uint256,string,address)
+function parseJobId(receipt){
+  if(!receipt || !receipt.logs) return null;
+  const topic0 = ethers.utils.id('JobCreated(uint256,address,address,address,uint256,string,address)');
+  for(const log of receipt.logs){
+    if(log.topics && log.topics[0]===topic0){
+      // topics[1] = jobId (uint256, indexed)
+      return ethers.BigNumber.from(log.topics[1]).toNumber();
+    }
+  }
+  return null;
+}
+
+// ===== 初始化：连接钱包 =====
 async function init(){
-  const wi=document.getElementById('wi');await new Promise(r=>setTimeout(r,1000));prov=fp();
-  if(!prov){wi.innerHTML='❌ 未检测到钱包<br><span style="font-size:11px;color:#999">请用TP钱包/Trust Wallet/MetaMask的DApp浏览器打开</span><br><span style="font-size:11px;color:#999">也可先浏览套餐内容</span>';document.getElementById('cards').style.display='block';return}
-  try{const a=await prov.request({method:'eth_requestAccounts'});if(!a?.length)throw 0;let c=await prov.request({method:'eth_chainId'});
-  if(c!=='0x38'){try{await prov.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x38'}]})}catch(e){await prov.request({method:'wallet_addEthereumChain',params:[{chainId:'0x38',chainName:'BNB Smart Chain',nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},rpcUrls:['https://bsc.publicnode.com'],blockExplorerUrls:['https://bscscan.com']}]})}c=await prov.request({method:'eth_chainId'})}
-  wi.innerHTML='✅ <b>'+a[0].slice(0,6)+'...'+a[0].slice(38)+'</b>'+(c==='0x38'?' · BNB链':' · ⚠️切BNB链');
-  document.getElementById('cards').style.display='block';document.getElementById('buyBtn').style.display='block';document.getElementById('dots').style.display='flex';
-  }catch(e){wi.innerHTML='❌ 连接失败，请刷新';document.getElementById('cards').style.display='block'}
+  const wi=document.getElementById('wi');
+  await new Promise(r=>setTimeout(r,1000));
+  prov=fp();
+  if(!prov){
+    wi.innerHTML='❌ 未检测到钱包<br><span style="font-size:11px;color:#999">请用TP钱包/Trust Wallet/MetaMask的DApp浏览器打开</span><br><span style="font-size:11px;color:#999">也可先浏览套餐内容</span>';
+    document.getElementById('cards').style.display='block';
+    return;
+  }
+  try{
+    const a=await prov.request({method:'eth_requestAccounts'});
+    if(!a?.length) throw 0;
+    let c=await prov.request({method:'eth_chainId'});
+    if(c!=='0x38'){
+      try{await prov.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x38'}]})}
+      catch(e){await prov.request({method:'wallet_addEthereumChain',params:[{chainId:'0x38',chainName:'BNB Smart Chain',nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},rpcUrls:['https://bsc.publicnode.com'],blockExplorerUrls:['https://bscscan.com']}]})}
+      c=await prov.request({method:'eth_chainId'});
+    }
+    wi.innerHTML='✅ <b>'+a[0].slice(0,6)+'...'+a[0].slice(38)+'</b>'+(c==='0x38'?' · 已连接':' · ⚠️请切换网络');
+    document.getElementById('cards').style.display='block';
+    document.getElementById('buyBtn').style.display='block';
+    document.getElementById('dots').style.display='flex';
+    document.getElementById('stepProgress').style.display='flex';
+  }catch(e){
+    wi.innerHTML='❌ 连接失败，请刷新';
+    document.getElementById('cards').style.display='block';
+  }
 }
-async function pay(){
-  if(!sel)return;const b=document.getElementById('buyBtn'),s=document.getElementById('st');
-  b.disabled=true;b.textContent='支付中...';s.className='st on';s.innerHTML='⏳ 请在钱包中确认USDT转账...';
-  try{const a=await prov.request({method:'eth_requestAccounts'}),f=a[0];
-  ptx=await prov.request({method:'eth_sendTransaction',params:[{from:f,to:USDT,data:'0xa9059cbb'+p6(TO)+p6('0x'+tw(sel).toString(16)),value:'0x0'}]});
-  s.innerHTML='⏳ 确认中...<br><a class="lk" href="https://bscscan.com/tx/'+ptx+'" target="_blank">'+ptx+'</a>';
-  for(let i=0;i<40;i++){await new Promise(r=>setTimeout(r,3000));const rc=await prov.request({method:'eth_getTransactionReceipt',params:[ptx]});
-  if(rc){if(rc.status==='0x1'){gs(2);return}else{s.innerHTML='<span class="err">❌ 交易失败</span>';b.disabled=false;b.textContent='重新支付 '+sel+' USDT'}return}}
-  b.disabled=false;b.textContent='重新支付 '+sel+' USDT';
-  }catch(e){let m=e.message||String(e);if(/denied|reject|cancel/i.test(m))m='您取消了交易';else if(/insufficient/i.test(m))m='余额不足';s.innerHTML='<span class="err">❌</span> '+m;b.disabled=false;b.textContent='重新支付 '+sel+' USDT'}
+
+// ===== ERC-8183 5步合约托管支付 =====
+// 严格按照 BNBAgent SDK happy.py 的5步流程：
+// createJob → registerJob → setBudget → approve+fund
+async function erc8183_pay(){
+  if(!sel) return;
+  const b=document.getElementById('buyBtn');
+  b.disabled=true;
+  updateStep(0,0);
+
+  const amountWei = tw(sel); // USDT 18位小数
+  const expiredAt = Math.floor(Date.now()/1000) + 7*24*3600; // 7天过期
+  const description = 'Fly GEO服务 - '+sel+' USDT套餐';
+
+  try{
+    // ===== 第1步：createJob — 创建托管订单 =====
+    // 对应SDK: client.create_job(provider=..., expired_at=..., description=...)
+    updateStep(0,1);
+    b.textContent='第1步/5：创建订单...';
+    setStatus('⏳ 正在创建托管订单，请在钱包中确认...<br><span style="font-size:11px;color:#999">这会创建一个合约托管订单，你的钱还在你口袋</span>');
+
+    const createData = commerceIface.encodeFunctionData('createJob',[
+      PROVIDER,       // provider: Fly服务方地址
+      ROUTER,         // evaluator: EvaluatorRouter合约
+      expiredAt,      // expiredAt: 7天后过期
+      description,    // description: 订单描述
+      ROUTER          // hook: Router合约（SDK默认evaluator=hook=Router）
+    ]);
+    const step1 = await sendTx({to:COMMERCE, data:createData}, '创建订单');
+    jobId = parseJobId(step1.receipt);
+    if(!jobId){
+      throw new Error('无法获取订单号。交易已上链：<a class="lk" href="https://bscscan.com/tx/'+step1.txHash+'" target="_blank">查看</a>');
+    }
+    console.log('✅ Job created, jobId=', jobId);
+    updateStep(1,0);
+
+    // ===== 第2步：registerJob — 注册保障策略 =====
+    // 对应SDK: client.register_job(job_id)  → binds OptimisticPolicy
+    updateStep(1,2);
+    b.textContent='第2步/5：注册保障...';
+    setStatus('✅ 订单已创建 (Job #'+jobId+')<br>⏳ 正在注册保障策略，请在钱包中确认...<br><span style="font-size:11px;color:#999">这会让订单获得争议退款保障</span>');
+
+    const registerData = routerIface.encodeFunctionData('registerJob',[jobId, POLICY]);
+    await sendTx({to:ROUTER, data:registerData}, '注册保障');
+    console.log('✅ Job registered to OptimisticPolicy');
+    updateStep(2,0);
+
+    // ===== 第3步：setBudget — 设定托管金额 =====
+    // 对应SDK: client.set_budget(job_id, budget)
+    updateStep(2,3);
+    b.textContent='第3步/5：设定托管金额...';
+    setStatus('✅ 保障策略已注册<br>⏳ 正在设定托管金额 ('+sel+' USDT)，请在钱包中确认...<br><span style="font-size:11px;color:#999">设定你同意托管的金额上限</span>');
+
+    const setBudgetData = commerceIface.encodeFunctionData('setBudget',[jobId, amountWei, '0x']);
+    await sendTx({to:COMMERCE, data:setBudgetData}, '设定托管金额');
+    console.log('✅ Budget set:', sel, 'USDT');
+    updateStep(3,0);
+
+    // ===== 第4步：approve — 授权合约划转USDT =====
+    // 对应SDK: client.fund() 内部自动检测allowance并approve
+    updateStep(3,4);
+    b.textContent='第4步/5：授权托管...';
+    setStatus('✅ 托管金额已设定<br>⏳ 正在授权USDT托管，请在钱包中确认...<br><span style="font-size:11px;color:#999">授权合约从你的钱包划转USDT（不会自动扣款）</span>');
+
+    // 先检查现有授权额度（SDK的floor-based策略）
+    const accounts = await prov.request({method:'eth_requestAccounts'});
+    const owner = accounts[0];
+    const allowanceData = erc20Iface.encodeFunctionData('allowance',[owner, COMMERCE]);
+    const allowanceResult = await prov.request({
+      method:'eth_call',
+      params:[{to:USDT, data:allowanceData},'latest']
+    });
+    const currentAllowance = ethers.BigNumber.from(allowanceResult);
+
+    // SDK默认approve_floor=100 USDT，我们用同样的策略
+    if(currentAllowance.lt(amountWei)){
+      const floor = ethers.BigNumber.from('100000000000000000000'); // 100 USDT
+      const approveAmount = amountWei.gt(floor) ? amountWei : floor;
+      const approveData = erc20Iface.encodeFunctionData('approve',[COMMERCE, approveAmount]);
+      await sendTx({to:USDT, data:approveData}, '授权托管');
+      console.log('✅ USDT approved:', ethers.utils.formatUnits(approveAmount, 18));
+    } else {
+      console.log('✅ Sufficient allowance already:', ethers.utils.formatUnits(currentAllowance, 18));
+      setStatus('✅ 已有足够授权额度，跳过授权步骤');
+    }
+    updateStep(4,0);
+
+    // ===== 第5步：fund — 资金锁定进合约托管 =====
+    // 对应SDK: client.fund(job_id, budget) — 钱从用户钱包转入合约
+    updateStep(4,5);
+    b.textContent='第5步/5：资金锁定...';
+    setStatus('✅ 授权完成<br>⏳ 正在锁定资金到托管合约，请在钱包中确认...<br><span style="font-size:11px;color:#999">资金锁定后，服务完成才会释放给商家</span>');
+
+    const fundData = commerceIface.encodeFunctionData('fund',[jobId, amountWei, '0x']);
+    const step5 = await sendTx({to:COMMERCE, data:fundData}, '资金锁定');
+    console.log('✅ Funds escrowed! Job is now FUNDED');
+    updateStep(5,0);
+
+    // ===== 全部5步完成！ =====
+    setStatus('🎉 托管支付完成！<br>订单号：<b>FLY-'+jobId+'</b><br>资金已锁定，服务完成后自动释放<br><a class="lk" href="https://bscscan.com/tx/'+step5.txHash+'" target="_blank">查看托管交易 →</a>');
+    b.textContent='✅ 托管完成，请填写店铺信息';
+    b.disabled=false;
+    b.onclick=function(){gs(2);};
+
+  }catch(e){
+    let m=e.message||String(e);
+    if(/denied|reject|cancel/i.test(m)) m='您取消了确认';
+    else if(/insufficient/i.test(m)) m='余额不足';
+    else if(/交易失败/.test(m)) m=m;
+    else m='操作失败：'+m.slice(0,100);
+    setError(m);
+    b.disabled=false;
+    b.textContent='重新托管支付 '+sel+' USDT';
+    b.onclick=function(){erc8183_pay();};
+  }
 }
+
+// ===== 提交店铺信息（存证上链） =====
 async function go(){
   const n=document.getElementById('fN').value,t=document.getElementById('fT').value;
   if(!n||!t){alert('请填写店铺名称和类型');return}
-  const oid='FLY-'+Date.now().toString(36).toUpperCase();
-  const d=JSON.stringify({id:oid,amt:sel,shop:{n,t,a:document.getElementById('fA').value,p:document.getElementById('fP').value},pay:ptx,ts:Date.now()});
-  try{const a=await prov.request({method:'eth_requestAccounts'}),f=a[0];
-  const hx='0x'+Array.from(new TextEncoder().encode('FLY:'+d)).map(b=>b.toString(16).padStart(2,'0')).join('');
-  const otx=await prov.request({method:'eth_sendTransaction',params:[{from:f,to:f,data:hx,value:'0x0'}]});
-  gs(3);document.getElementById('rP').textContent=ptx?ptx.slice(0,18)+'...':'';document.getElementById('rP').href=ptx?'https://bscscan.com/tx/'+ptx:'#';
-  document.getElementById('rO').textContent=otx.slice(0,18)+'...';document.getElementById('rO').href='https://bscscan.com/tx/'+otx;
-  document.getElementById('rI').textContent=oid;document.getElementById('rL').href='https://bscscan.com/address/'+f;
-  }catch(e){let or=JSON.parse(localStorage.getItem('fly_orders')||'[]');or.push({id:oid,d,ptx});localStorage.setItem('fly_orders',JSON.stringify(or));
-  gs(3);document.getElementById('rP').textContent=ptx?ptx.slice(0,18)+'...':'';document.getElementById('rP').href=ptx?'https://bscscan.com/tx/'+ptx:'#';
-  document.getElementById('rO').textContent='本地记录';document.getElementById('rI').textContent=oid;document.getElementById('rL').href='https://bscscan.com/address/0x5460BeEd186E1b3786713AFf6eD71962C1CBE931'}
+  const oid='FLY-'+(jobId||Date.now().toString(36).toUpperCase());
+  const d=JSON.stringify({id:oid,jobId:jobId,amt:sel,shop:{n,t,a:document.getElementById('fA').value,p:document.getElementById('fP').value},ts:Date.now()});
+  try{
+    const a=await prov.request({method:'eth_requestAccounts'}),f=a[0];
+    // 将店铺信息编码上链存证
+    const hx='0x'+Array.from(new TextEncoder().encode('FLY:'+d)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    const otx=await prov.request({method:'eth_sendTransaction',params:[{from:f,to:f,data:hx,value:'0x0'}]});
+    gs(3);
+    document.getElementById('rP').textContent=otx?otx.slice(0,18)+'...':'';
+    document.getElementById('rP').href=otx?'https://bscscan.com/tx/'+otx:'#';
+    document.getElementById('rI').textContent=oid;
+    document.getElementById('rJ').textContent=jobId||'—';
+    document.getElementById('rL').href='https://bscscan.com/address/'+COMMERCE;
+  }catch(e){
+    // 钱包不可用时本地保存
+    let or=JSON.parse(localStorage.getItem('fly_orders')||'[]');
+    or.push({id:oid,jobId,d});localStorage.setItem('fly_orders',JSON.stringify(or));
+    gs(3);
+    document.getElementById('rP').textContent='本地记录';
+    document.getElementById('rI').textContent=oid;
+    document.getElementById('rJ').textContent=jobId||'—';
+    document.getElementById('rL').href='https://bscscan.com/address/'+COMMERCE;
+  }
 }
+
 init();
 </script>
 </body>

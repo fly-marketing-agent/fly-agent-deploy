@@ -64,11 +64,11 @@ nav a{font-size:13px;color:var(--text2);margin-left:24px;transition:color .2s}na
 
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
 @media(max-width:600px){.cards{grid-template-columns:1fr}}
-.card{background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.04);border-radius:14px;padding:22px 20px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent}
+.card{background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.04);border-radius:14px;padding:22px 20px;transition:all .25s;position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent}
 .card:hover,.card.sel{border-color:rgba(255,107,53,.3);transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,.2)}
 .card.sel{background:rgba(255,107,53,.04)}
 .card.sel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--orange),var(--orange2))}
-.card .ck{position:absolute;top:14px;right:14px;width:20px;height:20px;border-radius:50%;border:2px solid var(--text4);display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .2s}
+.card .ck{position:absolute;top:14px;right:14px;width:26px;height:26px;border-radius:50%;border:2px solid var(--text4);display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .2s;cursor:pointer;z-index:2}
 .card.sel .ck{background:var(--orange);border-color:var(--orange);color:#fff}
 .pri{font-family:var(--mono);font-size:28px;font-weight:700;color:var(--orange);margin-bottom:2px;letter-spacing:-1px}
 .pri span{font-size:12px;color:var(--text3);font-weight:400;letter-spacing:0}
@@ -313,10 +313,11 @@ function tw(u){const p=u.toString().split('.');return ethers.BigNumber.from(p[0]
 
 // ===== 统一卡片事件绑定（兼容TP钱包DApp浏览器）=====
 document.addEventListener('DOMContentLoaded',function(){
-  document.querySelectorAll('.card').forEach(function(card){
-    card.addEventListener('click',function(e){e.preventDefault();sc(this)});
-    card.addEventListener('touchend',function(e){e.preventDefault();sc(this)});
-    card.style.cursor='pointer';
+  // 只绑定勾选按钮，防止滑动误触
+  document.querySelectorAll('.card .ck').forEach(function(ck){
+    ck.addEventListener('click',function(e){e.stopPropagation();e.preventDefault();sc(this.parentElement)});
+    ck.addEventListener('touchend',function(e){e.stopPropagation();e.preventDefault();sc(this.parentElement)});
+    ck.style.cursor='pointer';
   });
   var bb=document.getElementById('buyBtn');
   bb.addEventListener('click',function(){if(!bb.disabled&&sel)erc8183_pay()});

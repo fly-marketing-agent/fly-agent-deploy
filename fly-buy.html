@@ -366,7 +366,7 @@ async function sendTx(txData,stepLabel){
 
 function parseJobId(receipt){
   if(!receipt||!receipt.logs)return null;
-  const topic0=ethers.utils.id('JobCreated(uint256,address,address,address,uint256,string,address)');
+  const topic0=ethers.utils.id('JobCreated(uint256,address,address,address,uint256,address)');
   for(const log of receipt.logs){
     if(log.topics&&log.topics[0]===topic0){return ethers.BigNumber.from(log.topics[1]).toNumber()}
   }

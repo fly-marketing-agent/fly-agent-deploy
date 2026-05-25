@@ -1,89 +1,60 @@
 #!/usr/bin/env python3
-"""Fly GEO Agent — Vercel Serverless API."""
-
-import os
-import httpx
+"""Fly GEO Agent — Vercel Serverless API with streaming."""
+import os, httpx, json
 from datetime import datetime
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
-app = FastAPI(title="Fly GEO Agent", version="1.0.0")
+app = FastAPI(title="Fly GEO Agent", version="1.1.0")
+DK = os.getenv("DEEPSEEK_API_KEY", "")
+DK_URL = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com/v1")
+DK_MODEL = os.getenv("DEEPSEEK_MODEL", "deepseek-chat")
+PROVIDER = "0x5460BeEd186E1b3786713AFf6eD71962C1CBE931"
+PKGS = {"starter":{"name":"GEO诊断尝鲜","price":9.9},"basic":{"name":"基础GEO优化","price":59},"pro":{"name":"深度GEO代运营","price":299},"enterprise":{"name":"全托管代运营","price":999}}
+SYS = "你是Fly GEO Agent，本地商家AI搜索可见性诊断专家。生成GEO诊断报告：Markdown格式，含店铺信息表、AI搜索可见性评分(1-10)、平台覆盖诊断、优化建议。针对行业和地区精准建议，每条可执行。中文专业易懂，禁Web3/链上/合约术语。结尾加：*本报告由 Fly GEO Agent 生成 | fly-agent.xyz*。套餐：starter=5条,basic=10条+计划,pro=15条+竞品,enterprise=20条+专人方案"
 
-DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY", "")
-DEEPSEEK_BASE_URL = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com/v1")
-DEEPSEEK_MODEL = os.getenv("DEEPSEEK_MODEL", "deepseek-chat")
-PROVIDER_ADDRESS = "0x5460BeEd186E1b3786713AFf6eD71962C1CBE931"
-
-GEO_PACKAGES = {
-    "starter": {"name": "GEO诊断尝鲜", "price": 9.9, "currency": "USDT"},
-    "basic": {"name": "基础GEO优化", "price": 59, "currency": "USDT"},
-    "pro": {"name": "深度GEO代运营", "price": 299, "currency": "USDT"},
-    "enterprise": {"name": "全托管代运营", "price": 999, "currency": "USDT"},
-}
-
-SYSTEM_PROMPT = """你是Fly GEO Agent，专业的本地商家AI搜索可见性诊断专家。
-根据店铺信息生成GEO诊断报告。核心要求：
-1. Markdown格式
-2. 包含：店铺信息表、AI搜索可见性评分(1-10)、各平台覆盖诊断、优化建议
-3. 针对该行业和地区给出精准建议
-4. 每个建议具体到可执行步骤
-5. 中文，专业易懂，不用技术术语
-6. 不出现Web3/链上/合约/区块链等术语
-7. 结尾加：*本报告由 Fly GEO Agent 生成 | fly-agent.xyz*
-套餐区分：starter=5条建议, basic=10条+执行计划, pro=15条+月度计划+竞品分析, enterprise=20条+季度计划+专人方案"""
-
-class GEODiagnosisRequest(BaseModel):
-    store_name: str
-    industry: str = ""
-    address: str = ""
-    contact: str = ""
-    website: str = ""
-    package_type: str = "starter"
+class Req(BaseModel):
+    store_name:str; industry:str=""; address:str=""; contact:str=""; website:str=""; package_type:str="starter"
 
 @app.get("/")
 async def root():
-    return {
-        "service": "Fly GEO Agent",
-        "version": "1.0.0",
-        "provider": PROVIDER_ADDRESS,
-        "network": "BSC Mainnet",
-        "deepseek_configured": bool(DEEPSEEK_API_KEY),
-        "endpoints": {"/health": "健康检查", "/geo-diagnosis": "GEO诊断", "/packages": "套餐列表"}
-    }
+    return {"service":"Fly GEO Agent","version":"1.1.0","provider":PROVIDER,"deepseek_configured":bool(DK)}
 
 @app.get("/health")
 async def health():
-    return {"status": "healthy", "agent": "fly-geo-agent", "version": "1.0.0",
-            "provider": PROVIDER_ADDRESS, "deepseek_configured": bool(DEEPSEEK_API_KEY),
-            "timestamp": datetime.now().isoformat()}
+    return {"status":"healthy","agent":"fly-geo-agent","version":"1.1.0","provider":PROVIDER,"deepseek_configured":bool(DK),"timestamp":datetime.now().isoformat()}
 
 @app.get("/packages")
-async def list_packages():
-    return {"packages": GEO_PACKAGES, "default_currency": "USDT", "network": "BSC Mainnet"}
+async def pkgs():
+    return {"packages":PKGS,"currency":"USDT","network":"BSC Mainnet"}
+
+@app.get("/geo-diagnosis")
+async def diag_get(store_name:str,industry:str="",address:str="",contact:str="",website:str="",package_type:str="starter"):
+    if not DK: raise HTTPException(503,"DeepSeek not configured")
+    prompt=f"店铺：{store_name}|行业：{industry}|地址：{address}|联系：{contact}|网站：{website}|套餐：{package_type}|时间：{datetime.now().strftime('%Y%m%d %H:%M')}"
+    async with httpx.AsyncClient(timeout=55) as c:
+        r=await c.post(f"{DK_URL}/chat/completions",headers={"Authorization":f"Bearer {DK}"},json={"model":DK_MODEL,"messages":[{"role":"system","content":SYS},{"role":"user","content":prompt}],"max_tokens":3000,"temperature":0.7})
+        r.raise_for_status()
+    return {"success":True,"package_type":package_type,"store_name":store_name,"report":r.json()["choices"][0]["message"]["content"],"metadata":{"agent":"fly-geo-agent","generated_at":datetime.now().isoformat(),"provider":PROVIDER}}
 
 @app.post("/geo-diagnosis")
-async def geo_diagnosis(request: GEODiagnosisRequest):
-    if not DEEPSEEK_API_KEY:
-        raise HTTPException(status_code=503, detail="DeepSeek API not configured")
-    now = datetime.now().strftime('%Y年%m月%d日 %H:%M')
-    user_prompt = f"""请为以下店铺生成GEO诊断报告。
-店铺：{request.store_name} | 行业：{request.industry} | 地址：{request.address}
-联系：{request.contact} | 网站：{request.website} | 套餐：{request.package_type}
-生成时间：{now}"""
-    try:
-        async with httpx.AsyncClient(timeout=30) as client:
-            resp = await client.post(
-                f"{DEEPSEEK_BASE_URL}/chat/completions",
-                headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}"},
-                json={"model": DEEPSEEK_MODEL, "messages": [
-                    {"role": "system", "content": SYSTEM_PROMPT},
-                    {"role": "user", "content": user_prompt}
-                ], "max_tokens": 3000, "temperature": 0.7})
-            resp.raise_for_status()
-            report = resp.json()["choices"][0]["message"]["content"]
-    except Exception as e:
-        raise HTTPException(status_code=502, detail=f"DeepSeek error: {e}")
-    return {"success": True, "package_type": request.package_type,
-            "store_name": request.store_name, "report": report,
-            "metadata": {"agent": "fly-geo-agent", "generated_at": datetime.now().isoformat(),
-                         "provider": PROVIDER_ADDRESS}}
+async def diag_post(req:Req):
+    if not DK: raise HTTPException(503,"DeepSeek not configured")
+    prompt=f"店铺：{req.store_name}|行业：{req.industry}|地址：{req.address}|联系：{req.contact}|网站：{req.website}|套餐：{req.package_type}|时间：{datetime.now().strftime('%Y%m%d %H:%M')}"
+    async def gen():
+        yield f"data: {json.dumps({'type':'meta','store_name':req.store_name,'package_type':req.package_type},ensure_ascii=False)}\n\n"
+        try:
+            async with httpx.AsyncClient(timeout=55) as c:
+                async with c.stream("POST",f"{DK_URL}/chat/completions",headers={"Authorization":f"Bearer {DK}"},json={"model":DK_MODEL,"messages":[{"role":"system","content":SYS},{"role":"user","content":prompt}],"max_tokens":3000,"temperature":0.7,"stream":True}) as r:
+                    r.raise_for_status(); full=""
+                    async for line in r.aiter_lines():
+                        if line.startswith("data: ") and line!="data: [DONE]":
+                            try:
+                                d=json.loads(line[6:]);ct=d.get("choices",[{}])[0].get("delta",{}).get("content","")
+                                if ct: full+=ct; yield f"data: {json.dumps({'type':'chunk','content':ct},ensure_ascii=False)}\n\n"
+                            except: pass
+                    yield f"data: {json.dumps({'type':'done','report':full,'generated_at':datetime.now().isoformat()},ensure_ascii=False)}\n\n"
+        except Exception as e:
+            yield f"data: {json.dumps({'type':'error','message':str(e)},ensure_ascii=False)}\n\n"
+    return StreamingResponse(gen(),media_type="text/event-stream",headers={"Cache-Control":"no-cache","X-Accel-Buffering":"no"})

@@ -285,10 +285,10 @@ footer a{color:var(--text3);margin:0 8px}
 // ===== ERC-8183 合约交互 - TP钱包DApp浏览器优化版 =====
 
 // 合约地址 (BSC Mainnet)
-const COMMERCE = '0xea4daa3100a767e86fded867729ae7446476eba6';
+const COMMERCE = '0x7D7043bC1a308e245e56C8FbD9144FCdf2285aA1'; // Fly自己的Commerce(USDT)
 const ROUTER = '0x51895229e12f9876011789b04f8698af06ccd6da';
 const POLICY = '0x9c01845705b3078aa2e8cff7520a6376fd766de5';
-const USDT = '0xcE24439F2D9C6a2289F741120FE202248B666666';
+const USDT = '0x55d398326f99059fF775485246999027B3197955'; // BSC USDT
 const PROVIDER = '0x5460BeEd186E1b3786713AFf6eD71962C1CBE931';
 
 // 合约ABI定义
@@ -365,7 +365,7 @@ function selectCard(el) {
   sel = parseFloat(el.dataset.amt);
   const b = document.getElementById('buyBtn');
   b.disabled = false;
-  b.textContent = '合约托管支付 ' + sel + ' U';
+  b.textContent = '合约托管支付 ' + sel + ' USDT';
   b.style.display = 'block';
   b.onclick = function() { erc8183_pay(); };
   if (navigator.vibrate) navigator.vibrate(50);
@@ -674,7 +674,7 @@ async function erc8183_pay() {
 
   const amountWei = toWei(sel);
   const expiredAt = Math.floor(Date.now() / 1000) + 7 * 24 * 3600;
-  const description = 'Fly GEO服务 - ' + sel + ' U套餐';
+  const description = 'Fly GEO服务 - ' + sel + ' USDT套餐';
 
   console.log('[Fly] ===== 开始5步支付流程 =====');
   console.log('[Fly] 金额:', sel, 'U =', amountWei.toString());
@@ -687,14 +687,14 @@ async function erc8183_pay() {
     // 检查U余额
     const uBal = await usdt.balanceOf(owner);
     if (uBal.lt(amountWei)) {
-      throw new Error('U代币余额不足（当前 ' + ethers.utils.formatUnits(uBal, 18).slice(0, 8) + ' U，需要 ' + sel + ' U），请先在TP钱包中购买U代币');
+      throw new Error('USDT余额不足（当前 ' + ethers.utils.formatUnits(uBal, 18).slice(0, 8) + ' U，需要 ' + sel + ' U），请先在TP钱包中转入USDT');
     }
 
     // 检查BNB余额（gas费）
     const bnbHex = await prov.request({ method: 'eth_getBalance', params: [owner, 'latest'] });
     const bnbBal = ethers.BigNumber.from(bnbHex);
     if (bnbBal.lt(ethers.utils.parseEther('0.005'))) {
-      throw new Error('BNB余额不足（gas费），当前 ' + parseFloat(ethers.utils.formatEther(bnbBal)).toFixed(4) + ' BNB，请先转入少量BNB');
+      throw new Error('BNB余额不足（需少量BNB做Gas费），当前 ' + parseFloat(ethers.utils.formatEther(bnbBal)).toFixed(4) + ' BNB，请先转入少量BNB');
     }
 
     // ========== 第1步: createJob ==========
@@ -733,10 +733,10 @@ async function erc8183_pay() {
     // ========== 第4步: approve ==========
     updateStep(3, 4);
     b.textContent = '第4步/5：授权托管...';
-    setStatus('✅ 托管金额已设定<br>⏳ 正在授权U代币托管...');
+    setStatus('✅ 托管金额已设定<br>⏳ 正在授权USDT托管...');
 
     const currentAllowance = await usdt.allowance(owner, COMMERCE);
-    console.log('[Fly] 当前授权额度:', ethers.utils.formatUnits(currentAllowance, 18), 'U');
+    console.log('[Fly] 当前授权额度:', ethers.utils.formatUnits(currentAllowance, 18), 'USDT');
 
     if (currentAllowance.lt(amountWei)) {
       if (!currentAllowance.isZero()) {
@@ -748,9 +748,9 @@ async function erc8183_pay() {
       const minApprove = ethers.BigNumber.from('100000000000000000000');
       const approveAmount = amountWei.gt(minApprove) ? amountWei : minApprove;
 
-      setStatus('⏳ 授权U代币 (' + (approveAmount.eq(amountWei) ? sel + ' U' : '≥' + sel + ' U') + ')...');
-      await cSend(usdt, 'approve', [COMMERCE, approveAmount], '授权U代币');
-      console.log('[Fly] ✅ Step4完成: 授权', ethers.utils.formatUnits(approveAmount, 18), 'U');
+      setStatus('⏳ 授权USDT (' + (approveAmount.eq(amountWei) ? sel + ' USDT' : '≥' + sel + ' USDT') + ')...');
+      await cSend(usdt, 'approve', [COMMERCE, approveAmount], '授权USDT');
+      console.log('[Fly] ✅ Step4完成: 授权', ethers.utils.formatUnits(approveAmount, 18), 'USDT');
     } else {
       console.log('[Fly] ✅ Step4跳过: 已有足够授权');
     }
@@ -787,7 +787,7 @@ async function erc8183_pay() {
     } else if (/gasLimit.*too low|gas.*too low/i.test(msg)) {
       msg = 'Gas不足，请确认钱包中有足够BNB';
     } else if (/insufficient.*allowance/i.test(msg)) {
-      msg = 'U代币授权不足，请刷新页面重试';
+      msg = 'USDT授权不足，请刷新页面重试';
     } else if (/insufficient.*balance|余额不足/i.test(msg)) {
       // 预检查已给出详细信息，直接显示
     } else if (/expired|deadline/i.test(msg)) {
@@ -798,13 +798,13 @@ async function erc8183_pay() {
       const match = msg.match(/reason string (.+)/i) || msg.match(/"([^"]+)"/);
       if (match) msg = '合约错误：' + match[1];
       else msg = '合约执行失败，可能是授权或余额问题';
-    } else if (!/余额不足|U代币|BNB/i.test(msg)) {
+    } else if (!/余额不足|USDT|BNB/i.test(msg)) {
       msg = '操作失败：' + msg.slice(0, 150);
     }
 
     setError(msg + '<br><span style="font-size:11px;color:var(--text3)">详情请查看浏览器控制台</span>');
     b.disabled = false;
-    b.textContent = '重新托管支付 ' + sel + ' U';
+    b.textContent = '重新托管支付 ' + sel + ' USDT';
     b.onclick = function() { erc8183_pay(); };
   }
 }

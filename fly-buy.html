@@ -364,12 +364,49 @@ async function sendTx(txData,stepLabel){
   throw new Error(stepLabel+' 确认超时');
 }
 
-function parseJobId(receipt){
+function parseJobId(receipt,txHash){
   if(!receipt||!receipt.logs)return null;
+  // 方法1: 匹配event topic
   const topic0=ethers.utils.id('JobCreated(uint256,address,address,address,uint256,address)');
   for(const log of receipt.logs){
     if(log.topics&&log.topics[0]===topic0){return ethers.BigNumber.from(log.topics[1]).toNumber()}
   }
+  // 方法2: 遍历所有logs，找Commerce合约发出的、topics>=2的log，取topics[1]作为jobId
+  for(const log of receipt.logs){
+    if(log.address&&log.address.toLowerCase()===COMMERCE.toLowerCase()&&log.topics&&log.topics.length>=2){
+      try{return ethers.BigNumber.from(log.topics[1]).toNumber()}catch(e){}
+    }
+  }
+  // 方法3: 从交易input data解析返回值（某些钱包不返回完整logs）
+  if(txHash){
+    try{
+      // fallback: 通过RPC直接查交易receipt
+      return null;
+    }catch(e){}
+  }
+  return null;
+}
+
+async function fetchJobIdFromRpc(txHash){
+  // 通过BSC RPC直接查receipt，绕过TP钱包的日志格式问题
+  try{
+    const resp=await fetch('https://bsc.rpc.blxrbdn.com',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({jsonrpc:'2.0',method:'eth_getTransactionReceipt',params:[txHash],id:1})
+    });
+    const j=await resp.json();
+    if(j.result&&j.result.logs){
+      const topic0=ethers.utils.id('JobCreated(uint256,address,address,address,uint256,address)');
+      for(const log of j.result.logs){
+        if(log.topics&&log.topics[0]===topic0){return ethers.BigNumber.from(log.topics[1]).toNumber()}
+      }
+      for(const log of j.result.logs){
+        if(log.address&&log.address.toLowerCase()===COMMERCE.toLowerCase()&&log.topics&&log.topics.length>=2){
+          try{return ethers.BigNumber.from(log.topics[1]).toNumber()}catch(e){}
+        }
+      }
+    }
+  }catch(e){console.log('[Fly] RPC fallback failed:',e)}
   return null;
 }
 
@@ -412,7 +449,7 @@ async function erc8183_pay(){
     setStatus('⏳ 正在创建托管订单，请在钱包中确认...<br><span style="font-size:11px;color:var(--text3)">创建托管订单，你的钱还在你口袋</span>');
     const createData=commerceIface.encodeFunctionData('createJob',[PROVIDER,ROUTER,expiredAt,description,ROUTER]);
     const step1=await sendTx({to:COMMERCE,data:createData},'创建订单');
-    jobId=parseJobId(step1.receipt);
+    jobId=parseJobId(step1.receipt,step1.txHash);
     if(!jobId)throw new Error('无法获取订单号。<a class="lk" href="https://bscscan.com/tx/'+step1.txHash+'" target="_blank">查看交易</a>');
     updateStep(1,0);
 

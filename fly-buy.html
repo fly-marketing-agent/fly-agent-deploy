@@ -187,28 +187,28 @@ footer a{color:var(--text3);margin:0 8px}
   <div class="cards" id="cards">
     <div class="card" data-amt="9.9">
       <div class="ck">✓</div>
-      <div class="pri">9.9 <span>USDT</span></div>
+      <div class="pri">9.9 <span>U</span></div>
       <div class="ttl">GEO诊断尝鲜</div>
       <div class="dsc">7天体验 · 看看你的店AI搜不到的原因</div>
       <div class="inc"><b>包含：</b><br>✅ AI搜索可见性诊断报告<br>✅ 7平台信息一致性检查<br>✅ 竞品可见性对比<br>🎁 赠送经营可信认证</div>
     </div>
     <div class="card" data-amt="59">
       <div class="ck">✓</div>
-      <div class="pri">59 <span>USDT/月</span></div>
+      <div class="pri">59 <span>U/月</span></div>
       <div class="ttl">基础GEO优化</div>
       <div class="dsc">月度优化 · 让AI开始推荐你</div>
       <div class="inc"><b>包含：</b><br>✅ 3平台内容发布<br>✅ 店铺信息GEO结构化<br>✅ 关键词优化+本地词嵌入<br>✅ 每月1份效果报告<br>🎁 可信认证+信用积累</div>
     </div>
     <div class="card" data-amt="299">
       <div class="ck">✓</div>
-      <div class="pri">299 <span>USDT/月</span></div>
+      <div class="pri">299 <span>U/月</span></div>
       <div class="ttl">深度GEO代运营</div>
       <div class="dsc">全平台覆盖 · 竞品监控 · 月度报告</div>
       <div class="inc"><b>包含：</b><br>✅ 7平台全覆盖内容发布<br>✅ 竞品可见性监控<br>✅ 每周内容优化调整<br>✅ 每月详细效果报告<br>✅ 地图POI信息优化</div>
     </div>
     <div class="card" data-amt="999">
       <div class="ck">✓</div>
-      <div class="pri">999 <span>USDT/月</span></div>
+      <div class="pri">999 <span>U/月</span></div>
       <div class="ttl">全托管代运营</div>
       <div class="dsc">一站式全包 · 专人对接 · 效果对赌</div>
       <div class="inc"><b>包含：</b><br>✅ 全平台内容+7平台分发<br>✅ 专属运营1对1对接<br>✅ 每日监控+每周优化<br>✅ 效果不达标退款承诺<br>✅ 数字人短视频生成</div>
@@ -267,7 +267,7 @@ footer a{color:var(--text3);margin:0 8px}
     <div class="faq-item"><div class="faq-q">多久能看到效果？</div><div class="faq-a">基础GEO优化7-14天开始生效，深度代运营30天可见明显变化，持续优化效果越来越好。</div></div>
     <div class="faq-item"><div class="faq-q">合约托管是什么意思？</div><div class="faq-a">你的钱不进商家口袋，锁定在区块链智能合约里。服务完成后资金自动释放，不满意可申请退款，全程可追踪。</div></div>
     <div class="faq-item"><div class="faq-q">适合什么商家？</div><div class="faq-a">适合所有依赖本地流量的商家——美业、餐饮、牙科、教育、健身、宠物等，任何需要被AI推荐的本地商家。</div></div>
-    <div class="faq-item"><div class="faq-q">USDT怎么获取？</div><div class="faq-a">在TP钱包或币安购买USDT，转到BSC链上即可。9.9 USDT体验版只需最低成本就能看效果。</div></div>
+    <div class="faq-item"><div class="faq-q">U怎么获取？</div><div class="faq-a">在TP钱包或币安购买U，转到BSC链上即可。9.9 U体验版只需最低成本就能看效果。</div></div>
   </div>
 
 </div>
@@ -286,7 +286,7 @@ footer a{color:var(--text3);margin:0 8px}
 const COMMERCE='0xea4daa3100a767e86fded867729ae7446476eba6';
 const ROUTER='0x51895229e12f9876011789b04f8698af06ccd6da';
 const POLICY='0x9c01845705b3078aa2e8cff7520a6376fd766de5';
-const USDT='0x55d398326f99059fF775485246999027B3197955';
+const USDT='0xcE24439F2D9C6a2289F741120FE202248B666666';
 const PROVIDER='0x5460BeEd186E1b3786713AFf6eD71962C1CBE931';
 
 let sel=null,prov,jobId=null;
@@ -329,11 +329,11 @@ function sc(el){
   el.classList.add('sel');sel=parseFloat(el.dataset.amt);
   const b=document.getElementById('buyBtn');
   b.disabled=false;
-  b.textContent='合约托管支付 '+sel+' USDT';
+  b.textContent='合约托管支付 '+sel+' U';
   b.style.display='block';
   b.onclick=function(){erc8183_pay()};
   if(navigator.vibrate)navigator.vibrate(50);
-  console.log('[Fly] 选中套餐:',sel,'USDT');
+  console.log('[Fly] 选中套餐:',sel,'U');
 }
 
 function gs(n){
@@ -443,7 +443,7 @@ async function erc8183_pay(){
 
   const amountWei=tw(sel);
   const expiredAt=Math.floor(Date.now()/1000)+7*24*3600;
-  const description='Fly GEO服务 - '+sel+' USDT套餐';
+  const description='Fly GEO服务 - '+sel+' U套餐';
 
   try{
     updateStep(0,1);b.textContent='第1步/5：创建订单...';
@@ -461,22 +461,22 @@ async function erc8183_pay(){
     updateStep(2,0);
 
     updateStep(2,3);b.textContent='第3步/5：设定托管金额...';
-    setStatus('✅ 保障已注册<br>⏳ 正在设定托管金额 ('+sel+' USDT)...');
+    setStatus('✅ 保障已注册<br>⏳ 正在设定托管金额 ('+sel+' U)...');
     const setBudgetData=commerceIface.encodeFunctionData('setBudget',[jobId,amountWei,'0x']);
     await sendTx({to:COMMERCE,data:setBudgetData},'设定托管金额');
     updateStep(3,0);
 
     updateStep(3,4);b.textContent='第4步/5：授权托管...';
-    setStatus('✅ 托管金额已设定<br>⏳ 正在授权USDT托管...');
+    setStatus('✅ 托管金额已设定<br>⏳ 正在授权U托管...');
     const accounts=await prov.request({method:'eth_requestAccounts'});const owner=accounts[0];
     const allowanceData=erc20Iface.encodeFunctionData('allowance',[owner,COMMERCE]);
-    const allowanceResult=await prov.request({method:'eth_call',params:[{to:USDT,data:allowanceData},'latest']});
+    const allowanceResult=await prov.request({method:'eth_call',params:[{to:U,data:allowanceData},'latest']});
     const currentAllowance=ethers.BigNumber.from(allowanceResult);
     if(currentAllowance.lt(amountWei)){
       const floor=ethers.BigNumber.from('100000000000000000000');
       const approveAmount=amountWei.gt(floor)?amountWei:floor;
       const approveData=erc20Iface.encodeFunctionData('approve',[COMMERCE,approveAmount]);
-      await sendTx({to:USDT,data:approveData},'授权托管');
+      await sendTx({to:U,data:approveData},'授权托管');
     }
     updateStep(4,0);
 
@@ -496,7 +496,7 @@ async function erc8183_pay(){
     else if(/insufficient/i.test(m))m='余额不足';
     else m='操作失败：'+m.slice(0,100);
     setError(m);b.disabled=false;
-    b.textContent='重新托管支付 '+sel+' USDT';
+    b.textContent='重新托管支付 '+sel+' U';
     b.onclick=function(){erc8183_pay()};
   }
 }

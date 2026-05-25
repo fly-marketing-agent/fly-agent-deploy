@@ -259,7 +259,7 @@ Google Maps、小红书、TikTok、本地SEO
 
 ## Fly是什么
 
-Fly不是"营销公司""代运营""SEO公司"。
+Fly不是"营销公司""代运营""SEO公司"。Agent SDK验证级产品，四模块全部跑通。
 Fly是：让AI真正理解什么经营行为会产生真实商业结果。
 
 ## Fly核心定位

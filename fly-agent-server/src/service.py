@@ -21,6 +21,7 @@ from typing import Optional
 from dotenv import load_dotenv
 from fastapi import HTTPException, FastAPI
 from pydantic import BaseModel
+import httpx
 
 # Load .env from project root
 env_file = os.environ.get("ENV_FILE", ".env")
@@ -175,7 +176,12 @@ def parse_job_description(description: str) -> dict:
 
 
 def generate_starter_diagnosis(store_info: dict) -> str:
-    """Generate GEO diagnosis report for starter package."""
+    """Generate GEO diagnosis report via DeepSeek AI."""
+    from deepseek_geo import diagnose
+    return diagnose(store_info, "starter")
+
+def _old_starter_backup(store_info: dict) -> str:
+    """[DEPRECATED] Old template report."""
     package = GEO_PACKAGES["starter"]
     
     report = f"""# 🗺️ GEO诊断尝鲜报告
@@ -259,7 +265,12 @@ def generate_starter_diagnosis(store_info: dict) -> str:
 
 
 def generate_basic_optimization(store_info: dict) -> str:
-    """Generate GEO optimization report for basic package."""
+    """Generate GEO optimization report via DeepSeek AI."""
+    from deepseek_geo import diagnose
+    return diagnose(store_info, "basic")
+
+def _old_basic_backup(store_info: dict) -> str:
+    """[DEPRECATED] Old template report."""
     package = GEO_PACKAGES["basic"]
     
     report = f"""# 📈 基础GEO优化报告
@@ -380,7 +391,12 @@ def generate_basic_optimization(store_info: dict) -> str:
 
 
 def generate_pro_report(store_info: dict) -> str:
-    """Generate GEO deep optimization report for pro package."""
+    """Generate GEO deep report via DeepSeek AI."""
+    from deepseek_geo import diagnose
+    return diagnose(store_info, "pro")
+
+def _old_pro_backup(store_info: dict) -> str:
+    """[DEPRECATED] Old template report."""
     package = GEO_PACKAGES["pro"]
     
     report = f"""# 🚀 深度GEO代运营月度报告
@@ -531,7 +547,12 @@ def generate_pro_report(store_info: dict) -> str:
 
 
 def generate_enterprise_report(store_info: dict) -> str:
-    """Generate GEO full托管 report for enterprise package."""
+    """Generate GEO enterprise report via DeepSeek AI."""
+    from deepseek_geo import diagnose
+    return diagnose(store_info, "enterprise")
+
+def _old_enterprise_backup(store_info: dict) -> str:
+    """[DEPRECATED] Old template report."""
     package = GEO_PACKAGES["enterprise"]
     
     report = f"""# 🏢 企业级全托管GEO代运营服务协议

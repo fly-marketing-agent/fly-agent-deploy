@@ -134,28 +134,28 @@ a.lk{color:#2980fe;text-decoration:none;word-break:break-all}
 
   <div id="p1">
     <div id="cards" style="display:none">
-      <div class="card" data-amt="9.9" onclick="sc(this)">
+      <div class="card" data-amt="9.9">
         <div class="ck">✓</div>
         <div class="pri">9.9 <span>USDT</span></div>
         <div class="ttl">GEO诊断尝鲜</div>
         <div class="dsc">7天体验 · 看看你的店AI搜不到的原因</div>
         <div class="inc"><b>包含：</b><br>✅ AI搜索可见性诊断报告<br>✅ 7平台信息一致性检查<br>✅ 竞品可见性对比<br>🎁 赠送经营可信认证</div>
       </div>
-      <div class="card" data-amt="59" onclick="sc(this)">
+      <div class="card" data-amt="59">
         <div class="ck">✓</div>
         <div class="pri">59 <span>USDT/月</span></div>
         <div class="ttl">基础GEO优化</div>
         <div class="dsc">月度优化 · 让AI开始推荐你</div>
         <div class="inc"><b>包含：</b><br>✅ 3平台内容发布（知乎/百家号/头条）<br>✅ 店铺信息GEO结构化<br>✅ 关键词优化+本地词嵌入<br>✅ 每月1份效果报告<br>🎁 可信认证+信用积累</div>
       </div>
-      <div class="card" data-amt="299" onclick="sc(this)">
+      <div class="card" data-amt="299">
         <div class="ck">✓</div>
         <div class="pri">299 <span>USDT/月</span></div>
         <div class="ttl">深度GEO代运营</div>
         <div class="dsc">全平台覆盖 · 竞品监控 · 月度报告</div>
         <div class="inc"><b>包含：</b><br>✅ 7平台全覆盖内容发布<br>✅ 竞品可见性监控<br>✅ 每周内容优化调整<br>✅ 每月详细效果报告<br>✅ 地图POI信息优化指导<br>🎁 经营信用评分</div>
       </div>
-      <div class="card" data-amt="999" onclick="sc(this)">
+      <div class="card" data-amt="999">
         <div class="ck">✓</div>
         <div class="pri">999 <span>USDT/月</span></div>
         <div class="ttl">全托管代运营</div>
@@ -173,7 +173,7 @@ a.lk{color:#2980fe;text-decoration:none;word-break:break-all}
       <div class="step" id="s5"><span class="step-num">5</span>资金锁定</div>
     </div>
 
-    <button class="btn br" id="buyBtn" disabled onclick="erc8183_pay()" style="display:none">选择服务后点击购买</button>
+    <button class="btn br" id="buyBtn" disabled onclick="erc8183_pay()">选择服务后点击购买</button>
     <div class="st" id="st"></div>
   </div>
 
@@ -272,8 +272,13 @@ function tw(u){const p=u.toString().split('.');return ethers.BigNumber.from(p[0]
 function sc(el){
   document.querySelectorAll('.card').forEach(c=>c.classList.remove('sel'));
   el.classList.add('sel');sel=parseFloat(el.dataset.amt);
-  const b=document.getElementById('buyBtn');b.disabled=false;
+  const b=document.getElementById('buyBtn');
+  b.disabled=false;
   b.textContent='合约托管支付 '+sel+' USDT';
+  b.style.display='block';
+  // 移动端触觉反馈
+  if(navigator.vibrate) navigator.vibrate(50);
+  console.log('[Fly] 选中套餐:', sel, 'USDT, 按钮已激活');
 }
 
 function gs(n){
@@ -531,6 +536,16 @@ async function fetchDiagnosis(){
     btn.textContent='重新获取'; btn.disabled=false;
   }
 }
+
+// ===== 统一卡片事件绑定（兼容TP钱包DApp浏览器）=====
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.card').forEach(function(card){
+    // 同时绑定click和touchend，确保移动端响应
+    card.addEventListener('click', function(e){ e.preventDefault(); sc(this); });
+    card.addEventListener('touchend', function(e){ e.preventDefault(); sc(this); });
+    card.style.cursor = 'pointer';
+  });
+});
 
 init();
 </script>

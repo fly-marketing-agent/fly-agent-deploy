@@ -29,17 +29,17 @@ header .container{display:flex;justify-content:space-between;align-items:center;
 nav{display:flex;align-items:center;gap:28px}nav a{font-size:14px;color:var(--text2);transition:color .2s}nav a:hover{color:var(--text)}
 .cta-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;background:var(--orange);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;transition:all .25s;font-family:var(--sans)}.cta-btn:hover{background:#e55a28;transform:translateY(-1px);box-shadow:0 4px 20px rgba(255,107,53,.3)}.cta-btn svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2}
 .hero{padding:140px 0 80px;min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
-.hero-glow1{position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(255,107,53,.06) 0%,transparent 70%);pointer-events:none}
-.hero-glow2{position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,255,204,.04) 0%,transparent 70%);pointer-events:none}
+.hero-glow1{position:absolute;top:-300px;right:-200px;width:800px;height:800px;background:radial-gradient(circle,rgba(255,107,53,.09) 0%,transparent 70%)};pointer-events:none}
+.hero-glow2{position:absolute;bottom:-150px;left:-150px;width:600px;height:600px;background:radial-gradient(circle,rgba(0,255,204,.06) 0%,transparent 70%)};pointer-events:none}
 .hero .container{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
-.hero-text h1{font-size:40px;font-weight:700;line-height:1.35;margin-bottom:18px;letter-spacing:-1px}
+.hero-text h1{font-size:56px;font-weight:700;line-height:1.35;margin-bottom:18px;letter-spacing:-1px}
 .hero-text h1 em{font-style:normal;color:var(--orange);position:relative}
 .hero-text h1 em::after{content:'';position:absolute;bottom:2px;left:0;right:0;height:3px;background:rgba(255,107,53,.3);border-radius:2px}
 .hero-sub{font-size:16px;color:var(--text2);margin-bottom:12px;line-height:1.8}
 .hero-sub .tag{color:var(--cyan);font-family:var(--mono);font-size:13px;background:rgba(0,255,204,.06);padding:2px 8px;border-radius:4px}
 .hero-tagline{font-size:14px;color:var(--text3);margin-bottom:32px;line-height:1.6}
 .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
-.btn-primary{padding:14px 32px;background:var(--orange);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;transition:all .25s;font-family:var(--sans)}.btn-primary:hover{background:#e55a28;transform:translateY(-1px);box-shadow:0 6px 24px rgba(255,107,53,.35)}
+.btn-primary{padding:14px 32px;background:#fff;color:#0a0a12;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;transition:all .25s;font-family:var(--sans)}.btn-primary:hover{background:#e5e5e5;transform:translateY(-1px);box-shadow:0 6px 24px rgba(255,255,255,.08)}
 .btn-ghost{padding:14px 32px;background:transparent;color:var(--text2);border:1px solid var(--text4);border-radius:10px;font-size:16px;font-weight:500;cursor:pointer;transition:all .25s;font-family:var(--sans)}.btn-ghost:hover{border-color:var(--text2);color:var(--text);background:rgba(255,255,255,.02)}
 .dashboard{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:28px;position:relative;overflow:hidden}
 .dashboard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,255,204,.2),transparent)}
@@ -172,13 +172,54 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding:48px 0 28px}
 .legal-card{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:32px;max-width:540px;width:90%;max-height:80vh;overflow-y:auto;color:var(--text2);font-size:13px;line-height:1.8;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.04) transparent}
 .legal-card h2{font-size:18px;color:var(--text);margin-bottom:14px}.legal-card h3{font-size:14px;color:var(--text);margin:18px 0 6px}
 .legal-close{margin-top:20px;padding:9px 24px;background:var(--orange);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:var(--sans)}
-@media(max-width:900px){.hero .container{grid-template-columns:1fr;gap:32px}.hero-text h1{font-size:28px}.pain-grid,.causal-grid,.case-grid{grid-template-columns:1fr}.results-grid{grid-template-columns:1fr 1fr}.trust-compare,.price-grid,.geo-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}nav{display:none}.section-title{font-size:24px}.cta-section h2{font-size:26px}.chat-sb{display:none}.chat-window{width:100%;height:100%;border-radius:0}}
+@media(max-width:900px){.hero .container{grid-template-columns:1fr;gap:32px}.hero-text h1{font-size:32px}.pain-grid,.causal-grid,.case-grid{grid-template-columns:1fr}.results-grid{grid-template-columns:1fr 1fr}.trust-compare,.price-grid,.geo-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}nav{display:none}.section-title{font-size:24px}.cta-section h2{font-size:26px}.chat-sb{display:none}.chat-window{width:100%;height:100%;border-radius:0}}
 </style>
 </head>
 <body>
 <header><div class="container"><div class="logo"><span>Fly</span>Agent<div class="logo-dot"></div><span class="logo-sub">AI经营副驾驶</span></div><nav><a href="#pain">痛点</a><a href="#exec">AI执行</a><a href="#results">结果</a><a href="#geo">GEO</a><a href="#causal">因果</a><a href="#pricing">定价</a><a href="#confirm" style="color:var(--cyan)">确认机制</a><a href="#trust">可信验证</a></nav><button class="cta-btn" onclick="openChat()"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>免费诊断</button></div></header>
 
-<section class="hero" id="hero"><div class="hero-glow1"></div><div class="hero-glow2"></div><div class="container"><div class="hero-text"><h1>拒绝推广黑盒，<br>AI负责执行，<em>你来做主</em></h1><p class="hero-sub">AI经营副驾驶 · 智能执行 · 你来确认<br><span class="tag">智能诊断 · 老板确认 · 经营可信</span></p><p class="hero-tagline">带刹车的AI经营系统——AI踩油门，老板握方向盘</p><div style="margin-top:16px;display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,rgba(6,182,212,.1),rgba(6,182,212,.05));padding:6px 16px;border-radius:100px;font-size:12px;color:var(--cyan);font-weight:500;border:1px solid rgba(6,182,212,.2)">🏛 Agent SDK 验证级产品 · 四模块全部跑通</div><div class="hero-btns"><button class="btn-primary" onclick="openChat()">免费获取诊断报告</button><button class="btn-ghost" onclick="document.getElementById('cases').scrollIntoView({behavior:'smooth'})">查看真实案例</button></div></div><div class="dashboard"><div class="dash-header"><div class="dash-title">实时经营状态</div><div class="dash-status">系统运行中</div></div><div class="dash-stream" id="dashStream"><div class="dash-item green"><span class="dash-icon">✅</span><span class="dash-text">已同步3个平台的店铺信息</span><span class="dash-time">09:21</span></div><div class="dash-item green"><span class="dash-icon">✅</span><span class="dash-text">已更新本周GEO内容结构</span><span class="dash-time">10:02</span></div><div class="dash-item gold"><span class="dash-icon">📊</span><span class="dash-text">发现夜间发布点击率更高</span><span class="dash-time">10:17</span></div><div class="dash-item green"><span class="dash-icon">✅</span><span class="dash-text">建议调整发布时间至晚8点 → ✅老板已确认</span><span class="dash-time">11:15</span></div><div class="dash-item cyan"><span class="dash-icon">🔗</span><span class="dash-text">经营行为记录已可信验证</span><span class="dash-time">11:30</span></div></div><div class="dash-footer"><span>Fly经营系统 v1.0</span><span class="last" id="dashLast">最后执行 2分钟前</span></div></div></div></section>
+<section class="hero" id="hero"><div class="hero-glow1"></div><div class="hero-glow2"></div><div class="container"><div class="hero-text"><h1>拒绝推广黑盒，<br>AI负责执行，<em>你来做主</em></h1><p class="hero-sub">AI经营副驾驶 · 智能执行 · 你来确认<br><span class="tag">智能诊断 · 老板确认 · 经营可信</span></p><p class="hero-tagline">带刹车的AI经营系统——AI踩油门，老板握方向盘</p><div style="margin-top:16px;display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,rgba(6,182,212,.1),rgba(6,182,212,.05));padding:6px 16px;border-radius:100px;font-size:12px;color:var(--cyan);font-weight:500;border:1px solid rgba(6,182,212,.2)">🏛 Agent SDK 验证级产品 · 四模块全部跑通</div><div class="hero-btns"><button class="btn-primary" onclick="openChat()">免费获取诊断报告</button><button class="btn-ghost" onclick="document.getElementById('cases').scrollIntoView({behavior:'smooth'})">查看真实案例</button></div></div><div class="dashboard"><div class="dash-header"><div class="dash-title">实时经营状态</div><div class="dash-status">系统运行中</div></div><div class="dash-stream" id="dashStream"><div class="dash-item green"><span class="dash-icon">✅</span><span class="dash-text">已同步3个平台的店铺信息</span><span class="dash-time">09:21</span></div><div class="dash-item green"><span class="dash-icon">✅</span><span class="dash-text">已更新本周GEO内容结构</span><span class="dash-time">10:02</span></div><div class="dash-item gold"><span class="dash-icon">📊</span><span class="dash-text">发现夜间发布点击率更高</span><span class="dash-time">10:17</span></div><div class="dash-item green"><span class="dash-icon">✅</span><span class="dash-text">建议调整发布时间至晚8点 → ✅老板已确认</span><span class="dash-time">11:15</span></div><div class="dash-item cyan"><span class="dash-icon">🔗</span><span class="dash-text">经营行为记录已可信验证</span><span class="dash-time">11:30</span></div></div><div class="dash-footer"><span>Fly经营系统 v1.0</span><span class="last" id="dashLast">最后执行 2分钟前</span></div></div>
+<div style="position:relative;margin-top:20px">
+  <div style="background:var(--bg2);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;box-shadow:0 8px 32px rgba(0,0,0,.4);animation:float 3s ease-in-out infinite">
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px">
+      <div style="width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--orange2));display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:700">F</div>
+      <span style="font-size:11px;font-weight:600;color:var(--text)">Fly AI 实时诊断</span>
+      <span style="margin-left:auto;font-size:9px;color:var(--green);font-family:var(--mono)">● 在线</span>
+    </div>
+    <div style="background:var(--bg3);border-radius:8px;padding:10px;font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:8px">
+      🔍 检测到你的店在AI搜索中<span style="color:var(--red);font-weight:600">0次被推荐</span>，主要原因是缺少结构化数据。
+    </div>
+    <div style="background:var(--bg3);border-radius:8px;padding:10px;font-size:12px;color:var(--text2);line-height:1.6">
+      💡 建议：补充<span style="color:var(--cyan);font-weight:500">Schema.org</span>经营信息 + 3条FAQ语义覆盖，预计7天可见效。
+    </div>
+    <div style="margin-top:8px;text-align:right;font-size:10px;color:var(--text4);font-family:var(--mono)">Powered by DeepSeek V4</div>
+  </div>
+</div></div>
+<div style="text-align:center;margin-top:40px;padding:20px 0;border-top:1px solid rgba(255,255,255,.04)">
+  <div style="font-family:var(--mono);font-size:11px;color:var(--text3);letter-spacing:2px;margin-bottom:14px">TRUSTED BY LOCAL BUSINESSES</div>
+  <div style="display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap">
+    <div style="text-align:center">
+      <div style="font-family:var(--mono);font-size:28px;font-weight:700;color:var(--cyan)">4</div>
+      <div style="font-size:11px;color:var(--text3)">行业覆盖</div>
+    </div>
+    <div style="width:1px;height:32px;background:rgba(255,255,255,.06)"></div>
+    <div style="text-align:center">
+      <div style="font-family:var(--mono);font-size:28px;font-weight:700;color:var(--green)">7×24</div>
+      <div style="font-size:11px;color:var(--text3)">AI持续执行</div>
+    </div>
+    <div style="width:1px;height:32px;background:rgba(255,255,255,.06)"></div>
+    <div style="text-align:center">
+      <div style="font-family:var(--mono);font-size:28px;font-weight:700;color:var(--gold)">100%</div>
+      <div style="font-size:11px;color:var(--text3)">经营记录可验证</div>
+    </div>
+    <div style="width:1px;height:32px;background:rgba(255,255,255,.06)"></div>
+    <div style="text-align:center">
+      <div style="font-family:var(--mono);font-size:28px;font-weight:700;color:var(--orange)">30天</div>
+      <div style="font-size:11px;color:var(--text3)">无效全额退款</div>
+    </div>
+  </div>
+</div>
+</section>
 
 <section id="pain"><div class="container"><div class="section-label">痛点</div><h2 class="section-title">推广费花哪了，你真的知道吗？</h2><div class="pain-grid"><div class="pain-card"><div class="pain-icon">🧭</div><div class="pain-title">线下地推 = 盲人摸象</div><div class="pain-desc">发了1000张传单，只有5个人进店？你不知道是哪张起了作用，也不知道该不该继续发。</div></div><div class="pain-card"><div class="pain-icon">💸</div><div class="pain-title">线上投流 = 给平台送钱</div><div class="pain-desc">ROI忽高忽低，关键词一直在变，你永远在帮平台试错。停了没客户，投了又亏钱。</div></div><div class="pain-card"><div class="pain-icon">🎲</div><div class="pain-title">老客复购 = 全靠运气</div><div class="pain-desc">客人为什么不再来了？是因为价格、服务还是口味？没有数据反馈，只能瞎猜。</div></div></div></div></section>
 

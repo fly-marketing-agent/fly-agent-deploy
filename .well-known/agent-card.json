@@ -1,7 +1,7 @@
 {
   "schema_version": "0.3.0",
   "name": "Fly Marketing Agent",
-  "description": "The first AI marketing agent on BNB Chain - autonomous marketing team for 209M small business owners. Full-stack: strategy, content, multi-platform publishing, GEO optimization, and on-chain payment via x402.",
+  "description": "AI marketing agent for small business owners. Full-stack: strategy, content, multi-platform publishing, GEO optimization, and secure payment.",
   "url": "https://fly-marketing-agent.github.io",
   "icon_url": "https://fly-marketing-agent.github.io/fly_logo.jpg",
   "provider": {
@@ -63,7 +63,7 @@
     },
     {
       "id": "x402-payment",
-      "name": "链上支付"
+      "name": "安全支付"
     }
   ],
   "erc8004": {
@@ -73,7 +73,7 @@
       98158
     ],
     "modules": {
-      "identity": "ERC-8004",
+      "identity": "verified",
       "commerce": "ERC-8183",
       "payment": "x402",
       "memory": "Greenfield"

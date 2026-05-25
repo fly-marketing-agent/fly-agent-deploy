@@ -58,3 +58,46 @@ async def diag_post(req:Req):
         except Exception as e:
             yield f"data: {json.dumps({'type':'error','message':str(e)},ensure_ascii=False)}\n\n"
     return StreamingResponse(gen(),media_type="text/event-stream",headers={"Cache-Control":"no-cache","X-Accel-Buffering":"no"})
+
+class ChatReq(BaseModel):
+    messages: list = []
+    model: str = "deepseek-chat"
+    max_tokens: int = 300
+    temperature: float = 0.7
+
+@app.post("/chat")
+async def chat_proxy(req: ChatReq):
+    """Chat proxy - front-end calls this instead of DeepSeek directly."""
+    if not DK:
+        raise HTTPException(503, "DeepSeek not configured on server")
+    
+    SYS_PROMPT = """你是Fly的AI员工，专门帮小老板诊断推广盲区、优化营销。规则：
+1. 像真人聊天，不念稿不列清单不用模板
+2. 每次只说1-2个要点，说完追问
+3. 用户说不清楚时追问（什么店？在哪？月推广费？投了哪些平台？）
+4. 记住上下文不重复问
+5. 说话像朋友不像客服
+6. 先理解再建议，不甩方案
+7. 用人话解释专业概念
+8. 回复100字内
+用中文回复。"""
+    
+    messages = [{"role": "system", "content": SYS_PROMPT}] + req.messages[-10:]
+    
+    async with httpx.AsyncClient(timeout=60) as c:
+        r = await c.post(
+            f"{DK_URL}/chat/completions",
+            headers={"Authorization": f"Bearer {DK}"},
+            json={
+                "model": req.model,
+                "messages": messages,
+                "max_tokens": req.max_tokens,
+                "temperature": req.temperature
+            }
+        )
+        r.raise_for_status()
+    
+    data = r.json()
+    if data.get("choices") and data["choices"][0]:
+        return {"success": True, "reply": data["choices"][0]["message"]["content"]}
+    raise HTTPException(500, "Invalid response from DeepSeek")

@@ -629,10 +629,42 @@ async function init() {
   }
 }
 
-// ===== ERC-8183 5步支付流程 =====
+// ===== 核心：populateTransaction编码 + sendTx发送（TP钱包唯一兼容方式）=====
+// TP钱包要求eth_sendTransaction必须带gas，ethers.Contract直接调不带gas报错
+async function cSend(contract, method, args, stepLabel) {
+  // 1. 用ethers Contract的populateTransaction编码交易数据（最可靠的ABI编码）
+  const unsignedTx = await contract.populateTransaction[method](...args);
+  console.log('[Fly] cSend编码:', method, '→ to:', unsignedTx.to);
+
+  // 2. value格式化
+  let valueHex = '0x0';
+  if (unsignedTx.value) {
+    if (typeof unsignedTx.value === 'string') valueHex = unsignedTx.value;
+    else if (unsignedTx.value._isBigNumber) valueHex = unsignedTx.value.toHexString();
+    else if (typeof unsignedTx.value === 'number') valueHex = '0x' + unsignedTx.value.toString(16);
+  }
+
+  // 3. 构造sendTx需要的tx对象
+  const txObj = {
+    to: unsignedTx.to,
+    data: unsignedTx.data,
+    value: valueHex
+  };
+
+  // 4. 调用已有的sendTx函数（带gas估算+手动eth_sendTransaction）
+  const result = await sendTx(txObj, stepLabel);
+  return result;
+}
+
+// ===== ERC-8183 5步支付流程（populateTransaction + sendTx，TP钱包兼容）=====
 async function erc8183_pay() {
   if (!sel || !prov) {
     setError('请先选择套餐并连接钱包');
+    return;
+  }
+
+  if (!commerce || !router || !usdt) {
+    setError('合约未初始化，请刷新页面重试');
     return;
   }
 
@@ -644,121 +676,104 @@ async function erc8183_pay() {
   const expiredAt = Math.floor(Date.now() / 1000) + 7 * 24 * 3600;
   const description = 'Fly GEO服务 - ' + sel + ' U套餐';
 
-  console.log('[Fly] 开始支付流程，金额:', sel, 'U = ', amountWei.toString());
+  console.log('[Fly] ===== 开始5步支付流程 =====');
+  console.log('[Fly] 金额:', sel, 'U =', amountWei.toString());
 
   try {
+    // ====== 预检查：余额 ======
+    const accts = await prov.request({ method: 'eth_requestAccounts' });
+    const owner = accts[0];
+
+    // 检查U余额
+    const uBal = await usdt.balanceOf(owner);
+    if (uBal.lt(amountWei)) {
+      throw new Error('U代币余额不足（当前 ' + ethers.utils.formatUnits(uBal, 18).slice(0, 8) + ' U，需要 ' + sel + ' U），请先在TP钱包中购买U代币');
+    }
+
+    // 检查BNB余额（gas费）
+    const bnbHex = await prov.request({ method: 'eth_getBalance', params: [owner, 'latest'] });
+    const bnbBal = ethers.BigNumber.from(bnbHex);
+    if (bnbBal.lt(ethers.utils.parseEther('0.005'))) {
+      throw new Error('BNB余额不足（gas费），当前 ' + parseFloat(ethers.utils.formatEther(bnbBal)).toFixed(4) + ' BNB，请先转入少量BNB');
+    }
+
     // ========== 第1步: createJob ==========
     updateStep(0, 1);
     b.textContent = '第1步/5：创建订单...';
     setStatus('⏳ 正在创建托管订单，请在钱包中确认...<br><span style="font-size:11px;color:var(--text3)">创建托管订单，你的钱还在你口袋</span>');
 
-    console.log('[Fly] Step1: createJob', { provider: PROVIDER, router: ROUTER, expiredAt, description, hook: ROUTER });
-
-    const tx1 = await commerce.createJob(PROVIDER, ROUTER, expiredAt, description, ROUTER);
-    setStatus('⏳ 创建订单交易已发送，等待确认...<br><a class="lk" href="https://bscscan.com/tx/' + tx1.hash + '" target="_blank">' + tx1.hash.slice(0, 18) + '...</a>');
-    const receipt1 = await tx1.wait();
+    const r1 = await cSend(commerce, 'createJob', [PROVIDER, ROUTER, expiredAt, description, ROUTER], '创建订单');
 
     // 解析JobId
-    jobId = await parseJobId(receipt1, tx1.hash);
+    jobId = await parseJobId(r1.receipt, r1.txHash);
     if (!jobId) {
-      throw new Error('无法获取订单号。请到 <a class="lk" href="https://bscscan.com/tx/' + tx1.hash + '" target="_blank">BscScan</a> 查看交易记录');
+      throw new Error('无法获取订单号。请到 <a class="lk" href="https://bscscan.com/tx/' + r1.txHash + '" target="_blank">BscScan</a> 查看交易记录');
     }
-
-    console.log('[Fly] JobId获取成功:', jobId);
+    console.log('[Fly] ✅ Step1完成: Job #' + jobId);
     updateStep(1, 0);
 
-    // ========== 第2步: registerJob via Router ==========
+    // ========== 第2步: registerJob ==========
     updateStep(1, 2);
     b.textContent = '第2步/5：注册保障...';
     setStatus('✅ 订单已创建 (Job #' + jobId + ')<br>⏳ 正在注册保障策略...');
 
-    console.log('[Fly] Step2: registerJob', { jobId, policy: POLICY });
-
-    const tx2 = await router.registerJob(jobId, POLICY);
-    setStatus('⏳ 注册保障交易确认中...<br><a class="lk" href="https://bscscan.com/tx/' + tx2.hash + '" target="_blank">' + tx2.hash.slice(0, 18) + '...</a>');
-    await tx2.wait();
-
+    await cSend(router, 'registerJob', [jobId, POLICY], '注册保障');
+    console.log('[Fly] ✅ Step2完成');
     updateStep(2, 0);
 
-    // ========== 第3步: setBudget via Commerce ==========
+    // ========== 第3步: setBudget ==========
     updateStep(2, 3);
     b.textContent = '第3步/5：设定托管金额...';
     setStatus('✅ 保障已注册<br>⏳ 正在设定托管金额 (' + sel + ' U)...');
 
-    console.log('[Fly] Step3: setBudget', { jobId, amount: amountWei.toString() });
-
-    const tx3 = await commerce.setBudget(jobId, amountWei, '0x');
-    setStatus('⏳ 设定托管金额确认中...<br><a class="lk" href="https://bscscan.com/tx/' + tx3.hash + '" target="_blank">' + tx3.hash.slice(0, 18) + '...</a>');
-    await tx3.wait();
-
+    await cSend(commerce, 'setBudget', [jobId, amountWei, '0x'], '设定托管金额');
+    console.log('[Fly] ✅ Step3完成');
     updateStep(3, 0);
 
-    // ========== 第4步: approve (0 -> amount) via U Token ==========
+    // ========== 第4步: approve ==========
     updateStep(3, 4);
     b.textContent = '第4步/5：授权托管...';
     setStatus('✅ 托管金额已设定<br>⏳ 正在授权U代币托管...');
 
-    const accounts = await prov.request({ method: 'eth_requestAccounts' });
-    const owner = accounts[0];
-
-    // 检查当前授权额度
     const currentAllowance = await usdt.allowance(owner, COMMERCE);
-    console.log('[Fly] 当前授权额度:', currentAllowance.toString());
+    console.log('[Fly] 当前授权额度:', ethers.utils.formatUnits(currentAllowance, 18), 'U');
 
     if (currentAllowance.lt(amountWei)) {
-      // 需要重新授权：先approve(0)再approve(amount)
-      console.log('[Fly] Step4a: approve(0) 清除旧授权');
-
-      // 如果当前有授权，先清零
       if (!currentAllowance.isZero()) {
         setStatus('⏳ 清除旧授权...');
-        const tx4a = await usdt.approve(COMMERCE, 0);
-        setStatus('⏳ 清除授权确认中...<br><a class="lk" href="https://bscscan.com/tx/' + tx4a.hash + '" target="_blank">' + tx4a.hash.slice(0, 18) + '...</a>');
-        await tx4a.wait();
+        await cSend(usdt, 'approve', [COMMERCE, 0], '清除旧授权');
         console.log('[Fly] 旧授权已清除');
       }
 
-      // 授权新金额（使用较大值确保足够）
-      console.log('[Fly] Step4b: approve(' + amountWei.toString() + ')');
-
-      // 最低授权100 U，防止小额授权问题
-      const minApprove = ethers.BigNumber.from('100000000000000000000'); // 100 U
+      const minApprove = ethers.BigNumber.from('100000000000000000000');
       const approveAmount = amountWei.gt(minApprove) ? amountWei : minApprove;
 
       setStatus('⏳ 授权U代币 (' + (approveAmount.eq(amountWei) ? sel + ' U' : '≥' + sel + ' U') + ')...');
-      const tx4b = await usdt.approve(COMMERCE, approveAmount);
-      setStatus('⏳ 授权确认中...<br><a class="lk" href="https://bscscan.com/tx/' + tx4b.hash + '" target="_blank">' + tx4b.hash.slice(0, 18) + '...</a>');
-      await tx4b.wait();
-
-      console.log('[Fly] 授权完成，授权额度:', approveAmount.toString());
+      await cSend(usdt, 'approve', [COMMERCE, approveAmount], '授权U代币');
+      console.log('[Fly] ✅ Step4完成: 授权', ethers.utils.formatUnits(approveAmount, 18), 'U');
     } else {
-      console.log('[Fly] 已有足够授权，跳过approve');
+      console.log('[Fly] ✅ Step4跳过: 已有足够授权');
     }
-
     updateStep(4, 0);
 
-    // ========== 第5步: fund via Commerce ==========
+    // ========== 第5步: fund ==========
     updateStep(4, 5);
     b.textContent = '第5步/5：资金锁定...';
     setStatus('✅ 授权完成<br>⏳ 正在锁定资金到托管合约...');
 
-    console.log('[Fly] Step5: fund', { jobId, amount: amountWei.toString() });
-
-    const tx5 = await commerce.fund(jobId, amountWei, '0x');
-    setStatus('⏳ 资金锁定确认中...<br><a class="lk" href="https://bscscan.com/tx/' + tx5.hash + '" target="_blank">' + tx5.hash.slice(0, 18) + '...</a>');
-    const receipt5 = await tx5.wait();
-
+    const r5 = await cSend(commerce, 'fund', [jobId, amountWei, '0x'], '资金锁定');
+    console.log('[Fly] ✅ Step5完成: 资金已锁定!');
     updateStep(5, 0);
 
     // ===== 支付完成 =====
-    setStatus('🎉 托管支付完成！<br>订单号：<b>FLY-' + jobId + '</b><br>资金已锁定，服务完成后自动释放<br><a class="lk" href="https://bscscan.com/tx/' + tx5.hash + '" target="_blank">查看托管交易 →</a>');
+    setStatus('🎉 托管支付完成！<br>订单号：<b>FLY-' + jobId + '</b><br>资金已锁定，服务完成后自动释放<br><a class="lk" href="https://bscscan.com/tx/' + r5.txHash + '" target="_blank">查看托管交易 →</a>');
 
     b.textContent = '✅ 托管完成，请填写店铺信息';
     b.disabled = false;
     b.onclick = function() { gs(2); };
 
-    document.getElementById('rP').textContent = tx5.hash.slice(0, 18) + '...';
-    document.getElementById('rP').href = 'https://bscscan.com/tx/' + tx5.hash;
+    document.getElementById('rP').textContent = r5.txHash.slice(0, 18) + '...';
+    document.getElementById('rP').href = 'https://bscscan.com/tx/' + r5.txHash;
     document.getElementById('rJ').textContent = jobId;
     gs(3);
 
@@ -767,24 +782,23 @@ async function erc8183_pay() {
 
     let msg = e.message || String(e);
 
-    // 友好错误提示
     if (/user denied|rejected|cancel/i.test(msg)) {
       msg = '您取消了交易确认';
-    } else if (/insufficient|balance/i.test(msg)) {
-      msg = '余额不足，请确认钱包里有足够的BNB和U代币';
+    } else if (/gasLimit.*too low|gas.*too low/i.test(msg)) {
+      msg = 'Gas不足，请确认钱包中有足够BNB';
+    } else if (/insufficient.*allowance/i.test(msg)) {
+      msg = 'U代币授权不足，请刷新页面重试';
+    } else if (/insufficient.*balance|余额不足/i.test(msg)) {
+      // 预检查已给出详细信息，直接显示
     } else if (/expired|deadline/i.test(msg)) {
       msg = '交易超时，请重试';
     } else if (/nonce/i.test(msg)) {
-      msg = '交易序号错误，请刷新页面重试';
+      msg = '交易序号冲突，请刷新页面重试';
     } else if (/execution reverted/i.test(msg)) {
-      // 提取revert原因
-      const match = msg.match(/reason string (.+)/i) || msg.match(/\"([^\"]+)\"/);
-      if (match) {
-        msg = '合约错误：' + (match[1] || match[0]);
-      } else {
-        msg = '合约执行失败，可能是授权或余额问题';
-      }
-    } else {
+      const match = msg.match(/reason string (.+)/i) || msg.match(/"([^"]+)"/);
+      if (match) msg = '合约错误：' + match[1];
+      else msg = '合约执行失败，可能是授权或余额问题';
+    } else if (!/余额不足|U代币|BNB/i.test(msg)) {
       msg = '操作失败：' + msg.slice(0, 150);
     }
 

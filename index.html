@@ -224,6 +224,25 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding:48px 0 28px}
 
 <section class="cta-section"><div class="container"><h2>AI负责执行，你来做主</h2><p class="cta-sub">不是聊天工具，是<em>帮你执行经营的AI副驾驶</em></p><button class="btn-primary" onclick="openChat()" style="font-size:17px;padding:16px 40px">免费获取诊断报告</button></div></section>
 
+<!-- 验证锚点：功能落地状态（id=verify便于快速定位） -->
+<section id="verify" style="background:#0a0a0a;padding:32px 0;border-top:1px solid rgba(6,182,212,.1)">
+<div class="container" style="max-width:960px">
+<div style="font-size:13px;color:#666;margin-bottom:16px;font-weight:600;letter-spacing:1px">落地验证状态 · UPDATED 2025-05-25</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;font-size:13px;color:#aaa">
+<div>✅ Web3术语清零 · 全站0暴露</div>
+<div>✅ Agent SDK验证级话术 · 首页+meta+JSON-LD</div>
+<div>✅ fly-buy合约托管 · ERC-8183 5步流程</div>
+<div>✅ Agent Server · FastAPI+DeepSeek诊断</div>
+<div>✅ ERC-8004身份 · Agent #91852/#98158</div>
+<div>✅ ERC-8183合约 · Commerce+Router+Policy</div>
+<div>✅ DeepSeek GEO诊断 · 4套餐实时生成</div>
+<div>✅ MegaFuel免Gas · BSC主网</div>
+<div>⏳ Agent Server部署 · 待公网环境启动</div>
+<div>⏳ IPFS/Greenfield存储 · P1优先级</div>
+</div>
+</div>
+</section>
+
 <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><div class="logo"><span>Fly</span>Agent</div><p>小老板的AI经营副驾驶<br>AI执行经营，老板确认决策，经营行为可信验证</p></div><div class="footer-col"><h4>产品</h4><a href="#exec">AI执行</a><a href="#geo">GEO优化</a><a href="#causal">因果网络</a><a href="#trust">可信验证</a></div><div class="footer-col"><h4>支持</h4><a href="#pricing">定价</a><a href="#confirm" style="color:var(--cyan)">确认机制</a><a href="#cases">案例</a><a href="javascript:void(0)" onclick="openChat()">在线诊断</a></div><div class="footer-col"><h4>法律</h4><a href="javascript:void(0)" onclick="showPrivacy()">隐私政策</a><a href="javascript:void(0)" onclick="showTerms()">服务条款</a><a href="javascript:void(0)" onclick="showContact()">联系我们</a></div></div><div class="footer-bottom"><span>© 2026 FlyAgent · 经营行为可信验证 · 可信技术保障</span><span>由资深AI技术团队打造</span></div></div></footer>
 
 <div class="chat-overlay" id="chatOverlay"><div class="chat-window"><button class="chat-close" onclick="closeChat()">✕</button><div class="chat-sb"><div class="chat-sb-head"><div class="chat-sb-logo"><div class="chat-sb-av"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><div class="chat-sb-name"><span>Fly</span>Agent</div></div><button class="sb-new-btn" onclick="newChat()">+ 新对话</button></div><div class="sb-items" id="sbItems"></div><div class="sb-bottom"><span class="online">在岗</span> · Fly-Agent-801</div></div><div class="chat-main"><div class="chat-topbar" id="chatTopbar">新对话</div><div class="chat-msgs" id="chatMsgs"></div><div class="chat-input-area"><div class="chat-input-row"><textarea id="chatInput" rows="1" placeholder="说说你的店，副驾驶帮你诊断推广盲区..."></textarea><button class="chat-send" onclick="sendMsg()"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div><div class="chat-hint">请勿输入身份证号、银行卡等敏感信息 · AI建议需老板确认后执行</div></div></div></div></div>

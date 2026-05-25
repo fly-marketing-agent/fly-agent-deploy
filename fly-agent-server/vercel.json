@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "api/index.py": {
+      "excludeFiles": "{src/**,scripts/**,.agent-data/**,__pycache__/**,*.pyc,.env,.env.example,.gitignore,README.md}"
+    }
+  },
+  "routes": [
+    { "src": "/(.*)", "dest": "api/index.py" }
+  ]
+}
